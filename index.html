@@ -226,7 +226,32 @@ a:hover { color: var(--accent-green); }
 .sidebar-collapsed .tree-item-header .sidebar-text {
   display: none;
 }
-.sidebar-collapsed .sidebar-content {
+.sidebar-collapsed .tree-leaf {
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 0;
+}
+.sidebar-collapsed .work-type-item {
+  padding: 10px 10px;
+  justify-content: center;
+}
+.sidebar-collapsed .work-type-item .count,
+.sidebar-collapsed .work-type-item .sidebar-text {
+  display: none;
+}
+.sidebar-collapsed .practice-settings label,
+.sidebar-collapsed .practice-settings h3,
+.sidebar-collapsed .practice-settings .btn-start,
+.sidebar-collapsed .practice-settings select,
+.sidebar-collapsed .practice-settings .custom-select-wrap,
+.sidebar-collapsed .practice-settings input,
+.sidebar-collapsed .practice-settings .max-hint,
+.sidebar-collapsed .practice-settings .preset-btn,
+.sidebar-collapsed .practice-settings hr {
+  display: none;
+}
+
+.sidebar-content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
@@ -235,6 +260,149 @@ a:hover { color: var(--accent-green); }
 .sidebar-content::-webkit-scrollbar { width: 4px; }
 .sidebar-content::-webkit-scrollbar-track { background: transparent; }
 .sidebar-content::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+
+/* Knowledge sidebar tree */
+.tree-item {
+  padding: 0;
+}
+.tree-item-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.tree-item-header:hover {
+  background: rgba(78, 205, 196, 0.08);
+  color: var(--text-primary);
+}
+.tree-item-header i {
+  width: 16px;
+  font-size: 10px;
+  color: var(--accent-blue);
+  transition: transform var(--transition);
+}
+.tree-item-header i.expanded { transform: rotate(90deg); }
+.tree-item-header .indent { margin-left: 24px; }
+.tree-children { display: none; }
+.tree-children.open { display: block; }
+.tree-leaf {
+  padding: 6px 16px 6px 48px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  display: block;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+.tree-leaf:hover { color: var(--accent-blue); background: rgba(69, 183, 209, 0.06); }
+
+/* Question bank sidebar */
+.work-type-list { padding: 8px 0; }
+.work-type-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+.work-type-item:hover { background: rgba(78, 205, 196, 0.08); color: var(--text-primary); }
+.work-type-item.active { color: var(--accent-green); background: rgba(78, 205, 196, 0.12); }
+.work-type-item .count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Practice sidebar content */
+.practice-settings { padding: 16px; }
+.practice-settings label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+.practice-settings select, .practice-settings input {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: inherit;
+}
+.practice-settings select:focus, .practice-settings input:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+.count-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.count-input-group input[type="number"] {
+  width: 100%;
+}
+.max-hint{color:var(--accent-orange);font-size:12px;font-weight:500;margin-left:6px}
+.preset-btns {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.preset-btn {
+  padding: 4px 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.preset-btn:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+.preset-btn.active {
+  background: rgba(78, 205, 196, 0.15);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+.btn-start {
+  width: 100%;
+  padding: 10px;
+  margin-top: 18px;
+  background: var(--accent-green);
+  color: #0a0a1a;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-start:hover { background: #3dbeb6; transform: translateY(-1px); }
 
 /* ===== MAIN CONTENT ===== */
 .main-content {
@@ -256,9 +424,2126 @@ a:hover { color: var(--accent-green); }
   border: 1px solid rgba(78, 205, 196, 0.06);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
 }
+
+/* Module containers */
+.module { display: none; }
+.module.active { display: block; animation: moduleEnter 0.75s ease-out; }
+@keyframes moduleEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Exam two-column layout */
+.exam-layout{display:flex;gap:20px;align-items:flex-start}
+.exam-questions{flex:1;min-width:0}
+.exam-panel{width:220px;flex-shrink:0;position:sticky;top:80px}
+.exam-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px;margin-top:12px}
+.exam-submit{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px;margin-top:12px;text-align:center}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== KNOWLEDGE STYLES ===== */
+.knowledge-container h2.chapter-title {
+  color: var(--accent-green);
+  font-size: 22px;
+  margin: 32px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-green);
+  scroll-margin-top: 20px;
+}
+.knowledge-container h3.section-title {
+  color: var(--accent-orange);
+  font-size: 17px;
+  margin: 20px 0 10px;
+  scroll-margin-top: 20px;
+}
+.knowledge-container h4.subsection-title {
+  color: var(--accent-green);
+  font-size: 15px;
+  margin: 14px 0 8px;
+  scroll-margin-top: 20px;
+  font-weight: 500;
+}
+.knowledge-container .para {
+  margin: 8px 0;
+  font-size: 14.5px;
+  line-height: 1.8;
+}
+.knowledge-container .bullet {
+  margin: 4px 0 4px 20px;
+  font-size: 14px;
+  list-style: none;
+  color: var(--text-secondary);
+}
+.knowledge-container .bullet::before {
+  content: '•';
+  color: var(--accent-green);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+.knowledge-container .arrow {
+  margin: 4px 0 4px 20px;
+  font-size: 14px;
+  list-style: none;
+  color: var(--text-secondary);
+}
+.knowledge-container .arrow::before {
+  content: '▸';
+  color: var(--accent-blue);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+.knowledge-container .enum-item {
+  margin: 4px 0 4px 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ===== QUESTION BANK STYLES ===== */
+.qbank-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+/* Animated custom dropdown */
+.sidebar .custom-select-wrap { overflow: visible; }
+.custom-select-wrap {
+  position: relative;
+  min-width: 150px;
+}
+.custom-select-trigger {
+  padding: 8px 14px;
+  padding-right: 32px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  user-select: none;
+  position: relative;
+  z-index: 2;
+}
+.custom-select-trigger:hover {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 8px var(--glow-green);
+}
+.custom-select-trigger::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--text-muted);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.custom-select-wrap.open .custom-select-trigger::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+.custom-select-panel {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  right: 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.35s ease;
+  z-index: 10;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+.custom-select-wrap.open .custom-select-panel {
+  max-height: 320px;
+  opacity: 1;
+}
+.custom-select-panel::-webkit-scrollbar { width: 4px; }
+.custom-select-panel::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+.custom-select-option {
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, padding-left 0.2s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+.custom-select-option:hover {
+  background: rgba(78, 205, 196, 0.1);
+  color: var(--text-primary);
+  padding-left: 20px;
+}
+.custom-select-option.selected {
+  color: var(--accent-green);
+  background: rgba(78, 205, 196, 0.08);
+}
+.btn-toggle-answers {
+  padding: 6px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: var(--radius);
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+  white-space: nowrap;
+}
+.btn-toggle-answers:hover {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  box-shadow: 0 0 10px rgba(240, 160, 48, 0.15);
+}
+.btn-toggle-answers.active {
+  background: rgba(240, 160, 48, 0.12);
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+}
+.qbank-stats {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.q-group {
+  margin-bottom: 24px;
+  background: rgba(26, 33, 64, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(30, 42, 80, 0.6);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(78, 205, 196, 0.05);
+}
+.q-group-header {
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  border-bottom: 1px solid var(--border-color);
+}
+.q-card {
+  margin: 14px 0;
+  padding: 18px 20px;
+  background: rgba(26, 33, 64, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(30, 42, 80, 0.5);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  animation: fadeInUp 0.35s ease forwards;
+  transform-style: preserve-3d;
+  will-change: transform;
+  cursor: default;
+}
+.q-card:hover {
+  border-color: rgba(78, 205, 196, 0.25);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 0 20px rgba(78,205,196,0.06);
+}
+.q-card .q-text {
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+.q-card .q-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.q-card .q-type-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 6px;
+}
+.q-type-badge.judge { background: rgba(243, 156, 18, 0.2); color: var(--accent-orange); }
+.q-type-badge.single { background: rgba(69, 183, 209, 0.2); color: var(--accent-blue); }
+.q-card .q-options {
+  margin: 6px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.q-card .q-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 12px;
+  margin-top: 8px;
+  background: rgba(78, 205, 196, 0.08);
+  border-left: 3px solid var(--accent-green);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 13px;
+  color: var(--accent-green);
+  opacity: 1;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.q-card .q-answer.show { padding: 8px 12px; max-height: 120px; }
+.q-card .btn-answer {
+  padding: 4px 14px;
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: var(--radius);
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.q-card .btn-answer:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+/* ===== PRACTICE / EXAM STYLES ===== */
+/* Practice subtabs with sliding block - glass style */
+.practice-subtabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  pointer-events: none;
+}
+.subtab-inner {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  padding: 5px 6px;
+  background: rgba(8, 12, 25, 0.4);
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  border: 1px solid rgba(91, 141, 239, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(91, 141, 239, 0.03);
+  pointer-events: auto;
+}
+.practice-subtab {
+  padding: 7px 20px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color 0.2s ease;
+  font-family: inherit;
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+}
+.practice-subtab:hover { color: var(--text-primary); }
+.practice-subtab.active { color: var(--accent-blue); }
+
+.subtab-slider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 6px;
+  background: linear-gradient(135deg, rgba(91, 141, 239, 0.15), rgba(91, 141, 239, 0.08));
+  border: 1px solid rgba(91, 141, 239, 0.25);
+  border-radius: 8px;
+  transition: left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
+  box-shadow: 0 0 12px rgba(91, 141, 239, 0.2), inset 0 1px 0 rgba(91, 141, 239, 0.1);
+}
+
+.practice-panel { display: none; animation: fadeIn 0.3s ease; }
+.practice-panel.active { display: block; }
+
+/* Question display */
+.question-display, .stats-box, .wrong-item {
+  background: rgba(26, 33, 64, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 16px 0;
+  border: 1px solid rgba(30, 42, 80, 0.6);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(78, 205, 196, 0.05);
+}
+.question-display .q-number {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.question-display .q-text {
+  font-size: 16px;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+.question-display .q-option {
+  display: block;
+  padding: 10px 14px;
+  margin: 6px 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+}
+.question-display .q-option:hover { border-color: var(--accent-blue); }
+.question-display .q-option.selected {
+  border-color: var(--accent-blue);
+  background: rgba(69, 183, 209, 0.1);
+  color: var(--text-primary);
+}
+.question-display .q-option.correct {
+  border-color: var(--accent-green);
+  background: rgba(78, 205, 196, 0.12);
+  color: var(--accent-green);
+}
+.question-display .q-option.wrong {
+  border-color: var(--accent-red);
+  background: rgba(231, 76, 60, 0.1);
+  color: var(--accent-red);
+}
+.question-display .q-option.locked { cursor: default; opacity: 0.85; }
+
+.question-display .q-feedback {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  animation: fadeIn 0.3s ease;
+}
+.q-feedback.correct { background: rgba(78, 205, 196, 0.1); color: var(--accent-green); border-left: 3px solid var(--accent-green); }
+.q-feedback.wrong { background: rgba(231, 76, 60, 0.1); color: var(--accent-red); border-left: 3px solid var(--accent-red); }
+
+/* Nav buttons */
+.question-nav {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.question-nav button {
+  padding: 8px 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 13px;
+  font-family: inherit;
+}
+.question-nav button:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+.question-nav button:disabled { opacity: 0.4; cursor: not-allowed; }
+.question-nav button.primary {
+  background: var(--accent-green);
+  color: #0a0a1a;
+  border-color: var(--accent-green);
+  font-weight: 600;
+}
+.question-nav button.primary:hover { background: #3dbeb6; }
+
+/* Stats display */
+.stats-box {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  margin: 16px 0;
+}
+.stats-box .big-number {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+.stats-box .stats-detail {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.stats-detail .stat-item { text-align: center; }
+.stats-detail .stat-item .num { font-size: 24px; font-weight: 600; display: block; }
+.stats-detail .stat-item .label { font-size: 12px; color: var(--text-muted); }
+
+/* Wrong question book */
+.wrong-book {
+  margin-top: 16px;
+}
+.wrong-book .wrong-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.wrong-book .wrong-item .q-text { font-size: 14px; margin-bottom: 6px; }
+.wrong-book .wrong-item .q-answer-text { font-size: 12px; color: var(--accent-green); }
+.wrong-book .btn-remove {
+  padding: 3px 12px;
+  background: none;
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 11px;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.wrong-book .btn-remove:hover { background: rgba(231, 76, 60, 0.1); }
+
+/* Exam specific */
+.exam-timer {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-orange);
+  text-align: center;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+.exam-timer.warning { color: var(--accent-red); animation: pulse 1s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* ===== RESPONSIVE ===== */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 18px;
+}
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 99;
+}
+
+/* ===== ANIMATIONS & SMOOTH EFFECTS ===== */
+/* Card hover lift */
+.q-group, .question-display, .stats-box, .wrong-book .wrong-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.q-group:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(78, 205, 196, 0.08);
+  border-color: rgba(78, 205, 196, 0.2);
+}
+.question-display:hover, .stats-box:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+}
+.wrong-book .wrong-item:hover {
+  transform: translateX(4px);
+  border-color: rgba(78, 205, 196, 0.15);
+}
+
+/* Sidebar items smooth glow */
+.tree-item-header:hover, .work-type-item:hover {
+  background: rgba(78, 205, 196, 0.08);
+  box-shadow: inset 2px 0 0 var(--accent-green);
+}
+
+/* Buttons glow pulse */
+.btn-start:hover {
+  box-shadow: 0 0 24px var(--glow-green);
+  transform: translateY(-2px);
+}
+
+/* Question options click feedback */
+.q-option:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Smooth knowledge section scroll highlight */
+@keyframes highlightPulse {
+  0% { box-shadow: inset 0 0 0 0 rgba(78, 205, 196, 0); }
+  50% { box-shadow: inset 0 0 20px 4px rgba(78, 205, 196, 0.1); }
+  100% { box-shadow: inset 0 0 0 0 rgba(78, 205, 196, 0); }
+}
+
+/* Fade in for dynamically loaded content */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.q-card:nth-child(2) { animation-delay: 0.03s; }
+.q-card:nth-child(3) { animation-delay: 0.06s; }
+
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform var(--transition);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.show { display: block; }
+  /* On mobile, sidebar-collapsed should not affect the sliding menu */
+  .sidebar-collapsed .sidebar {
+    width: var(--sidebar-width) !important;
+  }
+  .sidebar-collapsed .sidebar-text {
+    opacity: 1 !important;
+    width: auto !important;
+    pointer-events: auto !important;
+  }
+  .sidebar-collapsed .sidebar-header h1 {
+    opacity: 1 !important;
+    width: auto !important;
+  }
+  .app-body {
+    flex-direction: column;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  .content-inner {
+    padding: 12px 16px 40px;
+  }
+  .top-nav {
+    padding: 8px 10px;
+  }
+  .nav-inner {
+    padding: 4px;
+    gap: 0;
+    border-radius: 12px;
+  }
+  .nav-btn { padding: 5px 12px 7px; font-size: 12px; white-space: nowrap; }
+  .nav-slider { top: 3px; bottom: 3px; left: 4px; border-radius: 8px; }
+}
+
+body::before,body::after{content:'';position:fixed;border-radius:50%;z-index:-1;pointer-events:none}
+body::before{width:600px;height:600px;background:radial-gradient(circle,rgba(78,205,196,0.07),transparent 70%);top:-150px;left:-150px;animation:f1 25s ease-in-out infinite}
+body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(91,141,239,0.05),transparent 70%);bottom:-120px;right:-120px;animation:f2 30s ease-in-out infinite}
+@keyframes f1{0%,100%{transform:translate(0,0)scale(1);opacity:0.5}33%{transform:translate(120px,80px)scale(1.15);opacity:1}66%{transform:translate(-60px,140px)scale(0.85);opacity:0.3}}
+@keyframes f2{0%,100%{transform:translate(0,0)scale(1);opacity:0.5}33%{transform:translate(-100px,-80px)scale(1.2);opacity:1}66%{transform:translate(80px,-120px)scale(0.8);opacity:0.3}}
+
+@keyframes sbe{from{opacity:0;transform:translateY(-10px)scaleY(0.95)}to{opacity:1;transform:translateY(0)scaleY(1)}}
+.sbpc{animation:sbe 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;transform-origin:top center}
+
+.sidebar-select-enhanced{width:100%;padding:8px 12px;background:var(--bg-primary);color:var(--text-primary);border:1px solid var(--border-color);border-radius:var(--r);font-size:13px;font-family:inherit;cursor:pointer;transition:border-color 0.3s,box-shadow 0.3s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235a6488' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+.sidebar-select-enhanced:focus{outline:none;border-color:var(--ag)!important;box-shadow:0 0 12px var(--gl)!important}
+.sidebar-select-enhanced:hover{border-color:var(--ag)}
+
+/* Sidebar panel enter animation */
+.sbpc-panel{animation:panelEnter 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;transform-origin:top center}
+@keyframes panelEnter{from{opacity:0;transform:translateY(-15px)scaleY(0.95)}to{opacity:1;transform:translateY(0)scaleY(1)}}
+
+.chapter-wrapper{display:block}
+.ch-enter{animation:chEnter 0.6s ease-out both}
+@keyframes chEnter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.qfade{animation:qfade 0.6s ease-out both}
+@keyframes qfade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.tree-item-header.active-chapter{background:rgba(78,205,196,0.12);color:var(--accent-green);border-right:3px solid var(--accent-green)}
+
+.btt{position:fixed;bottom:30px;right:20px;width:48px;height:48px;border-radius:50%;background:rgba(78,205,196,0.15);backdrop-filter:blur(8px);border:1px solid rgba(78,205,196,0.25);color:var(--ag);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:999;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s,transform 0.3s,box-shadow 0.3s}
+.btt.sh{opacity:1;visibility:visible}
+.btt:hover{transform:scale(1.15);box-shadow:0 0 30px rgba(78,205,196,0.3),0 0 60px rgba(78,205,196,0.1);border-color:rgba(78,205,196,0.5)}
+.btt:active{transform:scale(0.95)}
+
+.bta{padding:6px 16px;background:var(--bs);border:1px solid var(--bd);color:var(--ts);border-radius:var(--r);cursor:pointer;transition:0.3s;font-family:inherit}
+.bta:hover{border-color:var(--ag);color:var(--ag)}
+
+/* Sticky */
+.exam-sticky-top{position:sticky;top:0;z-index:20;background:rgba(18,26,50,0.9);backdrop-filter:blur(10px);padding:8px 16px;border-radius:var(--r);margin-bottom:12px}
+.exam-sticky-bot{position:sticky;bottom:0;z-index:20;background:rgba(18,26,50,0.9);backdrop-filter:blur(10px);padding:12px 16px;border-radius:var(--r);margin-top:12px;text-align:center}
+.pr{background:var(--accent-green);color:#0a0a1a;border:1px solid var(--accent-green);padding:10px 32px;border-radius:var(--r);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.3s;min-width:120px}
+.pr:hover{background:#3dbeb6;transform:translateY(-2px);box-shadow:0 6px 20px rgba(78,205,196,0.4)}
+.pr:active{transform:translateY(0)}
 </style>
+
+
+
 </head>
 <body>
-  <p>placeholder</p>
+
+<!-- Mobile menu toggle -->
+<button class="menu-toggle" id="menuToggle">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-body">
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="logo-icon">🔧</span>
+    <h1><span class="sidebar-text">工训机考复习</span></h1>
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="收起/展开侧边栏">
+      <i id="sidebarToggleIcon">◀</i>
+    </button>
+  </div>
+  <div class="sidebar-content" id="sidebarContent">
+    <!-- Knowledge tree (populated by JS) -->
+    <div id="sidebar-knowledge" class="sidebar-panel"></div>
+    <!-- Question bank nav (populated by JS) -->
+    <div id="sidebar-qbank" class="sidebar-panel" style="display:none"></div>
+    <!-- Practice settings (populated by JS) -->
+    <div id="sidebar-practice" class="sidebar-panel" style="display:none"></div>
+  </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+  <!-- ===== TOP NAV ===== -->
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" data-module="knowledge">📖 知识梳理</button>
+      <button class="nav-btn" data-module="qbank">🗂 题库展示</button>
+      <button class="nav-btn" data-module="practice">🎓 刷题 &amp; 考试</button>
+      <div class="nav-slider" id="navSlider"></div>
+    </div>
+  </nav>
+  <div class="content-inner">
+
+  <!-- Module 1: Knowledge -->
+  <div class="module active" id="module-knowledge">
+    <div class="knowledge-container" id="knowledgeContent"></div>
+  </div>
+
+  <!-- Module 2: Question Bank -->
+  <div class="module" id="module-qbank">
+    <div class="qbank-controls">
+      <div class="custom-select-wrap" id="qbankSelectWrap">
+        <div class="custom-select-trigger" onclick="toggleCustomSelect(this)">
+          <span id="qbankSelectLabel">全部工种</span>
+        </div>
+        <div class="custom-select-panel" id="qbankSelectPanel"></div>
+      </div>
+      <select id="qbankFilter" style="display:none">
+        <option value="all">全部工种</option>
+      </select>
+      <button class="btn-toggle-answers" id="btnToggleAnswers" onclick="toggleAllAnswers()">展开所有答案</button>
+    </div>
+    <div class="qbank-stats" id="qbankStats"></div>
+    <div id="qbankContent"></div>
+  </div>
+
+  <!-- Module 3: Practice & Exam -->
+  <div class="module" id="module-practice">
+    <div class="practice-subtabs">
+      <div class="subtab-inner">
+        <button class="practice-subtab active" data-subtab="practice-mode">📝 刷题模式</button>
+        <button class="practice-subtab" data-subtab="exam-mode">📄 模拟考试</button>
+        <button class="practice-subtab" data-subtab="wrong-book">📕 错题本</button>
+        <div class="subtab-slider" id="subtabSlider"></div>
+      </div>
+    </div>
+
+    <!-- Practice Mode -->
+    <div class="practice-panel active" id="panel-practice-mode">
+      <div id="practiceSetup">
+        <p style="color:var(--text-muted);margin-bottom:16px;">在侧边栏选择工种、题型和题量，开始刷题练习。</p>
+        <p style="color:var(--text-muted);font-size:13px;">
+          💡 请在左侧「刷题」面板中进行设置。
+        </p>
+      </div>
+      <div id="practiceArea" style="display:none"></div>
+    </div>
+
+    <!-- Exam Mode -->
+    <div class="practice-panel" id="panel-exam-mode">
+      <div id="examSetup">
+        <p style="color:var(--text-muted);margin-bottom:16px;">在侧边栏设置考试参数，生成模拟试卷。</p>
+        <p style="color:var(--text-muted);font-size:13px;">
+          💡 请在左侧「刷题」面板中进行设置。
+        </p>
+      </div>
+      <div id="examArea" style="display:none"></div>
+    </div>
+
+    <!-- Wrong Book -->
+    <div class="practice-panel" id="panel-wrong-book">
+      <div id="wrongBookContent"></div>
+    </div>
+  </div>
+
+  </div><!-- end content-inner -->
+</main>
+</div><!-- end app-body -->
+
+<script>
+// ============================================================
+// DATA: All questions
+// ============================================================
+const ALL_QUESTIONS = [{"text": "钻孔时，应戴好手套清除切屑，防止手被切屑划伤。（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 1}, {"text": "车削时要注意安全，必须穿合适的工作服，带好手套，女生还要戴好工作帽。（ ）", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "凡二人以上共同作业时，其中应指定一人负责指挥。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "在剪切作业时，光线强度，湿度变化都能影响作业的安全。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "运转中的机械设备对人的伤害主要有撞伤、压伤、轧伤、卷缠等。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "车间内的安全通道应保持畅通，任何情况下都不允许阻断。（ ）", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "穿脚趾及脚跟外露的凉鞋、拖鞋进入作业场所更方便操作。（ ）", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "当实践操作学习和安全发生矛盾时，要把学习放在首位（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "机器保护罩的首要作用是让机器看起来更美观。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 9}, {"text": "在车间里可以直接跨越或横跨运转设备的运转部位来传递物件（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "在钳工加工过程中，及时清除锤子、冲头、錾子等工具上的毛刺主要是为了让工具更整洁。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 11}, {"text": "当需要移动照明灯、电焊机等固定安装的电气设备时，一般可以在不切断电源的情况下直接移动（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 12}, {"text": "清洗电动机械时可以不用关掉电源。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 13}, {"text": "发生电气设备火灾时，应立即切断电源，可用二氧化碳、干粉等灭火器灭火（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 14}, {"text": "对于容易产生静电的场所，应保持地面环境一定的湿度，或铺设导电性能好的地板。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 15}, {"text": "实习生在变换岗位时必须接受相应岗位的安全教育培训（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 16}, {"text": "操作前，应检查设备或工作场地，排除各类故障和隐患（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 17}, {"text": "人体安全电压是36V，安全电流为10mA；当电流为100mA时，则为致命电流。（ ）", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 18}, {"text": "空气断路器至少包括短路保护、过电流保护功能，还可以选配分励控制、欠压保护等附加功能。配置齐全的空气断路器与漏电保护器联合使用能在故障状态（如负载短路、负载过电流、低电压等）和正常使用状态下均切断电气回路，起到更好的人身安全保护作用", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 19}, {"text": "在金属冷加工中也可能经常发生烫伤事件。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 20}, {"text": "锻件温度过低时，操作者应该立刻停止，拒绝锻打。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 21}, {"text": "钻孔时，当钻尖快要钻穿工件时，应加快钻尖的下降速度保证迅速钻透。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 22}, {"text": "空气断路器至少包括短路保护、过电流保护功能。因此，空气断路器能起到漏电保护作用", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 23}, {"text": "实习人员可以边上岗作业，边进行安全生产教育和培训。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 24}, {"text": "齿轮传动机构中，两齿轮开始咬合的部位最危险。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 25}, {"text": "同一开关或插座严禁直接控制两台以上用电设备；开关箱内电源插座必须装设漏电保护器。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 26}, {"text": "严禁用铜丝、铝丝、铁丝等代替开关箱或设备内的保险丝。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 27}, {"text": "安全标志由安全色、几何图形和图形符号构成，分为禁止标志、警告标志、指令标志和提示标志四类。其中，警告标志图案为三角形。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 28}, {"text": "操纵装置是用来对机械的运行状态进行控制的装置，应该与人体运动器官的特性相适应，并与操作任务要求相适应。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 29}, {"text": "在压力机操作时使用手用工具可以代替人手伸进危险区送取料。如果配备了手用工具，可以部分取代甚至不用安全装置。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 30}, {"text": "在金属锯床上的操作者确认关机后更换锋利刀片，或关机清理切削碎屑时可戴手套，在金属切削车床在进行车削工件时不应戴手套。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 31}, {"text": "在进行机械安全风险评价时，对那些可能导致最严重的损伤或有对健康的危害，如果发生概率极低，就可以不必考虑。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 32}, {"text": "机器运行处于正常状态下是没有危险的，只有在非正常状态才存在危险。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 33}, {"text": "机床运转时，不准用手检查工件表面粗糙度及测量工件尺寸。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 34}, {"text": "凡高度在2.0米以下的传动部件（皮带、齿轮、联轴）以及飞轮、电锯等危险部件或危险部位都必须设防护装置。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 35}, {"text": "下列哪种伤害不属于车间操作时的机械伤害范围。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 体育课扭伤脚踝坚持参加实践", "B. 金属切屑飞出伤人", "C. 夹具不牢固导致物件飞出伤人"], "answer": "A", "num": 1}, {"text": "在未做好以下哪项工作以前，千万不要开动机器。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 通知指导教师", "B. 检查过所有安全护罩是否安全可靠", "C. 机件擦洗"], "answer": "B", "num": 2}, {"text": "手用工具不应放在工作台边缘是因为( ) 。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 会造成工作台超过负荷", "B. 取用不方便", "C. 工具易于坠落伤人"], "answer": "C", "num": 3}, {"text": "清除电焊熔渣或多余的金属时，应怎样做才能减少危险?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 佩戴眼罩和手套等个人防护器具", "B. 清除的方向须靠向身体", "C. 须开风扇，加强空气流通，减少吸入金属雾气"], "answer": "A", "num": 4}, {"text": "任何电气设备在未验明无电之前，一律认为( ) 。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 有电", "B. 可能有电", "C. 无电"], "answer": "A", "num": 5}, {"text": "当操作打磨工具时，必须使用哪类个人防护用具?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 围裙", "B. 防潮服", "C. 护眼罩"], "answer": "C", "num": 6}, {"text": "下列哪种操作是不正确的?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 戴深色眼镜从事电焊", "B. 借助推送木棒操作剪切机械", "C. 操作机床时，戴防护手套"], "answer": "C", "num": 7}, {"text": "机床工作结束后，应最先做哪些安全工作? ( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 关闭机床电器系统和切断电源", "B. 清理机床", "C. 润滑机床"], "answer": "A", "num": 8}, {"text": "漏电保护器的使用是防止( )。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 电压波动", "B. 触电事故", "C. 电器超负荷"], "answer": "B", "num": 9}, {"text": "《气瓶安全监察规程》规定，盛装一般气体的气瓶，每( )年检验1次?", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 2", "B. 3", "C. 5"], "answer": "C", "num": 10}, {"text": "操作砂轮时，下列哪项是不安全的?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 操作者站在砂轮的正面操作", "B. 使用前检查砂轮有无破裂和损伤", "C. 用力均匀磨削"], "answer": "A", "num": 11}, {"text": "焊接作业所使用的气瓶应存放在下列哪种地方?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 隔烟房内", "B. 密闭地方", "C. 阴凉而空气流通的地方"], "answer": "B", "num": 12}, {"text": "刚刚车削下来的钢件切屑有较高的温度，甚至可以达到( )，极易引起烫伤。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 500°C以下", "B. 600~700°C", "C. 800~1000°C"], "answer": "B", "num": 13}, {"text": "压力加工中的自由锻操作时，下列规定哪项是不正确的? ( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 用夹钳取送模具", "B. 切断金属毛坯时要轻击", "C. 气锤开动前，应先空锤试打"], "answer": "C", "num": 14}, {"text": "在下列哪种情况下，不可以对机器进行清洗工作?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 没有指导教师在场", "B. 机器在开动中", "C. 没有操作手册"], "answer": "B", "num": 15}, {"text": "如果因电器引起火灾，在许可的情况下，你必须首先?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 找到适合的灭火器扑救", "B. 大声呼叫", "C. 将有开关的电源关掉"], "answer": "C", "num": 16}, {"text": "实习生在操作机械时穿着的“三紧”是指①工作服袖口紧②工作服领口紧③工作服下摆紧④工作服小而紧。( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②④", "B. ①③④", "C. ①②③"], "answer": "C", "num": 17}, {"text": "下列哪项是对铸工浇铸操作有不安全的影响?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 操作前对工具进行预热", "B. 保持操作场所干燥", "C. 正面对着冒口操作"], "answer": "C", "num": 18}, {"text": "操作机械时，护罩处于关闭位置，而护罩一旦处于开放位置，就会使机械停止运作，指的是下列哪种护罩的运作方式?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 触模式护罩", "B. 固定式护罩", "C. 互锁式护罩"], "answer": "C", "num": 19}, {"text": "工作任务紧张，忽然操作员发现运动着的机器传动轴里卷入不少纱线，该怎么办?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 先不理会，待擦洗机器时再清洗", "B. 关机后进行清理", "C. 不停机，用铁钩清理"], "answer": "B", "num": 20}, {"text": "应用下列哪种方法清理机械器具上的油污? ( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 用汽油清洗", "B. 用压缩空气喷射吹去", "C. 用干净抹布擦掉"], "answer": "C", "num": 21}, {"text": "以下是操作人员易于接近的各种可动零、部件机械危险部位：①旋转铀②相对传动部件，如开式的啮合齿轮③不连续的旋转零件，如风机叶片。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②", "B. ①②③", "C. ②③"], "answer": "B", "num": 22}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①皮带与皮带轮，链与链轮②旋转的砂轮③活动板和固定板之间靠近时的压板。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ②③", "B. ①②", "C. ①②③"], "answer": "C", "num": 23}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①往复式冲压工具，如冲头和模具②带状切割工具，如带锯③蜗轮和蜗杆。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②③", "B. ②③", "C. ①②"], "answer": "A", "num": 24}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①高速旋转运动部件的表面②联接杆与链环之间的夹子③旋转的刀具、刃具。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ②③", "B. ①②③", "C. ①②"], "answer": "B", "num": 25}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①旋转的曲轴和曲柄②旋转运动部件上的凸出物，如键、定位螺丝③旋转的搅拌机、搅拌翅。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②", "B. ②③", "C. ①②③"], "answer": "C", "num": 26}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①运动皮带上的金属接头(皮带扣)②飞轮③联轴节上的固定螺丝④过热过冷的表面。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②③", "B. ①②③④", "C. ②③"], "answer": "B", "num": 27}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①带尖角、锐边或利棱的零部件②锋利的工具③带有危险表面的旋转圆筒，如脱粒机。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ②③", "B. ①②", "C. ①②③"], "answer": "C", "num": 28}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位，或者危险加工区域：①电动工具的把柄②设备表面上的毛刺、尖角、利棱、凹凸不平的表面③机械加工设备的工作区。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②③", "B. ①②", "C. ②③"], "answer": "A", "num": 29}, {"text": "机床上使用的局部照明灯，电压不得超过( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 220V", "B. 380V", "C. 36V"], "answer": "C", "num": 30}, {"text": "工人操作机械设备时，应穿紧身适合的工作服的目的是防止( )。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 着凉", "B. 被机器弄污", "C. 被机器转动部分缠绕"], "answer": "C", "num": 31}, {"text": "所有机械的危险部位，首先应（ ），来确保工作安全。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 标上机器制造商铭牌", "B. 涂上安全警示色", "C. 安装合适安全防护装置"], "answer": "C", "num": 32}, {"text": "操作转动的机器设备时，最重要的是不应佩戴( )。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 手套", "B. 戒指", "C. 手表"], "answer": "A", "num": 33}, {"text": "机械危害的基本形式有（ ）：①挤压危险 ②剪切危险③缠绕危险④冲击危险 ⑤高压流体喷射危险", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②④⑤", "B. ①②③⑤", "C. ①②③④⑤", "D. ②③④⑤"], "answer": "C", "num": 34}, {"text": "冲剪压机设备的安全防护装置哪几种（ ）：①防护栅栏②安全模 ③双手按钮 ④光电保护装置", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②③④", "B. ①②④", "C. ①③④", "D. ②③④"], "answer": "A", "num": 35}, {"text": "下列行为属于现场违章操作的是（ ）。①设备设施超速、超温、超载运行 ②供料或送料速度过快 ③启用查封或报废的设备 ④调整、检修、清扫设备时未切断电源，测量工件时未停车", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①④", "B. ①②③④", "C. ②③④", "D. ①②③"], "answer": "B", "num": 36}, {"text": "双手按钮式安全装置的重新启动功能是指，在双手同时按压两个按钮时，只有（ ），机器才能运转。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 只要一只手离开按钮，机器就停止运转；当这只手再次按压按钮，机器就能重新运转", "B. 如果一只手离开按钮，机器不停止运转；只有在双手都离开按钮，机器才停止运转", "C. 只要一只手离开按钮，机器就停止运转；只有双手都离开按钮然后再次按压全部按钮，机器才能重新运转", "D. 只有双手都离开按钮，机器才能停止运转；只要一只手再次按压按钮，机器就能重新运转"], "answer": "C", "num": 37}, {"text": "由于有机粘结剂耐候性有限，磨削类机械使用有机结合剂（例如树脂、橡胶）的砂轮，其存放时间不应超过（ ）年，而且长时间存放的砂轮必须经回转试验合格后才可使用。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 1", "B. 2", "C. 3", "D. 4"], "answer": "A", "num": 38}, {"text": "在需要设置安全防护装置的危险点，使用安全信息，（ )安全防护装置。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 没必要设置", "B. 可以代替设置", "C. 不能代替设置", "D. 可以设置也可以不设置"], "answer": "C", "num": 39}, {"text": "为防止人体部位误通过而造成伤害，在防护栅栏与传动机构零部件的距离为135mm时，防护栅栏的间隙尺寸应不大于（ ）mm。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 30", "B. 20", "C. 40", "D. 50"], "answer": "B", "num": 40}, {"text": "在机械产品寿命周期的各环节中，决定机器产品安全性的最关键环节是（ ）。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 设计", "B. 制造", "C. 使用", "D. 维修"], "answer": "A", "num": 41}, {"text": "凡是操作人员的工作位置位于坠落基准面( )m 以上时，则必须在生产设备上配置供站立的平台和防坠落的防护栏杆。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 0.5", "B. 1", "C. 2", "D. 3"], "answer": "A", "num": 42}, {"text": "机械上常在防护装置上设置为检修用的可开启的活动门，应使活动门不关闭机器就不能开动；在机器运转时，活动门一打开机器就停止运转，这种功能称为( )。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 安全联锁", "B. 安全屏蔽", "C. 安全障碍", "D. 密封保护"], "answer": "A", "num": 43}, {"text": "下列操作哪一个不能防止焊接作业中的回火现象？（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 焊嘴不能过热", "B. 乙炔不能开得太大", "C. 焊炬不要过分接近熔融金属", "D. 如乙炔瓶内部已燃烧，要用自来水降温灭火"], "answer": "B", "num": 44}, {"text": "特种作业是指对（ ）容易发生伤亡事故的工作。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 周围职工", "B. 操作者本人及他人", "C. 操作者"], "answer": "B", "num": 45}, {"text": "激光切割过程中，可以采用填充材料来改善切割质量。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "激光切割设备的维护周期较长，一般不需要频繁更换零部件。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "激光切割只能用于金属材料的加工，不能用于非金属材料的加工。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "错", "num": 3}, {"text": "激光切割设备的价格较高，维护成本也相对较高。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "激光切割设备的操作相对简单，不需要专业的技术培训。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "错", "num": 5}, {"text": "激光切割在航空航天、汽车制造、电子制造等领域有广泛的应用。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "激光切割过程中，激光功率和频率的选择对切割效果有很大影响。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "激光切割过程中产生的热影响区（HAZ）较小，有利于提高零件的表面质量和减少变形。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "激光切割过程中，可以通过调整焦点位置来改变切割路径的形状。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "激光切割是一种", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 热加工", "B. 冷加工", "C. 电加工", "D. 化学加工"], "answer": "A", "num": 1}, {"text": "激光加工的主要应用领域包括哪些？", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 金属材料切割", "B. 金属材料焊接", "C. 非金属材料加工", "D. 以上都是"], "answer": "D", "num": 2}, {"text": "激光加工的优点有哪些？", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 高精度和可重复性", "B. 快速加工速度和高效率", "C. 可以加工复杂形状和结构的材料，如微细孔、深腔等。", "D. 以上都是"], "answer": "D", "num": 3}, {"text": "激光加工的优势包括", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 激光头与工件不接触，不存在加工工具磨损问题", "B. 工件不易污染", "C. 无“切削力”作用于工件", "D. 以上都是"], "answer": "D", "num": 4}, {"text": "激光切割设备主要由（ ）组成。", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 激光器、主机、冷却系统、供气系统、电源、控制系统", "B. 激光器、主机、冷却系统、供气系统、电源", "C. 激光器、主机、冷却系统、供气系统", "D. 激光器、主机、冷却系统"], "answer": "C", "num": 5}, {"text": "在激光加工过程中，哪种气体通常用于保护镜片？", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. Oxygen", "B. Nitrogen", "C. Argon", "D. CO2"], "answer": "C", "num": 6}, {"text": "激光加工的适应场合不包括", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 可以对运动的工件进行加工", "B. 密封在玻璃壳内的材料加工", "C. 对光、热敏感的场合", "D. 在恶劣环境或其他人难以接近的地方，可用机器人进行激光加工"], "answer": "C", "num": 7}, {"text": "激光加工可以直接实现的工艺过程不包括", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 打孔", "B. 折弯", "C. 切割", "D. 焊接"], "answer": "B", "num": 8}, {"text": "激光进行微细加工的优势在于", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 激光束的发散角可小于1毫弧", "B. 光斑直径可小到微米量级", "C. 作用时间可以短到纳秒和皮秒", "D. 以上都是"], "answer": "D", "num": 9}, {"text": "导热性愈好的材料，愈适合于气割。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 1}, {"text": "压力焊焊接时需要加填充材料。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "电阻焊不仅可以连接同种金属，也可以连接不同金属。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "被钎焊连接的基体材料可称为母材。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "直流电源焊接时，正接法是焊条接正极，工件接负极，主要用于焊接较厚工件。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 5}, {"text": "厚度在3mm以下的焊件适合气焊。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "焊条直径愈粗，焊接电流愈小。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "铜焊是软钎焊，锡焊是硬钎焊。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "气焊时氧气阀和乙炔阀不可以同时开启。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "中碳钢、高碳钢可广泛用作焊接结构件。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "大批量生产汽车油箱、小型容器应采用（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 点焊", "B. 缝焊", "C. 对焊"], "answer": "B", "num": 1}, {"text": "下列材料中，焊接性最好的是（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 合金钢", "B. 低碳钢", "C. 中碳钢", "D. 高碳钢"], "answer": "B", "num": 2}, {"text": "焊接电流过大时，会造成（ ）", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 熔宽增大，熔深减小", "B. 熔宽减少，熔深增大", "C. 熔宽和熔深都增大", "D. 熔宽和熔深都减小"], "answer": "C", "num": 3}, {"text": "以下哪项属于焊条手弧焊使用的设备或工具。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 氧、乙炔气瓶", "B. 箱式加热炉、焊炬、割炬", "C. 交、直流弧焊机、焊条", "D. 焊丝"], "answer": "C", "num": 4}, {"text": "车刀上的硬质合金刀片可以采用（ ）方法连接在刀杆上。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 电弧焊或紧固件", "B. 钎焊或紧固件", "C. 氩弧焊", "D. 压力焊或紧固件"], "answer": "B", "num": 5}, {"text": "选择焊接电流首先取决于（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 焊接电压", "B. 焊件厚度", "C. 焊件材料", "D. 焊条粗细"], "answer": "D", "num": 6}, {"text": "气焊火焰是由（ ）组成。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 内焰和外焰", "B. 焰心和外焰", "C. 焰心、内焰和外焰"], "answer": "C", "num": 7}, {"text": "焊条牌号J422属于（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 酸性焊条", "B. 碱性焊条", "C. 焊丝", "D. 焊芯"], "answer": "A", "num": 8}, {"text": "以下说法正确的是：氧乙炔气焊爆溅的原因有①焊嘴轻微堵塞②焊嘴离焊件太近③焊件表面有残余的铁锈等杂质，可以④将乙炔气开大或把氧气关小，⑤将乙炔气关小或把氧气开大", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. ①②③④", "B. ①②④", "C. ②③⑤", "D. ①②③⑤"], "answer": "A", "num": 9}, {"text": "重要受力平板焊件宜采用的焊接接头形式是（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 搭接", "B. 对接", "C. 角接", "D. T形接"], "answer": "B", "num": 10}, {"text": "大量铸造生产中，为提高生产率，便于操作，常常用单一砂（指原砂）。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "错", "num": 1}, {"text": "砂型铸造时分型面可以选择在模样的任何截面处。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "用于铸造的合金称为铸造合金。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "型砂是制造砂型的主要成型材料。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "金属型能一型多铸，使用寿命长，相比较砂型可称之为永久型铸型。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "铸件重量大、壁厚差别大，合金的浇注温度应该在满足充型效果的前提下适度降低。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "合金的浇注温度越高越好。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "在浇注铸件过程中是不允许断流的。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "铸造在造型时，舂砂太松，则会产生气孔", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "错", "num": 9}, {"text": "整模造型与分模造型相比，最大的特点是不会产生错箱缺陷", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "下列零件毛坯中，适用于铸造生产的是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 机床主轴", "B. 机床床身", "C. 机床丝杠", "D. 机床齿轮"], "answer": "B", "num": 1}, {"text": "型砂透气性差，主要易于产生以下（ ）缺陷。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 气孔", "B. 粘砂、硬皮", "C. 应力、变形", "D. 裂纹"], "answer": "A", "num": 2}, {"text": "冒口的主要作用是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 排除金属液中的杂质", "B. 金属液流入铸型的一种通道", "C. 补给铸型冷却收缩时所需要的金属液体，以免产生缩孔"], "answer": "C", "num": 3}, {"text": "铸造的突出优点之一是能够制造（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 形状复杂的毛坯", "B. 形状简单的毛坯", "C. 小件毛坯"], "answer": "A", "num": 4}, {"text": "铸件重要加工面，如机床导轨面在铸型中的位向，即浇注位置首先考虑的是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 朝上", "B. 朝下", "C. 朝左", "D. 朝右"], "answer": "B", "num": 5}, {"text": "铸造起模前，在模样周围刷水是为了（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 提高型砂的耐火性", "B. 增加型砂的湿强度和可塑性", "C. 提高型砂的流动性", "D. 提高型砂的退让性"], "answer": "B", "num": 6}, {"text": "你在铸造实习中使用的模样是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 木模", "B. 金属模", "C. 塑料模", "D. 蜡模"], "answer": "A", "num": 7}, {"text": "将模样沿最大截面处分成两部分进行造型的方法，称为（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 整模造型", "B. 活块造型", "C. 分模造型", "D. 挖砂造型"], "answer": "C", "num": 8}, {"text": "铸件中的重要加工面或支撑面如机床导轨面，在造型时其位置应设置（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 朝上", "B. 首选朝下，次选侧面", "C. 侧面", "D. 朝下"], "answer": "B", "num": 9}, {"text": "当合金的浇注温度过高时，铸件易产生的缺陷是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 粘砂", "B. 溢料", "C. 气孔", "D. 砂眼"], "answer": "A", "num": 10}, {"text": "焊接后为消除焊接应力，可采用退火工艺。（ ）", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "工业用的金属材料，最主要的性能是材料的物理性能，它是衡量金属材料的主要指标之一。（ ）", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "工业上使用的金属材料一般都是单晶体。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "错", "num": 3}, {"text": "布氏硬度、洛氏硬度和维氏硬度这三种硬度值之间，可以通过查表互相进行换算。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "在碳素钢中，为提高其性能，加入一种或多种合金元素，即成为合金钢", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "造成热处理变形的主要原因，是淬火冷却时工件内部产生的内应力所致。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "为了获得优良的淬火质量，细而长的轴类零件、薄而平的零件，应垂直淬入冷却液中。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "金属材料的塑性，随温度的升高而降低。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "淬火加高温回火的工艺称为调质处理。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "低碳钢为了达到硬而耐磨，可采用淬火热处理工艺。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "两种或两种以上的金属元素或金属元素与非金属元素，经过熔炼后，获得有金属特性的材料，通常称为（ ）。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 化合物", "B. 固溶体", "C. 机械混合物", "D. 合金"], "answer": "D", "num": 1}, {"text": "轻金属的密度一般小于（ ）。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 1克/厘米3", "B. 2.73克/厘米3", "C. 5克/厘米3"], "answer": "C", "num": 2}, {"text": "对形状复杂的零件，为防止或减小变形、开裂，应采用的以下哪种淬火方法最好。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 水中淬火", "B. 油中淬火", "C. 先水后油双介质淬火"], "answer": "B", "num": 3}, {"text": "有同样形状和大小的两块铁碳合金，其中一块是低碳钢，一块是灰铸铁，用什么简便的方法迅速将它们区别？", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 看表面", "B. 看断口", "C. 做力学性能"], "answer": "B", "num": 4}, {"text": "以下哪些不属于金属材料及热处理实践所需的仪器或设备。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 箱式电炉", "B. 邵氏硬度计", "C. 洛氏硬度计", "D. 维氏硬度计"], "answer": "B", "num": 5}, {"text": "铸造机床床身一般采用的材料是（ ）。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 铸钢", "B. 可锻铸铁", "C. 灰铸铁", "D. 球墨铸铁"], "answer": "C", "num": 6}, {"text": "以下硬度值标示中，哪一项的写法是正确的。（ ）", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. HBS240", "B. HRA80", "C. 55HRC", "D. HV800"], "answer": "C", "num": 7}, {"text": "选择材料时，应考虑哪些原则？（ ）", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 力学性能", "B. 使用性能和工艺性能", "C. 化学性能"], "answer": "B", "num": 8}, {"text": "用碳素工具钢制造的刀具能否用于高速切削？为什么？", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 能，因硬度高", "B. 不能，因硬度低", "C. 能，因红硬性好", "D. 不能，因红硬性差"], "answer": "D", "num": 9}, {"text": "淬火后零件立即进行回火处理的目的是（ ）。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 提高硬度", "B. 提高强度", "C. 降低脆性，提高韧性"], "answer": "C", "num": 10}, {"text": "用四爪卡盘安装工件时必须先找正、夹紧，才能进行加工。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "切削速度就是机床的转速。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "错", "num": 2}, {"text": "游标卡尺也可以用来测量毛坯的表面尺寸。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "在普通车床上钻孔，通常把钻头安装在尾座上，钻削时通常采用手动进给。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "车外圆时是通过丝杠传动，实现纵向自动走刀。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "错", "num": 5}, {"text": "用三爪卡盘夹住轴类零件，另一端用顶尖顶住，三爪卡盘夹住的毛柸部分越长越好。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "错", "num": 6}, {"text": "车床能够自动定心的夹具是（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 四爪卡盘", "B. 三爪卡盘", "C. 花盘"], "answer": "B", "num": 1}, {"text": "车床的种类很多，其中应用最广的是（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 立式车床", "B. 卧式车床", "C. 仪表车床", "D. 自动车床"], "answer": "B", "num": 2}, {"text": "测量Φ25±0.03mm的外圆尺寸时，应选用下列哪一种量具（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 钢尺", "B. 百分尺", "C. 百分表"], "answer": "B", "num": 3}, {"text": "三爪卡盘与四爪卡盘比较（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 两者都能自动定心，前者的定心精度比后者高", "B. 两者都能自动定心，后者的定心精度比后者高", "C. 前者能自动定心，而后者则不能，后者通过百分表定心的精度比前者高", "D. 前者能自动定心，而后者则不能，前者的定心精度比后者通过百分表定心的精度要高"], "answer": "C", "num": 4}, {"text": "安装车刀时，刀尖（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 应高于工件回转中心", "B. 应低于工件回转中心", "C. 与工件回转中心等高"], "answer": "C", "num": 5}, {"text": "常用切削加工刀具材料种类有（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 风钢刀，钨钢刀，麻花钻", "B. 内圆、外圆、沟槽、端面车刀", "C. 高碳钢、合金钢", "D. 碳素工具钢、合金工具钢、高速钢、硬质合金"], "answer": "D", "num": 6}, {"text": "用四爪卡盘安装工件时必须先找正、夹紧，才能进行加工。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "切削速度就是机床的转速。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "游标卡尺也可以用来测量毛坯的表面尺寸。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "在普通车床上钻孔，通常把钻头安装在尾座上，钻削时通常采用手动进给。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "车外圆时是通过丝杠传动，实现纵向自动走刀。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "错", "num": 5}, {"text": "用三爪卡盘夹住轴类零件，另一端用顶尖顶住，三爪卡盘夹住的毛柸部分越长越好。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "错", "num": 6}, {"text": "方刀架用来安装车刀，最多可以同时安装4把车刀。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "在车床上安装工件时必须使被加工表面的轴线与车床主轴轴线重合。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "由于三爪卡盘的三个卡爪轴同时移动安装工件，因此工件的中心和机床主轴中心是同心的。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "大拖板与溜板箱相联，可带动车刀沿床身导轨作纵向运动。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "车端面时，为了不影响零件表面粗糙度，工件的转速要选高一些。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "错", "num": 11}, {"text": "采用转动小拖板法和偏移尾架法都可以加工锥体和锥孔。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 12}, {"text": "切断刀刃磨和安装应有两个对称的副偏角、副后角和主偏角。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 13}, {"text": "车床能够自动定心的夹具是（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 四爪卡盘", "B. 三爪卡盘", "C. 花盘"], "answer": "B", "num": 1}, {"text": "车床的种类很多，其中应用最广的是（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 立式车床", "B. 卧式车床", "C. 仪表车床", "D. 自动车床"], "answer": "B", "num": 2}, {"text": "测量Φ25±0.03mm的外圆尺寸时，应选用下列哪一种量具（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 钢尺", "B. 百分尺", "C. 百分表"], "answer": "B", "num": 3}, {"text": "三爪卡盘与四爪卡盘比较（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 两者都能自动定心，前者的定心精度比后者高", "B. 两者都能自动定心，后者的定心精度比后者高", "C. 前者能自动定心，而后者则不能，后者通过百分表定心的精度比前者高", "D. 前者能自动定心，而后者则不能，前者的定心精度比后者通过百分表定心的精度要高"], "answer": "C", "num": 4}, {"text": "安装车刀时，刀尖（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 应高于工件回转中心", "B. 应低于工件回转中心", "C. 与工件回转中心等高"], "answer": "C", "num": 5}, {"text": "常用切削加工刀具材料种类有（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 风钢刀，钨钢刀，麻花钻", "B. 内圆、外圆、沟槽、端面车刀", "C. 高碳钢、合金钢", "D. 碳素工具钢、合金工具钢、高速钢、硬质合金"], "answer": "D", "num": 6}, {"text": "安装车刀时，车刀下面的垫片应尽可能采用（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 多的薄垫片", "B. 少量的厚垫片", "C. 无所谓"], "answer": "B", "num": 7}, {"text": "车削轴件进行切断时，防止振动的调整方法是（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 减小进给量", "B. 提高切削速度", "C. 增大切削前角", "D. 增加刀头宽度"], "answer": "A", "num": 8}, {"text": "车削螺纹时，工件每转一周，车刀必须准确地移动（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 一个距离", "B. 一个螺距或导程"], "answer": "B", "num": 9}, {"text": "车外圆时，如果主轴转速增大，则进给量（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 增大", "B. 减小", "C. 不变", "D. 不确定"], "answer": "C", "num": 10}, {"text": "安装车刀时，刀具伸出的长度应为（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 越长越好", "B. 刀杆厚度的1.1～1.5倍", "C. 伸出刀架10mm", "D. 无规定"], "answer": "B", "num": 11}, {"text": "普通车床上加工零件能达到的经济精度等级为（ ）", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. IT3～IT5", "B. IT6～IT8", "C. IT7～IT10", "D. IT10～IT12"], "answer": "C", "num": 12}, {"text": "数控机床只需要根据零件图样进行编程，不必考虑刀具运动还是工件运动", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "数控铣床的形式可以是卧式的，也可以是立式的。", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "数控系统是一种专用计算机控制系统，配有接口电路和伺服驱动装置。操作者通过数字、文字和符号组成的数值指令，控制动作位置、角度、速度等机械量和开关量，实现对一台或多台机械设备动作控制。", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "与传统手工雕刻手段相比CNC雕刻秉承了精细轻巧的特点，同时更加自动化。", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "对刀的目的是确定程序原点在机床坐标系中的位置，是建立工件坐标系的过程。", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "加工中心与数控铣床的主要区别是（）", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 数控系统复杂程度不同", "B. 机床精度不同", "C. 有无自动换刀系统", "D. 有无自动上下料系统"], "answer": "C", "num": 1}, {"text": "用于指令动作方式的辅助功能指令代码是（ ）代码。", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. F", "B. M", "C. T", "D. G"], "answer": "B", "num": 2}, {"text": "数控编程中，一个完整的程序是由若干个（ ）组成的。", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 字", "B. 程序段", "C. 字母", "D. 数字"], "answer": "B", "num": 3}, {"text": "CNC雕铣机可加工以下哪些材料（）", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 铜", "B. 钢", "C. 石膏", "D. 以上均可雕铣"], "answer": "D", "num": 4}, {"text": "雕铣机床可应用的行业可以是（）", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 木工行业", "B. 模具行业", "C. 广告行业", "D. 以上都是"], "answer": "D", "num": 5}, {"text": "采用齿轮铣刀可以加工齿形，该种加工方法属于（ ）。", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 范成法", "B. 成形法"], "answer": "B", "num": 6}, {"text": "数控机床只需要根据零件图样进行编程，不必考虑刀具运动还是工件运动", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "数控铣床的形式可以是卧式的，也可以是立式的。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "数控系统是一种专用计算机控制系统，配有接口电路和伺服驱动装置。操作者通过数字、文字和符号组成的数值指令，控制动作位置、角度、速度等机械量和开关量，实现对一台或多台机械设备动作控制。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "与传统手工雕刻手段相比CNC雕刻秉承了精细轻巧的特点，同时更加自动化。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "对刀的目的是确定程序原点在机床坐标系中的位置，是建立工件坐标系的过程。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "数控铣床的加工路线是指刀具中心的轨迹和方向。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "除了换刀程序外，加工中心的编程方法和数控铣床的编程方法基本相同", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "按机床刀具和工件相对运动布局结构，数控铣床有立式、卧式和立卧两用式三种。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "精雕数控铣床是使用小刀具、大功率和高速主轴电机的数控铣床，既可雕刻，也可铣削，使粗精加工均可在一个工位上完成，拓展了数控铣床的加工能力。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "铣齿加工可以加工直齿、斜齿、齿条和锥齿轮，并适合大批量生产。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "加工中心与数控铣床的主要区别是（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 数控系统复杂程度不同", "B. 机床精度不同", "C. 有无自动换刀系统", "D. 有无自动上下料系统"], "answer": "C", "num": 1}, {"text": "数控机床主轴以800转/分钟转速正转时，其指令应该是", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. M03 S800", "B. M04 S800", "C. M03 S480000", "D. M04 S480000"], "answer": "A", "num": 2}, {"text": "用于指令动作方式的辅助功能指令代码是（ ）代码。", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. F", "B. M", "C. T", "D. G"], "answer": "B", "num": 3}, {"text": "数控编程中，一个完整的程序是由若干个（ ）组成的。", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 字", "B. 程序段", "C. 字母", "D. 数字"], "answer": "B", "num": 4}, {"text": "CNC雕铣机可加工以下哪些材料（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 铜", "B. 钢", "C. 石膏", "D. 以上均可雕铣"], "answer": "D", "num": 5}, {"text": "雕铣机床可应用的行业可以是（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 木工行业", "B. 模具行业", "C. 广告行业", "D. 以上都是"], "answer": "D", "num": 6}, {"text": "采用齿轮铣刀可以加工齿形，该种加工方法属于（ ）。", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 范成法", "B. 成形法"], "answer": "B", "num": 7}, {"text": "数控铣床编程中，辅助功能中表示程序计划停止的指令是（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. M00", "B. M01", "C. M03", "D. M30"], "answer": "B", "num": 8}, {"text": "数控铣床上铣一个正方形零件外轮廓，如果使用的铣刀直径比原来小1mm，则加工后的正方形尺寸差（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 小1mm", "B. 小0.5mm", "C. 大1mm", "D. 大0.5mm"], "answer": "C", "num": 9}, {"text": "精密雕铣机床可以加工的对象包括 （）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 文字", "B. 图案", "C. 纹理", "D. 以上都是"], "answer": "D", "num": 10}, {"text": "通常雕铣加工时的主轴转速较合理的是", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 10000-50000rpm", "B. 1000-3000rpm", "C. 300-2000rpm", "D. 5-50rpm"], "answer": "A", "num": 11}, {"text": "立式钻床刚性好，功率大，允许采用较大的切削用量，适用于加工中小型零件。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "开始推锉时，左手压力要大，右手压力要小，使锉刀保持水平。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "丝锥攻丝时，始终需要加压旋转，方能加工出完整的内螺纹。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "错", "num": 3}, {"text": "任何一台机器都是由多个零件装配而成。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "拆卸零件的顺序应与装配零件的顺序正好相反。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "台虎钳夹持工件的已加工表面时，应用软质铜或铝皮垫在钳口上，保护工件。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 6}, {"text": "钳工划线时，用于正确划出并确定工件各部尺寸、几何形状和相对位置的点、线或面的基准，称为（ ）。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 设计基准", "B. 测量基准", "C. 划线基准", "D. 定位基准"], "answer": "C", "num": 1}, {"text": "钳工实习时制作小榔头的锤头合理工序是 ①取平划线基准面 ②划线 ③锉削 ④锯切 ⑤钻孔攻丝 ⑥修光", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. ②①③⑤④⑥", "B. ①②③④⑤⑥", "C. ①②④③⑤⑥", "D. ③①②④⑤⑥"], "answer": "C", "num": 2}, {"text": "锯切厚件时应选用（ ）。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 粗齿锯条", "B. 中齿锯条", "C. 细齿锯条", "D. 先细齿锯条，再粗齿锯条"], "answer": "A", "num": 3}, {"text": "装配次序应为（ ）。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 组件装配→部件装配→总装配", "B. 总装配→组件装配 →部件装配", "C. 部件装配→组件装配→总装配"], "answer": "A", "num": 4}, {"text": "以下机械连接方式中属于易拆的连接的是( )。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 焊接", "B. 螺栓", "C. 铆接", "D. 压合"], "answer": "B", "num": 5}, {"text": "用钻头在实体材料上加工出孔，称为（ ）。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 镗孔", "B. 铰孔", "C. 锪孔", "D. 钻孔"], "answer": "D", "num": 6}, {"text": "立式钻床刚性好，功率大，允许采用较大的切削用量，适用于加工中小型零件。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "开始推锉时，左手压力要大，右手压力要小，使锉刀保持水平。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "丝锥攻丝时，始终需要加压旋转，方能加工出完整的内螺纹。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 3}, {"text": "任何一台机器都是由多个零件装配而成。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "拆卸零件的顺序应与装配零件的顺序正好相反。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "台虎钳夹持工件的已加工表面时，应用软质铜或铝皮垫在钳口上，保护工件。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "用手锯锯割时，一般往复长度不应小于锯条长度的三分之二。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "顺时针旋转旋入的螺纹是左螺纹。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "正常锯切时，锯条返回仍需加压，但要轻轻拉回，速度要慢。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 9}, {"text": "为了使划出的线条清晰，划针应在工件上反复多次划线。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "锯切铜、铝等软金属时，应选取细齿锯条。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 11}, {"text": "钳工划线时，用于正确划出并确定工件各部尺寸、几何形状和相对位置的点、线或面的基准，称为（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 设计基准", "B. 测量基准", "C. 划线基准", "D. 定位基准"], "answer": "C", "num": 1}, {"text": "钳工实习时制作小榔头的锤头合理工序是 ①取平划线基准面 ②划线 ③锉削 ④锯切 ⑤钻孔攻丝 ⑥修光", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. ②①③⑤④⑥", "B. ①②③④⑤⑥", "C. ①②④③⑤⑥", "D. ③①②④⑤⑥"], "answer": "C", "num": 2}, {"text": "锯切厚件时应选用（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 粗齿锯条", "B. 中齿锯条", "C. 细齿锯条", "D. 先细齿锯条，再粗齿锯条"], "answer": "A", "num": 3}, {"text": "装配次序应为（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 组件装配→部件装配→总装配", "B. 总装配→组件装配 →部件装配", "C. 部件装配→组件装配→总装配"], "answer": "A", "num": 4}, {"text": "以下机械连接方式中属于易拆的连接的是( )。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 焊接", "B. 螺栓", "C. 铆接", "D. 压合"], "answer": "B", "num": 5}, {"text": "用钻头在实体材料上加工出孔，称为（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 镗孔", "B. 铰孔", "C. 锪孔", "D. 钻孔"], "answer": "D", "num": 6}, {"text": "手工起锯的适宜角度为（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 0°", "B. 约小于15°", "C. 约30°", "D. 45°"], "answer": "B", "num": 7}, {"text": "8英寸的圆锉刀长度相当于（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 100mm", "B. 150mm", "C. 200mm"], "answer": "C", "num": 8}, {"text": "锉削余量较大平面时，应采用（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 顺向锉", "B. 交叉锉", "C. 推锉", "D. 先推锉，后顺向锉"], "answer": "B", "num": 9}, {"text": "锉削时，锉刀的用力应是在（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 锉削开始时", "B. 拉回锉刀时", "C. 推锉和拉回锉刀时", "D. 推锉时两手用力应变化"], "answer": "A", "num": 10}, {"text": "数控车床可以车削直线、斜线、圆弧、圆柱管螺纹、圆锥螺纹等，但是不能车削多头螺纹。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "错", "num": 1}, {"text": "数控车床的顺、逆方向判断方法是沿垂直于圆弧所在平面，从正向往负向看，刀具相对工件转动方向是顺时针用G02，反之用G03 。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "进给速度与主轴转速有关时，表示为进给量mm/r，一般是数控车床默认的状态。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "i5数控系统是国产的智能化数控系统 。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "随着数控车床的推广与应用，数控车床可以加工各种复杂成形表面。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "数控车削编程时，工件的工艺分析和加工参数确定是关键。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 6}, {"text": "数控车床的X轴往负方向进给1mm，则零件直径（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. 减小1mm", "B. 增大1mm", "C. 减小2mm", "D. 增大2mm"], "answer": "C", "num": 1}, {"text": "数控机床主要适用的场合是（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. 定型产品的大量生产", "B. 多品种小批量生产", "C. 中等精度的定型产品"], "answer": "B", "num": 2}, {"text": "在确定数控车床坐标系中，X、Y、Z的关系及正方向时，用（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. 左手笛卡尔坐标系", "B. 左手螺旋法则", "C. 右手笛卡尔坐标系", "D. 右手螺旋法则"], "answer": "C", "num": 3}, {"text": "数控车床加工的主要几何要素为（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. 斜线和直线", "B. 斜线和圆弧", "C. 直线和圆弧", "D. 圆弧和曲线"], "answer": "C", "num": 4}, {"text": "数控车床两个坐标轴设定分别是（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. XY轴", "B. YZ轴", "C. XZ轴", "D. 根据机床类别设定"], "answer": "C", "num": 5}, {"text": "数控车床可以车削直线、斜线、圆弧、圆柱管螺纹、圆锥螺纹等，但是不能车削多头螺纹。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "错", "num": 1}, {"text": "数控车床的顺、逆方向判断方法是沿垂直于圆弧所在平面，从正向往负向看，刀具相对工件转动方向是顺时针用G02，反之用G03 。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "进给速度与主轴转速有关时，表示为进给量mm/r，一般是数控车床默认的状态。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "i5数控系统是国产的智能化数控系统 。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "随着数控车床的推广与应用，数控车床可以加工各种复杂成形表面。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "数控车削编程时，工件的工艺分析和加工参数确定是关键。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "数控车削中，T0001这样的指令表示撤消补偿。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "数控车床编程中，所有G指令后都需要指定主轴转速值", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "数控车床的螺纹切削循环，可加工直螺纹和锥螺纹。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "数控车床切断刀有两个副偏角。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "数控车床上，一个程序只可加工一个工件。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "错", "num": 11}, {"text": "数控车床的X轴往负方向进给1mm，则零件直径（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 减小1mm", "B. 增大1mm", "C. 减小2mm", "D. 增大2mm"], "answer": "C", "num": 1}, {"text": "数控机床主要适用的场合是（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 定型产品的大量生产", "B. 多品种小批量生产", "C. 中等精度的定型产品"], "answer": "B", "num": 2}, {"text": "在确定数控车床坐标系中，X、Y、Z的关系及正方向时，用（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 左手笛卡尔坐标系", "B. 左手螺旋法则", "C. 右手笛卡尔坐标系", "D. 右手螺旋法则"], "answer": "C", "num": 3}, {"text": "数控车床加工的主要几何要素为（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 斜线和直线", "B. 斜线和圆弧", "C. 直线和圆弧", "D. 圆弧和曲线"], "answer": "C", "num": 4}, {"text": "数控车床两个坐标轴设定分别是（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. XY轴", "B. YZ轴", "C. XZ轴", "D. 根据机床类别设定"], "answer": "C", "num": 5}, {"text": "用数控程序表示调用子程序的代码是（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. M98", "B. M99", "C. M03", "D. M30"], "answer": "A", "num": 6}, {"text": "在数控车床上，不能自动完成的功能为（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 车床的启动停止", "B. 装夹工件", "C. 纵横向进给", "D. 刀架转位、换刀"], "answer": "B", "num": 7}, {"text": "零件上既有孔又有面需要加工时，一般数控机床进行加工的顺序为（ ）。", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 先面后孔", "B. 先孔后面", "C. 孔面同时加工", "D. 以上皆可"], "answer": "A", "num": 8}, {"text": "数控机床关机时，第一动作为（ ）。", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 关闭数控系统电源", "B. 关闭机床总电源", "C. 数控系统复位", "D. 删除数控程序"], "answer": "C", "num": 9}, {"text": "序号字和功能字是由（ ）构成，一般数控程序中使用的常用功能字主要有（ ）。", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 数字，4种", "B. 字母和数字，4种", "C. 字母和数字，6种", "D. 字母，6种"], "answer": "C", "num": 10}, {"text": "特种加工是直接利用电能、光能、声能、热能、化学能、电化学能及特殊机械能等多种形式的能量实现去除材料来完成对零件的加工成型的工艺方法。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "数控电火花线切割机床能加工各种高硬度﹑高强度﹑高韧度的材料，但必须是低熔点的材料。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "错", "num": 2}, {"text": "电火花线切割机床能加工高强高硬度的绝缘材料。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "错", "num": 3}, {"text": "电火花线切割不能加工半导体材料。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "错", "num": 4}, {"text": "特种加工是直接利用各种能量对材料进行加工，其加工机理与金属切割加工相同。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "错", "num": 5}, {"text": "特种加工可以采用的能量包括（）", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. 电能、热能、光能", "B. 电化学能、化学能", "C. 声能及特殊机械能", "D. 以上均可以"], "answer": "D", "num": 1}, {"text": "以下不属于特种加工的是（）", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. 等离子弧加工", "B. 精密雕铣", "C. 激光加工", "D. 电火花加工"], "answer": "B", "num": 2}, {"text": "电火花线切割加工称为", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. EDMB", "B. ECM", "C. EBM", "D. WEDM"], "answer": "D", "num": 3}, {"text": "线切割加工的工件材料，应具有什么物理性能", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. 导电性", "B. 绝缘性", "C. 高密度", "D. 低熔点"], "answer": "A", "num": 4}, {"text": "线切割加工的材料范围是", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. 黑色金属", "B. 非淬火材料", "C. 硬度必须小于HRC30", "D. 各种导电金属"], "answer": "D", "num": 5}, {"text": "特种加工是直接利用电能、光能、声能、热能、化学能、电化学能及特殊机械能等多种形式的能量实现去除材料来完成对零件的加工成型的工艺方法。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "数控电火花线切割机床能加工各种高硬度﹑高强度﹑高韧度的材料，但必须是低熔点的材料。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "电火花线切割机床能加工高强高硬度的绝缘材料。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 3}, {"text": "电火花线切割不能加工半导体材料。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 4}, {"text": "数控电火花线切割机床的编程，主要采用ISO编程、3B编程、图形化自动编程三种格式编写。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "特种加工是直接利用各种能量对材料进行加工，其加工机理与金属切割加工相同。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 6}, {"text": "在线切割加工中，当电压表、电流表的表针稳定不动，此时进给速度均匀、平稳，是线切割加工速度和表面粗糙度的最佳状态。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "电火花线切割加工过程中，电极丝与工件间火花放电是比较理想的状态。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "线切割机床加工路径生成的时候需要考虑刀具半径补偿。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "电火花线切割可以加工淬火钢、不锈钢和硬质合金、陶瓷、金刚石等。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "特种加工可以采用的能量包括（）", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 电能、热能、光能", "B. 电化学能、化学能", "C. 声能及特殊机械能", "D. 以上均可以"], "answer": "D", "num": 1}, {"text": "以下不属于特种加工的是（）", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 等离子弧加工", "B. 精密雕铣", "C. 激光加工", "D. 电火花加工"], "answer": "B", "num": 2}, {"text": "电火花线切割加工称为", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. EDMB", "B. ECM", "C. EBM", "D. WEDM"], "answer": "D", "num": 3}, {"text": "线切割加工的工件材料，应具有什么物理性能", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 导电性", "B. 绝缘性", "C. 高密度", "D. 低熔点"], "answer": "A", "num": 4}, {"text": "线切割加工的材料范围是", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 黑色金属", "B. 非淬火材料", "C. 硬度必须小于HRC30", "D. 各种导电金属"], "answer": "D", "num": 5}, {"text": "以下不能使用电火花线切割加工的材料为", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 石墨", "B. 大理石", "C. 铝", "D. 硬质合金"], "answer": "B", "num": 6}, {"text": "电火花成型加工中常用的电极材料有", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 石墨", "B. 紫铜", "C. 银钨合金", "D. 以上都是"], "answer": "D", "num": 7}, {"text": "电火花加工、电子束加工、等离子弧加工是利用（ ）能量加工材料的。", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 电、热能", "B. 电、机械能", "C. 电、化学能", "D. 电、声能"], "answer": "A", "num": 8}, {"text": "电火花加工主要用于高效加工（ ）", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 难切削材料", "B. 碳素钢", "C. 精密细小及复杂形状的金属件", "D. A+C"], "answer": "D", "num": 9}, {"text": "以下哪一项不属于特种加工设备范畴（ ）", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 电火花线切割、电火花成型机床", "B. 多工位深小孔钻床", "C. 激光加工机床", "D. 超声波加工机床"], "answer": "B", "num": 10}, {"text": "计算机辅助设计技术是利用计算机及其图形设备帮助设计人员进行设计工作。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "CAD设计过程不应该包括装配设计 。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "错", "num": 2}, {"text": "CAD设计中，草图特征中的旋转操作允许旋转一个或多个轮廓。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "CAD的发展过程按对几何模型表示模式的复杂程度，主要经历了线框建模、曲面建模、实体建模、参数化特征建模；CAM的发展过程主要经历了穿孔纸带、APT语言自动编程、图形交互自动编程、CAD/CAM集成数控编程的发展过程。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "在CAD设计系统中，零件和装配默认存在三个工作面、三个工作轴、一个工作点组成的原始坐标系，这个原始坐标系是固定的。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "CAD指的是", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 计算机辅助设计", "B. 计算机辅助制造", "C. 计算机辅助工程", "D. 计算机辅助开发"], "answer": "A", "num": 1}, {"text": "CAM指的是", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 计算机辅助设计", "B. 计算机辅助制造", "C. 计算机辅助工程", "D. 计算机辅助管理"], "answer": "B", "num": 2}, {"text": "CAD系统中的坐标体系包括世界坐标系和", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 绝对坐标系", "B. 平面坐标系", "C. 相对坐标系", "D. 用户坐标系"], "answer": "D", "num": 3}, {"text": "CAM系统功能中不包括", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 力学性能仿真", "B. 刀具路径生成", "C. 刀具路径仿真", "D. 数控代码生成"], "answer": "A", "num": 4}, {"text": "下述CAD/CAM技术中，属于CAD范畴的是（ ）。", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 数控加工", "B. 几何造型", "C. CAPP", "D. 仿真加工"], "answer": "B", "num": 5}, {"text": "计算机辅助设计技术是利用计算机及其图形设备帮助设计人员进行设计工作。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "CAD设计过程不应该包括装配设计 。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "CAD设计中，草图特征中的旋转操作允许旋转一个或多个轮廓。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "CAD的发展过程按对几何模型表示模式的复杂程度，主要经 历了线框建模、曲面建模、实体建模、参数化特征建模；CAM的发展过程主要经历了穿孔纸带、APT语言自动编程、图形交互自动编程、CAD/CAM集成数控编程的发展过程。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "在CAD设计系统中，零件和装配默认存在三个工作面、三个工作轴、一个工作点组成的原始坐标系，这个原始坐标系是固定的。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "CAD设计中的组合实体的基本方式包括并、交、差运算。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "CAD设计中，采用阵列的方式不仅具有复制图形的功能，还实现了批量控制图形的位置和方向。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "CAD设计中，草图中的拉伸指令方向只有正向和反向两种。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "在CAD/CAM支撑软件中，特征是设计者对设计对象的功能、形状、结构、制造、装配、检验、管理与使用等信息及其关系的具有确切工程含义的高层次抽象描述；拉伸造型、旋转造型、扫描造型、放样造型以及镜向、圆周阵列、线性阵列、参数化驱动阵列等是基于特征造型的几何建模方法。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "几何建模是以几何信息和拓扑信息反映结构体的形状、位置、表现形式等数据的方法。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "CAD指的是", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 计算机辅助设计", "B. 计算机辅助制造", "C. 计算机辅助工程", "D. 计算机辅助开发"], "answer": "A", "num": 1}, {"text": "CAM指的是", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 计算机辅助设计", "B. 计算机辅助制造", "C. 计算机辅助工程", "D. 计算机辅助管理"], "answer": "B", "num": 2}, {"text": "CAD系统中的坐标体系包括世界坐标系和", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 绝对坐标系", "B. 平面坐标系", "C. 相对坐标系", "D. 用户坐标系"], "answer": "D", "num": 3}, {"text": "CAM系统功能中不包括", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 力学性能仿真", "B. 刀具路径生成", "C. 刀具路径仿真", "D. 数控代码生成"], "answer": "A", "num": 4}, {"text": "下述CAD/CAM技术中，属于CAD范畴的是（ ）。", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 数控加工", "B. 几何造型", "C. CAPP", "D. 仿真加工"], "answer": "B", "num": 5}, {"text": "CAD中的草图的编辑指令不包括", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 拖动", "B. 延伸", "C. 修剪", "D. 放样"], "answer": "D", "num": 6}, {"text": "CAM中需要设定的工艺信息不包括", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 加工模式", "B. 加工区域", "C. 机床精度", "D. 使用刀具"], "answer": "C", "num": 7}, {"text": "用CAD/CAM软件生成的程序属于下述哪种编程方法。( )", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. APT语言编程", "B. 图形交互自动编程", "C. 手工编程", "D. VB语言编程"], "answer": "B", "num": 8}, {"text": "在CAD/CAM整个过程中，需要人工介入最多的是哪个环节。（ ）", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 计算机辅助编程", "B. 零件设计", "C. 数控加工", "D. 模拟加工"], "answer": "B", "num": 9}, {"text": "以下哪一项不是CAD/CAM软件系统（ ）。", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. Solidworks，AutoCAD", "B. Pro/E、UG", "C. iOS、Windows", "D. CATIA、i-Deal"], "answer": "C", "num": 10}, {"text": "VR的3D立体视觉效果利用的是两眼视差的原理。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "虚拟现实（Virtual Reality）技术是一种以计算机技术为核心的人机接口，通过对视觉、听觉、触觉、嗅觉和味觉等多种感觉进行实时模拟和实时交互，建立一个沉浸式的虚拟世界。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "AR（Augumented Reality）即增强现实，是将虚拟信息内容与真实世界叠加的应用。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "虚拟现实（Virtual Reality）的视觉感知设备——头盔显示器，采用两个LCD或者CRT显示器向双眼显示图像，双眼得到的图像没有差别。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "错", "num": 4}, {"text": "VR头盔（虚拟现实头戴式显示设备）中“透镜”的作用是聚焦光线，让视觉感受到视野成像在无限远之外。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "虚拟现实（Virtual Reality）技术的特性包括", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. 沉浸性", "B. 交互性", "C. 想象性", "D. 以上都是"], "answer": "D", "num": 1}, {"text": "虚拟现实 (VR)系统的重要组成部分——感知设备，能将虚拟世界各类感知模型转变为人能接受的信号，包括", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. 视觉感知设备", "B. 听觉感知设备", "C. 触觉感知设备", "D. 以上都是"], "answer": "D", "num": 2}, {"text": "将虚拟环境占据满用户的整个视野，屏蔽真实的世界，使用户完全沉浸在虚拟的世界里，指的是下面哪项技术？", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. VR（Virtual Reality）", "B. AR（Augmented Reality）", "C. MR（Mixed Reality）"], "answer": "A", "num": 3}, {"text": "立体显示技术采用了双眼视差的原理，目前已存在的立体显示技术包括：", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. 分色技术（如红蓝滤色）", "B. 分光技术（如偏振式滤光）", "C. 分时技术（如主动快门式）", "D. 以上都是"], "answer": "D", "num": 4}, {"text": "VR头盔的主要组成部分包括：", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. 显示器", "B. 光学透镜", "C. 位置传感器", "D. 以上都是"], "answer": "D", "num": 5}, {"text": "VR的3D立体视觉效果利用的是两眼视差的原理。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "虚拟现实（Virtual Reality）技术是一种以计算机技术为核心的人机接口，通过对视觉、听觉、触觉、嗅觉和味觉等多种感觉进行实时模拟和实时交互，建立一个沉浸式的虚拟世界。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "AR（Augumented Reality）即增强现实，是将虚拟信息内容与真实世界叠加的应用。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "虚拟现实（Virtual Reality）的视觉感知设备——头盔显示器，采用两个LCD或者CRT显示器向双眼显示图像，双眼得到的图像没有差别。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "错", "num": 4}, {"text": "VR头盔（虚拟现实头戴式显示设备）中“透镜”的作用是聚焦光线，让视觉感受到视野成像在无限远之外。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "在使用Unity软件建立虚拟现实（VR）场景之前，需要先准备相关资源素材，如模型、音频、视频、材质、图片等。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "本次虚拟现实（VR）实训课程中，我们使用的Unity脚本语言为C#", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "虚拟现实（VR）技术不仅可以应用在娱乐、艺术方面，同样也被应用于电气、机械、建筑等工程领域，以及在教育培训等行业也有较成熟的应用。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "在Unity中建立虚拟（VR）场景时，我们在头盔中看到的虚拟世界的景象，是由场景中的摄像机（Camera）“拍摄”并“播放”在头盔的屏幕上。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "在Unity中建立虚拟（VR）场景时，可以通过编写脚本语言来实现场景中各种对象的运行。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "虚拟现实（Virtual Reality）技术的特性包括", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 沉浸性", "B. 交互性", "C. 想象性", "D. 以上都是"], "answer": "D", "num": 1}, {"text": "虚拟现实 (VR)系统的重要组成部分——感知设备，能将虚拟世界各类感知模型转变为人能接受的信号，包括", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 视觉感知设备", "B. 听觉感知设备", "C. 触觉感知设备", "D. 以上都是"], "answer": "D", "num": 2}, {"text": "将虚拟环境占据满用户的整个视野，屏蔽真实的世界，使用户完全沉浸在虚拟的世界里，指的是下面哪项技术？", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. VR（Virtual Reality）", "B. AR（Augmented Reality）", "C. MR（Mixed Reality）"], "answer": "A", "num": 3}, {"text": "立体显示技术采用了双眼视差的原理，目前已存在的立体显示技术包括：", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 分色技术（如红蓝滤色）", "B. 分光技术（如偏振式滤光）", "C. 分时技术（如主动快门式）", "D. 以上都是"], "answer": "D", "num": 4}, {"text": "VR头盔的主要组成部分包括：", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 显示器", "B. 光学透镜", "C. 位置传感器", "D. 以上都是"], "answer": "D", "num": 5}, {"text": "VR场景中出现的三维模型可以由什么方式建立？", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 全景拍摄", "B. CG建模", "C. 三维扫描", "D. 以上都是"], "answer": "D", "num": 6}, {"text": "虚拟现实技术在工业领域的应用有哪些？", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 工厂规划、数据可视化", "B. 虚拟装配、虚拟培训", "C. 训练体验、协同工作", "D. 以上都是"], "answer": "D", "num": 7}, {"text": "在VR实践课程中，当我们控制对象旋转和移动时，是改写了对象的( )组件中的Position和Rotation属性的值。", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. Transform组件", "B. Collider组件", "C. RigidBody组件", "D. Text组件"], "answer": "A", "num": 8}, {"text": "在实践课程中，我们建立的VR虚拟世界，是依托以下哪种设备生成后，与VR头显进行数据交互的？", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 个人电脑（PC）端", "B. 分布式网络计算机", "C. 超级计算机", "D. 图形工作站"], "answer": "A", "num": 9}, {"text": "直流有刷电机的工作原理是：直流电源的电能通过电刷和换向器进入电枢绕组，产生电枢电流，电枢电流产生的磁场与主磁场相互作用产生电磁转矩,使电机旋转带动负载。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "移动机器人运动学建模时标准轮需满足纯滚动约束和无侧滑约束。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "Arduino开发环境使用C/C++编写程序。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "机器人的基本功能类型有操作机器人和移动机器人。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "轮式移动机器人适合松软、沟壑路面。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "错", "num": 5}, {"text": "下列产品中不属于嵌入式系统的是( )。", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 有线电视机顶盒", "B. 服务器", "C. 电饭煲", "D. 路由器"], "answer": "B", "num": 1}, {"text": "1MB 等于( )。", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 1024B", "B. 1024KB", "C. 8bit", "D. 1024GB"], "answer": "B", "num": 2}, {"text": "平面平行运动刚体的自由度是（）。", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 2", "B. 3", "C. 4", "D. 6"], "answer": "B", "num": 3}, {"text": "常规情况下，保持移动机器人静态稳定至少需要（）个轮子", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 2", "B. 3", "C. 4", "D. 6"], "answer": "B", "num": 4}, {"text": "两轮差速小车如何实现绕过两轮中心竖直轴自转？", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 两轮以相同速度正转", "B. 两轮以相同速度反转", "C. 两轮以相同速度反向转动", "D. 两轮以不同速度反向转动"], "answer": "C", "num": 5}, {"text": "直流有刷电机的工作原理是：直流电源的电能通过电刷和换向器进入电枢绕组，产生电枢电流，电枢电流产生的磁场与主磁场相互作用产生电磁转矩,使电机旋转带动负载。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "移动机器人运动学建模时标准轮需满足纯滚动约束和无侧滑约束。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "Arduino开发环境使用C/C++编写程序。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "机器人的基本功能类型有操作机器人和移动机器人。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "轮式移动机器人适合松软、沟壑路面。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "错", "num": 5}, {"text": "在Arduino的开发环境(Arduino IDE)点击“串口监视器”可以察看串口收发的数据。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "Arduino程序基本结构由main() 和loop() 两个函数组成。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "在Arduino程序中，编写C程序代码的时候必须使用英文全角输入法，尤其是标点符号", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "Arduino IDE状态栏的作用是输出编译或报错信息。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "下列产品中不属于嵌入式系统的是( )。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 有线电视机顶盒", "B. 服务器", "C. 电饭煲", "D. 路由器"], "answer": "B", "num": 1}, {"text": "1MB 等于( )。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 1024B", "B. 1024KB", "C. 8bit", "D. 1024GB"], "answer": "B", "num": 2}, {"text": "平面平行运动刚体的自由度是（）。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 2", "B. 3", "C. 4", "D. 6"], "answer": "B", "num": 3}, {"text": "常规情况下，保持移动机器人静态稳定至少需要（）个轮子", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 2", "B. 3", "C. 4", "D. 6"], "answer": "B", "num": 4}, {"text": "两轮差速小车如何实现绕过两轮中心竖直轴自转？", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 两轮以相同速率同向正转", "B. 两轮以相同速率同向反转", "C. 两轮以相同速率反向转动", "D. 两轮以不同速率反向转动"], "answer": "C", "num": 5}, {"text": "Arduino的开发环境(Arduino IDE)可以打开后缀名为( )的程序文件。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. .ino", "B. .pdf", "C. .rar", "D. .jpg"], "answer": "A", "num": 6}, {"text": "PWM脉冲宽度调制技术，其具有两个很重要的参数：频率和( )。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 周期", "B. 脉冲宽度", "C. 调制率", "D. 占空比"], "answer": "D", "num": 7}, {"text": "在Arduino中，设定某个特定引脚是输入接口，使用的命令符是（）。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. HIGH", "B. LOW", "C. OUTPUT", "D. INPUT"], "answer": "D", "num": 8}, {"text": "开环控制方式是按（）进行控制的。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 偏差", "B. 扰动", "C. 给定量", "D. 输出量"], "answer": "C", "num": 9}, {"text": "Arduino函数“delay(1500)”表示延迟时间是（）。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 1500毫秒", "B. 1500微妙", "C. 1500秒", "D. 1.5毫秒"], "answer": "A", "num": 10}, {"text": "FDM 熔融沉积成型（Fused Deposition Modeling）是将热塑性材料通过加热器融化，挤压喷出并堆积一个层面，同样的方法造出第二个层面并与前一层融化在一起，层层堆积可以获得三维实体。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "快速成型、增材制造、三维打印表示同一概念。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "三维打印工艺不受刀具、模具及工装卡具的限制，且不受零件复杂程度的限制，因此可以降低了新产品的开发成本和周期。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "由于三维打印采用了离散/堆积分层制造工艺和非接触加工方式，能够很好地将CAD、CAM结合起来。可实现快速制造，将完全替代传统制造方法。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "错", "num": 4}, {"text": "三维打印的CAM过程是将三维模型分层切片，并根据每一层形状生成喷头 移动路径的G代码。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "三维打印技术运用于零部件制造的特点不包括", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 短周期", "B. 高柔性", "C. 低成本", "D. 高精度"], "answer": "D", "num": 1}, {"text": "下列对三维打印技术的解说不正确的一项是", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 三维打印技术的工作原理是：在平面上以一定形式固化材料，逐层打印，以堆积成三维物体。", "B. 三维打印过程总体上分为三个步骤，包括：数据前处理，分层叠加成型，后处理。", "C. 三维打印技术的开发从20世纪80年代开始，目前已可以替代大部分传统制造方式。", "D. 三维打印技术的优势在于可以制作出几乎任意形状、传统加工工艺无法完成的产品。"], "answer": "C", "num": 2}, {"text": "三维打印的成型原理为（ ）。", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 切削成型", "B. 受迫成型", "C. 增材制造", "D. 注塑成型"], "answer": "C", "num": 3}, {"text": "以下哪项符合快速成型制造的特点。", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 适合于大批量零件生产", "B. 可使用任何材料成型", "C. 加工精度高", "D. 可成型复杂曲面"], "answer": "D", "num": 4}, {"text": "以下哪种方式不属于三维打印技术", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 电子束熔融成型EBM", "B. 电火花成型EDM", "C. 选择性激光熔融SLM", "D. 立体光固化成型SLA"], "answer": "B", "num": 5}, {"text": "FDM 熔融沉积成型（Fused Deposition Modeling）是将热塑性材料通过加热器融化，挤压喷出并堆积一个层面，同样的方法造出第二个层面并与前一层融化在一起，层层堆积可以获得三维实体。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "快速成型、增材制造、三维打印表示同一概念。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "三维打印工艺不受刀具、模具及工装卡具的限制，且不受零件复杂程度的限制，因此可以降低了新产品的开发成本和周期。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "由于三维打印采用了离散/堆积分层制造工艺和非接触加工方式，能够很好地将CAD、CAM结合起来。可实现快速制造，将完全替代传统制造方法。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "错", "num": 4}, {"text": "三维打印的CAM过程是将三维模型分层切片，并根据每一层形状生成喷头移动路径的G代码。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "三维打印机的加工范围是有限的，当被加工零件超出加工范围时，可以对零件进行分割打印。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "由于不易控制Z方向（垂直面）上的翘曲变形等原因，打印工件的X-Y方向（水平面）的尺寸精度比Z方向更易保证。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "逆向工程是一个通过实物建立模型的过程，其重点在于采集物体表面数据和后期处理两部分，即利用设备对物体作全方位的扫描或测绘，得到物体表面的原始三维信息，之后再使用软件整理数据、三维造型并输出结果。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "快速成型制造相对于数控机床加工而言，精度更高、速度更快，适用于大批量的零件生产，并可大大降低生产成本。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "错", "num": 9}, {"text": "FDM类型的三维打印机可使用金属粉末、液态光敏树脂、塑料、尼龙等多种原材料。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "三维打印技术运用于零部件制造的特点不包括", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 短周期", "B. 高柔性", "C. 低成本", "D. 高精度"], "answer": "D", "num": 1}, {"text": "下列对三维打印技术的解说不正确的一项是", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 三维打印技术的工作原理是：在平面上以一定形式固化材料，逐层打印，以堆积成三维物体。", "B. 三维打印过程总体上分为三个步骤，包括：数据前处理，分层叠加成型，后处理。", "C. 三维打印技术的开发从20世纪80年代开始，目前已可以替代大部分传统制造方式。", "D. 三维打印技术的优势在于可以制作出几乎任意形状、传统加工工艺无法完成的产品。"], "answer": "C", "num": 2}, {"text": "三维打印的成型原理为（ ）。", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 切削成型", "B. 受迫成型", "C. 增材制造", "D. 注塑成型"], "answer": "C", "num": 3}, {"text": "以下哪项符合快速成型制造的特点。", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 适合于大批量零件生产", "B. 可使用任何材料成型", "C. 加工精度高", "D. 可成型复杂曲面"], "answer": "D", "num": 4}, {"text": "以下哪种方式不属于三维打印技术", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 电子束熔融成型EBM", "B. 电火花成型EDM", "C. 选择性激光熔融SLM", "D. 立体光固化成型SLA"], "answer": "B", "num": 5}, {"text": "熔融沉积三维打印使用的成形材料可以是", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. PLA塑料丝", "B. 薄片纸", "C. 光敏树脂液", "D. 陶瓷粉末"], "answer": "A", "num": 6}, {"text": "以下3D打印工艺中表面精度最高的是", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 熔融沉积工艺", "B. 光固化立体成型工艺", "C. 粉末烧结工艺", "D. 层片叠加工艺"], "answer": "B", "num": 7}, {"text": "课程实训中所使用的FDM打印过程设置的层厚一般在", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 0.001mm左右", "B. 0.01mm左右", "C. 0.1mm左右", "D. 1mm左右"], "answer": "C", "num": 8}, {"text": "课程实训中所使用的FDM打印机喷头出口直径大约在", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 0.4μm左右", "B. 0.004mm左右", "C. 0.04mm左右", "D. 0.4mm左右"], "answer": "D", "num": 9}, {"text": "课程学习中所用到的三维打印机系统从控制角度看属于", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 2轴联动系统", "B. 3轴联动系统", "C. 4轴联动系统", "D. 5轴联动系统"], "answer": "C", "num": 10}];
+
+// ============================================================
+// DATA: Knowledge HTML
+// ============================================================
+const KNOWLEDGE_HTML = "<h2 class=\"chapter-title\" id=\"chap-2\">材料与热处理</h2>\n<h3 class=\"section-title\" id=\"sec-2-1\">材料的分类</h3>\n<p class=\"para\">材料：金属材料，非金属材料；</p>\n<p class=\"para\">金属材料：黑色金属，有色金属；</p>\n<h3 class=\"section-title\" id=\"sec-2-2\">材料性能</h3>\n<p class=\"para\">材料性能：使用性能（包括力学性能（强度、硬度、刚度。。。）、物理性能和化学性能等）和工艺性能（铸造性能、焊接性能、压力加工性能、切削性能和热处理性能）；</p>\n<h3 class=\"section-title\" id=\"sec-2-3\">常用金属材料及其牌号</h3>\n<p class=\"para\">掌握常用碳素钢（碳素结构钢Q235、优质碳素结构钢45、碳素工具钢T8、T12）、合金钢（在碳素钢的基础上加入合金元素，使得材料的性能提高或具有特殊的性能12Mn）和铸铁（HT200、KTH330－08）的分类、牌号、性能、应用。</p>\n<p class=\"para\">Q235A：Q屈服强度，235MPa，A质量等级，螺栓、连杆、法兰等</p>\n<p class=\"para\">45：数字表示钢中碳的平均质量分数的万分之几，0.45%，轴承、齿轮等</p>\n<p class=\"para\">T12：T表示碳素工具钢，数字表示钢中碳的平均质量分数的千分之几，1.2%，刀具、模具等</p>\n<p class=\"para\">12Mn：首两位数字表示碳的质量分数的万分之几，元素符号后数字表示该元素含量的百分之几，小于1.5%不标</p>\n<h3 class=\"section-title\" id=\"sec-2-4\">热处理</h3>\n<p class=\"para\">热处理是将工件加热到一定的温度，经保温后以一定的冷却速度冷却。通过热处理可使钢的组织和性能发生改变，可提高工件的力学性能，改善工艺性能，达到充分发挥金属材料的潜力，提高产品质量，延长使用性能，提高经济效益。</p>\n<p class=\"para\">钢的热处理基本工艺有：退火、正火、淬火和回火。</p>\n<h4 class=\"subsection-title\" id=\"sub-2-4-1\">退火</h4>\n<p class=\"para\">退火——加热到一定温度，经保温后随炉冷却。降低硬度、消除内应力、改善组织性能，包括完全退火、球化退火、去应力退火</p>\n<h4 class=\"subsection-title\" id=\"sub-2-4-2\">正火</h4>\n<p class=\"para\">正火——加热到一定温度，经保温后在空气中冷却。细化晶粒、消除内应力；低碳钢正火处理可提高强度和硬度、改善切削加工性能。</p>\n<h4 class=\"subsection-title\" id=\"sub-2-4-3\">淬火</h4>\n<p class=\"para\">淬火——加热到临界温度以上（30-50℃）的某一温度，经保温后以快速冷却（即大于临界冷却速度）。获得马氏体组织（硬、脆），45钢经淬火后硬度可达50-55HRC，碳素工具钢大于60HRC</p>\n<h4 class=\"subsection-title\" id=\"sub-2-4-4\">回火</h4>\n<p class=\"para\">回火——将淬火后的工件重新加热到临界点以下的某一温度，经长时期保温后缓慢冷却。</p>\n<p class=\"para\">一般随回火温度的升高，钢的强度和硬度下降，而塑性韧性上升。</p>\n<li class=\"arrow\">低温回火（150～250℃） 目的是消除和降低淬火钢的内应力及脆性，提高韧性，使零件具有较高的硬度（58～64HRC）。主要用于各种工、量、模具及滚动轴承等，如用T12钢制造的锯条、锉刀等，一般都采用淬火后低温回火。</li>\n<li class=\"arrow\">中温回火（350～500℃） 中温回火后工件的硬度有所降低，但可使钢获得较高的弹性极限和强度（35～45HRC）。主要用于各种弹簧的热处理。</li>\n<li class=\"arrow\">高温回火（500～650℃）通常将钢件淬火后加高温回火，称为调质处理。经调质处理后的零件，既具有一定的强度、硬度，又具有一定的塑性和韧性，即综合力学性能较好（25～35HRC）。主要用于轴、齿轮、连杆等重要结构零件。如各类轴、齿轮、连杆等采用中碳钢制造，经淬火+高温回火后，即可达到使用性能的要求。</li>\n<h2 class=\"chapter-title\" id=\"chap-3\">铸造</h2>\n<h3 class=\"section-title\" id=\"sec-3-1\">铸造概述</h3>\n<p class=\"para\">铸造是熔炼金属，制造铸型并将熔融金属浇入与零件形状相适应的铸型，凝固后获得一定形状和性能的铸件的成型方法。铸件一般是尺寸精度不高，表面粗糙的毛坯，必须经切削加工后才能成为零件。若对零件表面要求不高，也可直接使用。</p>\n<h3 class=\"section-title\" id=\"sec-3-2\">铸造的特点</h3>\n<li class=\"bullet\">铸造的适应性强，铸造可以制成形状和内腔十分复杂的铸件，特别是具有内腔的毛坯，如各种箱体、气缸体、气缸盖等。</li>\n<li class=\"bullet\">可用于各种材料，如有色金属，黑色金属、铸铁和铸钢等，但以黑色金属为主；可生产不同尺寸及质量的铸件，如壁厚可做到小于1mm、铸件的质量可以轻到几克、重达几百吨的铸件等。</li>\n<li class=\"bullet\">铸件生产成本低，设备投资较少，原材料价格低，来源广等。</li>\n<h3 class=\"section-title\" id=\"sec-3-3\">铸造的应用</h3>\n<li class=\"bullet\">主要应用在各种箱体和非承受载荷的低速齿轮等。如机床床身、齿轮箱、变速箱、手轮、内燃机气缸体、气缸盖、火车轮、皮带轮、台虎钳钳座等。</li>\n<li class=\"bullet\">铸造生产方法很多，主要分为两大类：①砂型铸造；②特种铸造。</li>\n<h3 class=\"section-title\" id=\"sec-3-4\">铸造主要工艺参数</h3>\n<li class=\"bullet\">收缩余量</li>\n<li class=\"bullet\">加工余量</li>\n<li class=\"bullet\">起模斜度--与壁高、造型方法、模样材料及表面粗糙度有关。</li>\n<li class=\"bullet\">铸孔、槽及型芯头</li>\n<li class=\"bullet\">铸造圆角</li>\n<p class=\"para\">铸造在机械制造中获得广泛的应用，但铸造生产工艺过程难以精确控制；铸件的化学成分和组织不十分均匀、晶粒粗大、组织疏松，常有气孔、夹渣、砂眼等缺陷存在，使得力学性能不如锻件高的缺点。随着新工艺、新材料发展，铸件的质量也在不断提高。</p>\n<h3 class=\"section-title\" id=\"sec-3-5\">造型工艺</h3>\n<li class=\"bullet\">造型时必须考虑到的工艺问题主要是分型面和浇注系统，它们直接影响铸件的质量及生产率等。</li>\n<li class=\"bullet\">分型面的确定 分型面是指上、下砂型的接触表面。</li>\n<p class=\"para\">分型面确定的原则：</p>\n<li class=\"bullet\">分型面应选择在模样的最大截面处；</li>\n<li class=\"bullet\">应使铸件上的重要加工面朝下或处于垂直位置；</li>\n<li class=\"bullet\">应使铸件全部或大部分在同一砂箱内，以减少错箱和提高精度。</li>\n<li class=\"bullet\">浇注系统的确定 浇注系统是指液体金属流入铸型的通道，并能平稳地将液体金属引入铸型，要有利于挡渣和排气，并能控制铸件的凝固顺序。</li>\n<li class=\"bullet\">如浇注系统开设得不好，铸件易产生浇不足、缩孔、冷隔、裂纹和夹杂物等缺陷。</li>\n<h3 class=\"section-title\" id=\"sec-3-6\">浇注系统</h3>\n<li class=\"bullet\">典型浇注系统一般包括：外浇口、直浇道、横浇道和内浇道等。</li>\n<li class=\"bullet\">外浇口—缓冲液体金属浇入时的冲击力和分离熔渣。</li>\n<li class=\"bullet\">直浇道—连接外浇口和横浇道的垂直通道，利用其高度使金属液产生一定的静压力而迅速地充满型腔。</li>\n<li class=\"bullet\">横浇道—连接直浇道和内浇道，位于内浇道之上，稳定金属液的流动，使其平稳经内浇道流入型腔及向各内浇道分配金属液，并起挡渣作用。</li>\n<li class=\"bullet\">内浇道—直接和型腔相连通道，可控制金属液流入型腔的位置、速度和方向。</li>\n<li class=\"bullet\">冒口：主要起补缩作用。同时还兼有排气、浮渣及观察金属液体的流动情况等。一般安放在壁厚顶部。</li>\n<h3 class=\"section-title\" id=\"sec-3-7\">熔炼设备</h3>\n<li class=\"bullet\">铸铁—冲天炉；</li>\n<li class=\"bullet\">铸钢—电弧炉；</li>\n<li class=\"bullet\">有色金属—坩埚炉。</li>\n<h3 class=\"section-title\" id=\"sec-3-8\">特种铸造</h3>\n<li class=\"bullet\">金属型铸造</li>\n<li class=\"bullet\">熔模铸造</li>\n<li class=\"bullet\">压力铸造</li>\n<li class=\"bullet\">离心铸造 是在离心力的作用下充型，所以组织致密，无缩孔、气孔、渣眼等缺陷，因此力学性能较好。铸造空心旋转体铸件不需要型芯和浇注系统，铸件不需要冒口补缩，省工省料、生产率高、质量好、成本低。</li>\n<h3 class=\"section-title\" id=\"sec-3-9\">造型操作技术</h3>\n<li class=\"bullet\">造型方法：手工造型和机器造型。</li>\n<li class=\"bullet\">手工造型方法：整模两箱造型、分模两箱造型、挖砂造型和假箱造型、活块造型、刮板造型、三箱造型等。</li>\n<h3 class=\"section-title\" id=\"sec-3-10\">造芯</h3>\n<li class=\"bullet\">型芯的主要作用是形成铸件的内腔。</li>\n<li class=\"bullet\">型（芯）砂——芯砂的性能要求比普通型砂的综合性能要高。</li>\n<h3 class=\"section-title\" id=\"sec-3-11\">浇注温度</h3>\n<p class=\"para\">浇注温度 浇注温度偏低，金属液流动性差，易产生浇不足、冷隔、气孔等缺陷；浇注温度过高，铸件收缩大，易产生缩孔、裂纹、晶粒粗大及粘砂等缺陷。合适的浇注温度应根据铸造合金种类、铸件的大小及形状等确定。</p>\n<h2 class=\"chapter-title\" id=\"chap-4\">压力加工</h2>\n<h3 class=\"section-title\" id=\"sec-4-1\">压力加工概述</h3>\n<p class=\"para\">压力加工是指对坯料施加外力，使其产生塑性变形，改变形状、尺寸和改善性能，以制造零件或毛坯的成形加工方法。</p>\n<li class=\"bullet\">锻造和冲压总称锻压。</li>\n<li class=\"bullet\">金属压力加工的主要方法有轧制、拉拔、挤压、自由锻、模锻和板料冲压等。</li>\n<h3 class=\"section-title\" id=\"sec-4-2\">锻压</h3>\n<p class=\"para\">金属材料经锻压后，其组织和性能都得到了改善，特别是铸造组织。通过压加工或锻造后，其内部的缺陷，如微裂纹、气孔、缩松等缺陷得到压合，使其结构致密，细化晶粒，力学性能大大提高。与铸件、焊件相比，锻压加工一般只能获得形状较简单的制件毛坯。</p>\n<h3 class=\"section-title\" id=\"sec-4-3\">锻造</h3>\n<li class=\"bullet\">凡是承受重载的机器零件，如主轴、曲轴、齿轮等。</li>\n<h3 class=\"section-title\" id=\"sec-4-4\">金属的加热</h3>\n<p class=\"para\">锻造时，金属坯料需加热。加热目的是为了提高金属的塑性，降低变形抗力，以使金属产生大量的变形，以便锻造。一般金属材料的可锻性常用塑性和变形抗力来衡量。随着含碳量的提高，金属材料的可锻性下降。一般工业纯铁、低碳钢的可锻性最好，而中碳钢、高碳钢、铸铁、硬质合金、有色金属等可锻性较差。</p>\n<p class=\"para\">金属材料加热后，随着温度的升高，其力学性能中的强度、硬度下降，而塑性、韧性提高。</p>\n<p class=\"para\">加热温度高，则金属的塑性好，变形抗力小，但加热温度不能过高，因为超过一定温度后，金属易出现氧化、脱碳、过热和过烧等缺陷，因此，加热最高温度以不出现过热为前提，即始锻温度。当温度降低到一定程度，金属塑性变差，不仅难以继续变形，且易产生裂纹，必须停止锻造，重新加热，即为终锻温度。45号钢的始锻温度为1150～1200℃，终锻温度为800℃。</p>\n<h3 class=\"section-title\" id=\"sec-4-5\">锻造工艺的分类</h3>\n<p class=\"para\">锻造工艺分为：自由锻、胎模锻和模锻等。</p>\n<h3 class=\"section-title\" id=\"sec-4-6\">自由锻基本工序</h3>\n<li class=\"bullet\">镦粗、拔长、冲孔、弯曲、扭转、错移、切割等。前3种应用得最多。</li>\n<li class=\"bullet\">自由锻有手工锻和机器锻两种。</li>\n<li class=\"bullet\">自由锻设备有空气锤、蒸气-空气锤和水压机等。</li>\n<h3 class=\"section-title\" id=\"sec-4-7\">板料冲压</h3>\n<p class=\"para\">板料冲压是在室温下，利用安装在压力机上的模具，对板料施加压力，使其产生变形或分离的工艺过程。也称为冷冲压。</p>\n<li class=\"bullet\">板料冲压可分为分离工序和变形工序两大类。</li>\n<li class=\"bullet\">分离工序：剪切、冲裁等；</li>\n<li class=\"bullet\">变形工序：弯曲、拉深、翻边等。</li>\n<h2 class=\"chapter-title\" id=\"chap-5\">焊接</h2>\n<h3 class=\"section-title\" id=\"sec-5-1\">焊接概述</h3>\n<p class=\"para\">焊接是通过加热或加压(或两者并用），并且用或不用填充材料，使焊件形成原子结合的一种连接方法。</p>\n<h3 class=\"section-title\" id=\"sec-5-2\">焊接的特点</h3>\n<li class=\"bullet\">焊接实现的连接是不可拆卸的永久性连接，采用焊接方法制造的金属构件，可以节省材料，简化制造工艺，缩短生产周期，且连接处具有良好的使用性能；</li>\n<li class=\"bullet\">如焊接工艺不当会产生缺陷、应力和变形等。</li>\n<h3 class=\"section-title\" id=\"sec-5-3\">焊接的应用</h3>\n<li class=\"bullet\">焊接广泛应用于制造各种金属结构件，如桥梁、船体、建筑、压力容器、锅炉、车辆、飞机等；</li>\n<li class=\"bullet\">也常用于机器零件毛坯，如机架、底座、箱体、吊车车架等；</li>\n<li class=\"bullet\">还可用于修补铸、锻件的缺陷和局部损坏的零件。</li>\n<h3 class=\"section-title\" id=\"sec-5-4\">焊接方法</h3>\n<li class=\"bullet\">熔化焊：电弧焊、气焊、电渣焊等。电弧焊有手工电弧焊、埋弧自动焊、气体保护焊等；</li>\n<li class=\"bullet\">压力焊：电阻焊、摩擦焊等。电阻焊有点焊、对焊、缝焊等；</li>\n<li class=\"bullet\">钎焊：硬钎焊和软钎焊。</li>\n<li class=\"bullet\">原则上各种金属都能焊接，但焊接性能相差很大，要选用相应的焊接方法和工艺措施。焊接性能随着含碳量的增加，可焊性下降。纯铁、低碳钢焊接性能最好，高碳钢、铸铁、铸钢、有色金属、异种材料的焊接性能差，一般不用来制作焊接结构件。</li>\n<h3 class=\"section-title\" id=\"sec-5-5\">手工电弧焊</h3>\n<p class=\"para\">手工电弧焊的焊条由焊芯和药皮两部分组成。</p>\n<li class=\"bullet\">焊芯作用：①作为电极传导焊接电流，产生电弧；②熔化后又作为焊缝的充填金属。</li>\n<li class=\"bullet\">药皮作用：①改善焊接工艺；②机械保护；③冶金处理。</li>\n<li class=\"bullet\">焊接不同的材料应选不同的焊条，并非选用焊条强度级别高的，就能提高焊缝质量。</li>\n<li class=\"bullet\">焊条直径的选择：根据被焊工件的厚度和焊接质量来选择。</li>\n<li class=\"bullet\">焊接电流的选择：根据焊条直径来选择。</li>\n<h3 class=\"section-title\" id=\"sec-5-6\">气焊与气割</h3>\n<h4 class=\"subsection-title\" id=\"sub-5-6-1\">气焊</h4>\n<p class=\"para\">气焊是利用可燃气体燃烧的高温火焰来熔化母材充填金属一种焊接方法。焊接时，一般焰芯顶端应距焊件2～3mm。</p>\n<p class=\"para\">气焊通常使用的气体是乙炔和氧气。调节乙炔和氧气的比例，可得到三种不同的火焰：</p>\n<li class=\"bullet\">中性焰 火焰呈中性，应用最广，如桥梁、机架等。常用于焊接低中碳钢、合金钢、铜和铝合金等；</li>\n<li class=\"bullet\">碳化焰 火焰呈还原性，有增碳作用。常用于焊接高碳钢、铸铁、硬质合金等；</li>\n<li class=\"bullet\">氧化焰 火焰呈氧化性，一般不采用，但可用于焊接黄铜。</li>\n<p class=\"para\">气焊操作：点火时，先微开氧气阀，再开乙炔阀；灭火时，先关乙炔阀，再关氧气阀；回火时，应先关乙炔阀，再关氧气阀。</p>\n<p class=\"para\">与电弧焊相比，气焊火焰温度比电弧焊低，热量分散，生产率低，焊接变形大，接头质量差，但气焊火焰可控制，操作方便，灵活性强，不需要电源，可在没有电源的地方应用。气焊适用于焊接厚度为3mm以下的低碳钢薄板、高碳钢、铸件、硬质合金、铜、铝等有色金属及合金。</p>\n<h4 class=\"subsection-title\" id=\"sub-5-6-2\">气割</h4>\n<p class=\"para\">气割是利用某些金属在纯氧中燃烧原理来实现金属切割的方法。对金属材料进行切割时，被切割金属应满足以下条件：</p>\n<li class=\"bullet\">（1）金属的燃点应低于熔点；</li>\n<li class=\"bullet\">（2）燃烧生成的金属氧化物的燃点应低于金属本身的燃点；</li>\n<li class=\"bullet\">（3）金属燃烧时产生大量的热，且金属本身导热性要低。</li>\n<p class=\"para\">满足上述条件的金属材料有低、中碳钢和低合金钢；而高碳钢、铸铁、高合金钢及铜、铝等有色金属及合金，均难以进行气割。</p>\n<h3 class=\"section-title\" id=\"sec-5-7\">电阻焊</h3>\n<p class=\"para\">电阻焊的特点：低电压、强电流、焊接时间短、不需填充金属、焊接变形小、生产率高、操作简单，易于实现机械化和自动化。</p>\n<p class=\"para\">电阻焊的基本形式有：</p>\n<li class=\"bullet\">（1）点焊—主要用于焊接厚度为4mm以下的薄板结构；</li>\n<li class=\"bullet\">（2）缝焊—连续点焊，厚度3mm以下，要求密封的容器和管道；</li>\n<li class=\"bullet\">（3）对焊—直径小于20mm，强度要求低的棒材、管材的对焊。</li>\n<h3 class=\"section-title\" id=\"sec-5-8\">钎焊</h3>\n<p class=\"para\">钎焊是采用比母材熔点低的金属材料作为钎料，将焊件接头和钎料同时加热到钎料熔化而焊件不熔化，使液态嵌料渗入接头间隙并向接头表面扩散，形成钎焊接头的方法。</p>\n<p class=\"para\">按钎料熔点不同，钎焊可分为：</p>\n<li class=\"bullet\">（1）硬钎焊 钎料熔点大于450℃，接头强度大于200MPa，主要用于接头受力较大，工作温度较高的焊件。</li>\n<li class=\"bullet\">（2）软钎焊 钎焊熔点小于450℃接头强度小于70MPa，主要用于受力不大，工作温度较低的焊件。</li>\n<p class=\"para\">钎焊与熔化焊相比，加热温度低，接头金属组织和性能变化及焊接变形小，尺寸容易保证。生产率高，易于实现机械化和自动化。可焊接异种金属，但接头强度较低，特别是冲击韧性较低。耐热能力较差。</p>\n<p class=\"para\">目前主要用于电子元件、精密仪表机械等。</p>\n<h3 class=\"section-title\" id=\"sec-5-9\">常见焊接缺陷</h3>\n<p class=\"para\">焊接缺陷是指焊接接头部位在焊接过程中形成的缺陷，焊接缺陷包括气孔、夹渣、未焊透、未熔合、裂纹、凹坑、咬边、焊瘤等</p>\n<p class=\"para\">裂纹 焊瘤 烧穿 弧坑 气孔 夹渣 咬边 未熔合 未焊透</p>\n<h2 class=\"chapter-title\" id=\"chap-6\">切削加工基础</h2>\n<h3 class=\"section-title\" id=\"sec-6-1\">金属切削加工</h3>\n<p class=\"para\">金属切削加工是通过刀具与工件的相对运动，从毛坯上切去多余的金属，以获得一定的形状、尺寸、加工精度和表面粗糙度都符合要求的零件加工方法。</p>\n<li class=\"bullet\">金属切削加工分为钳工和机械加工两大类。</li>\n<li class=\"bullet\">钳工—一般由工人手持工具对工件进行切削加工，包括划线、锯削、锉削、攻丝和套扣、刮研、钻孔、铰孔及装配等。</li>\n<li class=\"bullet\">机械加工—通过金属切削机床对工件进行切削加工，如车（数车）、铣（数铣）、磨、钻、刨及特种加工等。</li>\n<h3 class=\"section-title\" id=\"sec-6-2\">切削运动和切削用量</h3>\n<h4 class=\"subsection-title\" id=\"sub-6-2-1\">切削运动</h4>\n<li class=\"bullet\">1）主运动</li>\n<li class=\"bullet\">2）进给运动</li>\n<h4 class=\"subsection-title\" id=\"sub-6-2-2\">切削用量三要素</h4>\n<li class=\"bullet\">切削用量三要素：</li>\n<li class=\"bullet\">1）切削速度v</li>\n<li class=\"bullet\">2）进给量f</li>\n<li class=\"bullet\">3）背吃刀量αp</li>\n<p class=\"para\">三要素中对刀具耐用度影响最大的是v，其次是f，最小的是αp。</p>\n<p class=\"para\">在选定合理的刀具后，粗加工：αp→f→ v； 精加工： v→f→ αp。</p>\n<h3 class=\"section-title\" id=\"sec-6-3\">刀具的几何角度</h3>\n<p class=\"para\">金属切削刀具种类繁多，构造各异。较典型的车刀，其它刀具的切削部分都可看作以车刀为基本形态演变而成的。以车刀为例来分析切削部分的几何角度。</p>\n<h4 class=\"subsection-title\" id=\"sub-6-3-1\">车刀的组成</h4>\n<p class=\"para\">车刀的组成：车刀由刀头和刀体两部分组成。刀尖为切削部分，刀体用来将车刀夹持在刀架上，起支承与传力作用。</p>\n<p class=\"para\">刀头一般由三个面、二个刃和一个尖组成。</p>\n<li class=\"bullet\">1）前面</li>\n<li class=\"bullet\">2）主后面</li>\n<li class=\"bullet\">3）副后面</li>\n<li class=\"bullet\">4）主切削刃</li>\n<li class=\"bullet\">5）副切削刃</li>\n<li class=\"bullet\">6）刀尖</li>\n<h4 class=\"subsection-title\" id=\"sub-6-3-2\">车刀几何角度</h4>\n<p class=\"para\">1）前角γ0： 在正交平面上测量的前面与基面的夹角。增大前角，则刀具锋利，切削轻快，但前角过大，刀刃强度降低，硬质合金车刀的前角一般取-5°～+25°。当工件材料硬度较低、塑性较好、刀具韧性较好及精加工时，前角取大些，反之，前角取小些。</p>\n<p class=\"para\">2）后角α0：在正交平面上测量的主后面与切削平面的夹角。增大后角，可减少刀具主后面与工件摩擦，但后角过大，刀具强度降低。一般粗加工时取6°～8°；精加工时取10°～12°。即粗加工时取小值，精加工时取大值。</p>\n<p class=\"para\">3）主偏角Κr： 在基面中测量，主切削刃与进给运动方向在基面上投影的夹角。增大主偏角，可使轴向分力加大，径向分力减小，有利于减小振动，改善切削条件，但刀具磨损加快，散热条件变差。主偏角一般取45°～90°。工件刚度好，粗加工时取小值。</p>\n<p class=\"para\">4）副偏角Κr′：在基面中测量，是副切削刃与进给运动反方向在基面上投影的夹角。增大副偏角可减小副切削刃与已加工面的摩擦，降低表面粗糙度，防止切削时产生振动。一般副切削刃取5°～15°，粗加工时取大值，精加工时取小值。</p>\n<p class=\"para\">5）刃倾角λs：在切削平面中测量的主切削刃与基面的夹角。其主要作用是控制切屑的流动方向。切削刃与基面平行时，λs=0；刀尖处于切削刃的最低点，λs为负值，刀尖强度增大，切屑流向已加工表面，用于粗加工；刀尖处于切削刃的最高点，λs为正值，刀尖强度较低，切削流向待加工表面，用于精加工。刃倾角一般取-5°～+10°。粗加工时取负值，精加工时取正值。在切削加工中，一般粗加工时，应选择小的γ0 、α0；精加工时应选择大的γ0 、α0。</p>\n<h3 class=\"section-title\" id=\"sec-6-4\">刀具材料</h3>\n<p class=\"para\">刀具切削部分的材料应具有的性能：</p>\n<li class=\"bullet\">①高的硬度； ②高的耐磨性； ③高的热硬性；</li>\n<li class=\"bullet\">④足够的强度和韧性。</li>\n<h4 class=\"subsection-title\" id=\"sub-6-4-1\">常用刀具材料</h4>\n<li class=\"bullet\">1）碳素工具钢 如T10、T10A、T12、T12A等，用于制造手工工具，如锉刀、锯条等；</li>\n<li class=\"bullet\">2）合金工具钢 如9SiCr、CrWMn等，用于制造复杂的刀具，如板牙、丝锥、铰刀等；</li>\n<li class=\"bullet\">3）高速钢 如W18Cr4V等，用于制造复杂的刀具，如钻头、拉刀、铣刀等；</li>\n<li class=\"bullet\">4）硬质合金 可用于高速切削刀具。常用的有：</li>\n<p class=\"para\">①钨钴类：用于加工脆性材料，如铸铁等。常用牌号有YG3、YG6、YG8等。YG8用于粗加工；YG6、YG3用于半精和精加工。</p>\n<p class=\"para\">②钨钴钛类：加工塑性材料，如碳钢等。常用牌号YT5、YT15、YT30等。YT5用于粗加工；YT15、YT30用于半精和精加工。</p>\n<h3 class=\"section-title\" id=\"sec-6-5\">常用量具</h3>\n<li class=\"bullet\">①卡钳：内卡钳和外卡钳；</li>\n<li class=\"bullet\">②游标卡尺；</li>\n<li class=\"bullet\">③百分表；</li>\n<li class=\"bullet\">④百分尺。</li>\n<h2 class=\"chapter-title\" id=\"chap-7\">车削加工</h2>\n<h3 class=\"section-title\" id=\"sec-7-1\">车削概述</h3>\n<p class=\"para\">车削是机械加工中的主要方法，使用范围很广。车削是利用工件的旋转运动和刀具的直线运动来加工的，在车床上可加工内外圆柱面、内外圆锥面、内外螺纹、成形面、端面、沟槽、滚花等。</p>\n<h3 class=\"section-title\" id=\"sec-7-2\">普通车床</h3>\n<li class=\"bullet\">车床的组成：床身、主轴箱、进给箱、溜板箱、拖板、刀架和尾座等。</li>\n<h3 class=\"section-title\" id=\"sec-7-3\">工件的装夹方法</h3>\n<li class=\"bullet\">（1）三爪卡盘装夹工件</li>\n<li class=\"bullet\">（2）四爪卡盘装夹工件</li>\n<li class=\"bullet\">（3）顶尖装夹工件</li>\n<li class=\"bullet\">（4）花盘装夹工件</li>\n<li class=\"bullet\">（5）心轴装夹工件</li>\n<li class=\"bullet\">（6）中心架及跟刀架装夹工件</li>\n<p class=\"para\">车加工精度一般IT10～IT8，表面粗糙度Ra6.3～1.6μm。</p>\n<h3 class=\"section-title\" id=\"sec-7-4\">车刀的安装</h3>\n<li class=\"bullet\">（1）车刀刀尖应与工件中心线等高 当刀尖高于工件中心线时,则前角增大而后角减小,车刀后面与工件之间的摩擦增大；反之，前角减小，后角增大，切削不顺利。</li>\n<li class=\"bullet\">（2）车刀刀杆轴线应与工件表面垂直 否则，会引起主偏角和副偏角发生变化。</li>\n<li class=\"bullet\">（3）刀杆伸出长度不宜太长 以免发生刀杆振动，一般伸出长度不超过刀杆厚度的1.1～1.5倍。</li>\n<h3 class=\"section-title\" id=\"sec-7-5\">车端面</h3>\n<p class=\"para\">车端面时应注意：</p>\n<li class=\"bullet\">（1）车刀刀尖应对准工件中心，否则将在端面中心处车出凸台，并易蹦坏刀尖。</li>\n<li class=\"bullet\">（2）车端面时，切削速度由外向中心逐渐减少，会影响端面粗糙度，工件速度应比车外圆略高。45°右偏刀车端面由外向中心车削时，凸台是瞬间车掉，易产生振动，损坏刀具，因此，切削接近中心时，应放慢进给速度。有孔工件车端面时，常用右偏刀由中心向外进给，切削厚度较小，刀刃有前角，因而切削顺利，粗糙度小。</li>\n<li class=\"bullet\">（3）车削直径较大的端面时，为避免因车刀受刀架移动产生凸出或凹进，可将拖板固定在床身上横向切削，背吃刀量用小刀架调节。</li>\n<h3 class=\"section-title\" id=\"sec-7-6\">车圆锥</h3>\n<h4 class=\"subsection-title\" id=\"sub-7-6-1\">转动小拖板法</h4>\n<p class=\"para\">当内外圆锥面的圆锥角为α时，将小刀架扳转α/2，然后固定，摇动小拖板手柄，即可车出所需的圆锥面。这种方法操作简单，可加工任意锥角的内、外圆锥面，但加工长度受到限制，只能手动进给，粗糙度为12.5～3.2μm。</p>\n<h4 class=\"subsection-title\" id=\"sub-7-6-2\">偏移尾架法</h4>\n<p class=\"para\">把工件装在前、后顶尖上，然后，将尾座顶尖横向偏移一个S距离，使工件中心轴线与车床主轴中心线的交角等于工件锥角的1/2，利用车刀作纵向进给，即可车出圆锥。这种方法可加工较长的锥面，并可手动或自动进给，但不能车削内圆锥面。尾架的偏移量受到限制，只能适用于车削锥度不大的锥面（α＜8°），粗糙度为6.3～1.6 μm。</p>\n<h4 class=\"subsection-title\" id=\"sub-7-6-3\">靠尺法</h4>\n<p class=\"para\">靠尺法</p>\n<h4 class=\"subsection-title\" id=\"sub-7-6-4\">宽刀法</h4>\n<p class=\"para\">宽刀法</p>\n<h3 class=\"section-title\" id=\"sec-7-7\">车螺纹</h3>\n<h4 class=\"subsection-title\" id=\"sub-7-7-1\">保证正确的牙形角</h4>\n<li class=\"bullet\">1）车刀的刀尖角应等于牙形角α 使车刀切削部分形状与螺纹截面形状相吻合。为保证这一要求，应取前角γ0 =0。粗加工时，为了改善切削条件，可用带有正前角的车刀车削。</li>\n<li class=\"bullet\">2）正确地安装车刀 车刀刀尖必须与工件中心等高，否则螺纹的截面将有改变。此外，车刀刀尖角的等分线必须与工件的轴线相垂直。为了保证这一要求，应用对刀样板进行对刀。</li>\n<h4 class=\"subsection-title\" id=\"sub-7-7-2\">保证工件的螺距</h4>\n<p class=\"para\">保证螺距的基本方法是：在工件旋转一周时，车刀准确移动一个螺距。调整车床和交换齿轮根据公式计算出的交换齿轮必须符合下列条件：</p>\n<p class=\"para\">Z1+Z2≥Z3+（15～20）</p>\n<p class=\"para\">Z3+Z4≥Z2+（15～20）</p>\n<h2 class=\"chapter-title\" id=\"chap-8\">钻削与镗削</h2>\n<h3 class=\"section-title\" id=\"sec-8-1\">钻削</h3>\n<p class=\"para\">钻削加工是钻头作旋转的主运动，同时钻头本身又作轴向的进给运动。在实体材料上加工孔的方法。</p>\n<li class=\"bullet\">钻床是孔加工机床。可以完成钻孔、扩孔、锪孔和铰孔等工作。</li>\n<li class=\"bullet\">钻孔是孔加工的一种基本方法。</li>\n<li class=\"bullet\">钻孔所用的刀具有麻花钻、中心钻和深孔钻等。</li>\n<li class=\"bullet\">麻花钻：有两条对称的主切削刃，如刃磨时两条主切削刃不相等，则所钻孔直径要大于钻头直径。</li>\n<li class=\"bullet\">钻孔：钻孔过程最容易发生引偏使孔径增大，所以，钻孔前在孔中心要打样冲眼，孔中心要打得大一些，则可起到钻孔时不易偏离中心。</li>\n<li class=\"bullet\">钻孔属粗加工，精度一般IT13～IT11，表面粗糙度12.5～6.3μm。</li>\n<h3 class=\"section-title\" id=\"sec-8-2\">扩孔与铰孔</h3>\n<p class=\"para\">扩孔：用扩孔钻将已有孔（如铸出、锻出或钻出的孔）扩大加工的方法。扩孔属半精加工，精度一般为IT9～IT10，表面粗糙度为3.2～6.3μm。</p>\n<li class=\"bullet\">扩孔可以作为孔加工的最后工序或作为铰孔前的准备工序。</li>\n<p class=\"para\">铰孔：当孔的精度和表面粗糙度要求较高时，则要采用铰孔。铰孔是对工件上已有孔进行精加工的方法之一。</p>\n<li class=\"bullet\">铰孔可分为粗铰和精铰。粗铰时精度为IT8～IT7，表面粗糙度为1.6～0.8μm;精铰时精度为IT7～IT6,表面粗糙度为0.8～0.4μm。</li>\n<p class=\"para\">钻、扩、铰只能保证孔本身的精度，而不能保证孔与孔之间的尺寸精度。此时，可利用夹具（如钻模）或镗孔来保证。</p>\n<h3 class=\"section-title\" id=\"sec-8-3\">镗孔</h3>\n<p class=\"para\">镗孔是对工件上已有孔进行精加工方法之一。镗孔一般精度为IT8～IT7，表面粗糙度为0.8～1.6μm；</p>\n<p class=\"para\">精镗时，可达精度IT7～IT6，表面粗糙度为0.2～0.8 μm。</p>\n<p class=\"para\">镗孔主要用于箱体、机架等结构复杂的中、大型零件上孔与孔之间的加工，容易保证孔与孔之间、孔与基准面之间的尺寸精度及位置精度。</p>\n<h2 class=\"chapter-title\" id=\"chap-9\">铣削与刨削</h2>\n<h3 class=\"section-title\" id=\"sec-9-1\">铣削</h3>\n<li class=\"bullet\">最常用的铣床是万能立式铣床和万能卧式铣床。</li>\n<li class=\"bullet\">可铣削平面、成形面、台阶、键槽、T形槽、齿轮、镗孔等。</li>\n<h3 class=\"section-title\" id=\"sec-9-2\">铣刀的种类</h3>\n<li class=\"bullet\">常用铣刀有圆柱铣刀、端铣刀、直柄铣刀、圆锥铣刀、三面刃铣刀、盘铣刀等。</li>\n<li class=\"bullet\">端铣刀可铣削平面、斜面和垂直面等。</li>\n<h3 class=\"section-title\" id=\"sec-9-3\">铣床主要附件</h3>\n<li class=\"bullet\">①平口钳 对于中小型工件，多用平口钳装夹；对于大中型工件，则用压板、角铁和V型块紧压在工作台上。</li>\n<li class=\"bullet\">②回转工作台 主要用于对较大工件进行分度，或加工具有圆弧表面和圆弧形腰槽的零件；</li>\n<li class=\"bullet\">③万能分度头 N=40/Z用于各种齿槽及多面体工件的铣削加工。</li>\n<h3 class=\"section-title\" id=\"sec-9-4\">铣削的特点</h3>\n<p class=\"para\">铣削与刨削相比，除狭长平面外，生产率高，其主要原因是由于铣刀是由多齿和多刃组成，铣削工作同时由参加工作的几个刀齿和刀刃承担，切削用量大，刀齿与工件接触时间短，刀具冷却条件好，铣刀的耐用度高，所以铣削具有较高的生产率及加工精度。</p>\n<h2 class=\"chapter-title\" id=\"chap-10\">磨削加工</h2>\n<h3 class=\"section-title\" id=\"sec-10-1\">磨削加工概述</h3>\n<p class=\"para\">在磨床上用砂轮切削工件表面的方式称为磨削加工。磨削加工通常用于零件的精加工，一般加工精度为IT5～IT7，表面粗糙度为0.2～0.8μm。磨削不仅可加工钢、铸铁等一般材料，还可以加工一般刀具难以加工的材料（如淬火钢、硬质合金等）。</p>\n<h3 class=\"section-title\" id=\"sec-10-2\">磨削特点</h3>\n<li class=\"bullet\">能加工硬度很高的材料 如淬硬钢、硬质合金等。这是因为砂轮磨粒本身具有很高的硬度和耐热性。</li>\n<li class=\"bullet\">能获得高精度和低粗糙度的加工表面 这是砂轮和磨床特性决定的。磨粒圆角半径小，分布稠密且多为负前角；磨削速度高，每个磨刃切削量小；磨床刚度好，转动平稳，可作微量进给。它们保证了能作均匀的微量切削。因此磨削能获得高的加工精度。</li>\n<li class=\"bullet\">磨削温度高 由于剧烈的摩擦，产生了大量的磨削热，使磨削区温度很高。这会使工件表面产生磨削应力和变形，甚至造成工件表面烧伤。因此，磨削时必须注入大量的冷却液，以降低磨削温度。冷却液还可起到排屑和润滑作用。</li>\n<h3 class=\"section-title\" id=\"sec-10-3\">磨削过程</h3>\n<p class=\"para\">磨削过程是切削、刻划和滑擦三种过程的综合。</p>\n<h3 class=\"section-title\" id=\"sec-10-4\">磨削运动</h3>\n<li class=\"bullet\">主运动—指砂轮的旋转运动；</li>\n<li class=\"bullet\">进给运动：工件的旋转运动、砂轮的纵向移动、砂轮的径向进给运动</li>\n<h3 class=\"section-title\" id=\"sec-10-5\">磨削径向力与光磨</h3>\n<p class=\"para\">磨削时径向力很大 这会造成机床—砂轮—工件系统的弹性退让，使实际切深小于名义切深。因此，磨削将要完成时，应不进刀进行光磨，以消除误差。</p>\n<h3 class=\"section-title\" id=\"sec-10-6\">砂轮的自锐性与硬度</h3>\n<h4 class=\"subsection-title\" id=\"sub-10-6-1\">自锐性</h4>\n<p class=\"para\">砂轮具有\"自锐性\" 磨粒磨钝后，其磨削力也随之增大，致使磨粒破碎或脱落，重新露出锋利的刃口。这种特性称为\"自锐性\"。自锐性能使磨削在一定时间内正常进行，超过一定时间后，应进行人工修磨，以免磨削力增大引起振动及损失表面质量。</p>\n<h4 class=\"subsection-title\" id=\"sub-10-6-2\">砂轮的硬度</h4>\n<p class=\"para\">砂轮的硬度是指在外力作用下磨粒脱落的难易程度。易脱落的称之为软，反之为硬。磨削软材料时选用硬砂轮，磨削硬材料时则选用软砂轮。粗磨选用软砂轮，精磨选用硬砂轮。</p>\n<h2 class=\"chapter-title\" id=\"chap-11\">钳工</h2>\n<h3 class=\"section-title\" id=\"sec-11-1\">钳工概述</h3>\n<p class=\"para\">钳工是手持工具对工件进行加工的方法。</p>\n<li class=\"bullet\">基本操作：划线、錾削、锯削、锉削、攻丝和套扣、刮削及装配等。</li>\n<h3 class=\"section-title\" id=\"sec-11-2\">划线</h3>\n<p class=\"para\">1）划线种类</p>\n<li class=\"bullet\">①平面划线—在工件的一个平面上划线；</li>\n<li class=\"bullet\">②立体划线—在工件三个坐标方向上划线。</li>\n<p class=\"para\">2）划线基准</p>\n<p class=\"para\">零件上用来确定点、线、面位置的依据，作为划线依据的基准，称为划线基准。</p>\n<h3 class=\"section-title\" id=\"sec-11-3\">锯削</h3>\n<p class=\"para\">锯条用碳素工具钢制成，并经淬火及回火处理，硬度可达58～62HRC。</p>\n<p class=\"para\">锯条规格用其两端安装孔的距离来表示。常用锯条长300mm、宽12mm、厚0.8mm。</p>\n<p class=\"para\">锯条按齿距分为粗齿、中齿和细齿3种。</p>\n<h4 class=\"subsection-title\" id=\"sub-11-3-1\">锯条的安装</h4>\n<p class=\"para\">锯条装在锯弓上，锯齿向前，松紧适当，不能有歪斜和扭曲，否则，锯削时易折断。</p>\n<h4 class=\"subsection-title\" id=\"sub-11-3-2\">锯条的选用</h4>\n<p class=\"para\">锯削软材料（如铜、铝等有色金属）及厚工件时，选用粗齿锯条；锯削普通钢、铸铁及中等厚度的工件时，选用中齿锯条；锯削较硬的材料（如中碳钢、合金钢等）或较薄的工件（如板料、钢管等）时，选用细齿锯条。</p>\n<h4 class=\"subsection-title\" id=\"sub-11-3-3\">锯削方法</h4>\n<p class=\"para\">锯削时应注意起锯、锯削压力和往返长度。</p>\n<p class=\"para\">锯削时，锯条与工件表面的起锯角应小于15°，并用左手拇指靠住锯条，锯弓作往复运动，左手施力，右手推进，用力要均匀；返回时，锯条轻轻地滑过加工面，速度不宜太快。锯削开始和终了时的压力和速度均应减少。</p>\n<p class=\"para\">锯条长度应充分利用，即往返长度不应少于2/3，以免局部过早磨损。锯缝如有歪斜，不可强扭，应将工件翻转90°，重新起锯。</p>\n<h3 class=\"section-title\" id=\"sec-11-4\">锉削</h3>\n<p class=\"para\">用锉刀从工件表面锉掉多余金属的加工方法称为锉削。锉削可提高工件的尺寸精度和降低表面粗糙度。锉削是钳工最基本的操作方法。可锉削平面、曲面、沟槽、内外圆弧面和复杂形状表面等。）</p>\n<h4 class=\"subsection-title\" id=\"sub-11-4-1\">锉刀的种类</h4>\n<p class=\"para\">锉刀用碳素工具钢制造，并经淬火及回火处理，硬度可达58～62HRC以上。</p>\n<p class=\"para\">锉刀规格以其工作部分的长度来标示，有100mm、50mm、·····、400mm等7种。</p>\n<p class=\"para\">锉刀面的齿纹有单齿纹和双齿纹之分。按用途分为普通锉刀、整形锉刀（又称什锦锉）和特种锉刀。按齿纹分为粗齿（每10mm有4～12齿）、中齿（每10mm有13～24齿）、细齿（每10mm有30～40齿）和油光锉（每10mm有40齿以上）。</p>\n<h4 class=\"subsection-title\" id=\"sub-11-4-2\">锉刀的选用</h4>\n<p class=\"para\">根据工件材料、加工余量、精度、表面粗糙度等来选用锉刀。粗齿锉刀用于粗加工及锉削较软的材料（如铜、铝等）；中齿锉刀用于粗锉后的加工；细齿锉刀用于锉光表面及锉削较硬的材料（如钢、铸铁等）；油光锉刀主要用于精锉后的表面修光。</p>\n<h4 class=\"subsection-title\" id=\"sub-11-4-3\">锉削方法</h4>\n<li class=\"bullet\">1）工件装夹在台虎钳口中间，被锉削表面距钳口的距离不要太高。</li>\n<li class=\"bullet\">2）以保持锉刀水平为原则，根据锉刀的规格不同握法不同。在锉削时，两手在锉刀上施加的力的大小是变化的，其原则是保持水平，即以工件为支点形成力的杠杆平衡。</li>\n<li class=\"bullet\">3）锉平面时，有顺向锉、交叉锉和推锉等。交叉锉用于粗加工，生长率高；顺向锉用于精加工锉平和锉光；推锉主要用于修光，适用于锉削细长工件及台阶面。</li>\n<li class=\"bullet\">4）锉圆弧时，有滚锉和顺锉等。滚锉是锉刀顺圆弧切向摆动锉削，常用于精锉外圆弧面；顺锉是锉刀垂直圆弧面轴向运动，适用粗锉。</li>\n<h3 class=\"section-title\" id=\"sec-11-5\">攻丝与套丝</h3>\n<p class=\"para\">攻丝是用丝锥在零件的通孔或盲孔上加工内螺纹；套丝是用板牙在圆杆或圆管上加工外螺纹。</p>\n<h4 class=\"subsection-title\" id=\"sub-11-5-1\">攻丝</h4>\n<p class=\"para\">攻丝前需要钻孔，一般钻孔的孔径应略大于螺纹内径。钻孔直径d可用经验公式计算或查表确定。</p>\n<p class=\"para\">塑性材料（钢、紫铜等） d=D-P</p>\n<p class=\"para\">脆性材料（铸铁、青铜等） d=D-（1.05-1.1)P</p>\n<p class=\"para\">式中：D—大螺纹直径；P—螺距。</p>\n<p class=\"para\">攻盲孔（不通孔）螺纹时 孔的深度=要求螺纹的长度+0.7D。</p>\n<p class=\"para\">将钻好的孔倒角，把头锥装在铰杠上，两手加压（大小合适）进行攻丝。注意要保持丝锥垂直，旋转一周后，要倒转。钻通孔螺纹时，注意丝锥切削部分要完全伸出孔端，然后用二锥、三锥完善螺孔。</p>\n<h4 class=\"subsection-title\" id=\"sub-11-5-2\">套丝</h4>\n<p class=\"para\">套丝前应检查圆杆直径,圆杆直径太大,板牙难以套入;太小则套出的螺纹牙形不完整。一般圆杆的直径要略小于螺纹外径。圆杆直径D也可经验公式计算或查表来确定。</p>\n<p class=\"para\">D=d-0.13P</p>\n<p class=\"para\">式中：d—外螺纹外径； P—螺距。</p>\n<p class=\"para\">一般材料韧性愈大，则圆杆直径愈小。</p>\n<p class=\"para\">套丝前，圆杆的端面要倒角，倒角深度要超过螺纹全深。</p>\n<p class=\"para\">套丝的操作与攻丝很相似，两手施力应均匀，保持板牙架手柄与圆杆垂直。</p>\n<h2 class=\"chapter-title\" id=\"chap-12\">数控与自动化</h2>\n<h3 class=\"section-title\" id=\"sec-12-1\">数控机床</h3>\n<p class=\"para\">数控机床综合应用了自动控制、计算机、精密测量和传动元件、结构设计等技术，是一种高效、柔性加工的机电一体化设备。）</p>\n<h3 class=\"section-title\" id=\"sec-12-2\">数控机床的组成</h3>\n<li class=\"bullet\">主机 是数控机床的主体，包括床身、立柱、主轴、进给机构等。</li>\n<li class=\"bullet\">CNC装置 是数控机床的核心，包括硬件（电路板、显示器、键盘、纸带阅读机等）以及相应的软件。</li>\n<li class=\"bullet\">驱动装置 是数控机床执行机构的驱动部件，包括主轴驱动单元、进给驱动单元、主轴电机相应的软件。数控机床的辅助装置和编程机及其他一些附属设备。</li>\n<h3 class=\"section-title\" id=\"sec-12-3\">数控机床分类</h3>\n<li class=\"bullet\">数控机床分类：点位控制机床、直线控制机床、轮廓控制机床。</li>\n<li class=\"bullet\">数控加工分为：数字控制（NC）、计算机数字控制（CNC）和直接数字控制等3类。</li>\n<h3 class=\"section-title\" id=\"sec-12-4\">数控编程</h3>\n<h4 class=\"subsection-title\" id=\"sub-12-4-1\">数控编程步骤</h4>\n<li class=\"bullet\">1）分析零件图形和工艺处理；</li>\n<li class=\"bullet\">2）数字处理；</li>\n<li class=\"bullet\">3）编写零件加工程序单、输入数控系统及程序检验。</li>\n<h4 class=\"subsection-title\" id=\"sub-12-4-2\">数控编程的方法</h4>\n<li class=\"bullet\">手工编程 适用于点加工或几何形状不太复杂的零件；</li>\n<p class=\"para\">自动编程 是用计算机把人们易懂的零件程序改成数控机床执行的数字加工程序，即数控编程的大部分工作由计算机来完成。编程人员只需根据易懂的零件图纸及工艺要求，使用规定的数控编程语言编写一个较简单的零件程序，并将其输入计算机进行自动处理，计算刀具中心轨迹，输出零件数控加工程序。</p>\n<h3 class=\"section-title\" id=\"sec-12-5\">数控指令</h3>\n<p class=\"para\">数控系统指令代码中，最基本的是G、S、M、T指令代码。</p>\n<li class=\"bullet\">G指令代码 准备功能，用来描述数控装置作某一操作的准备功能，如直线插补、圆弧插补等。它由代码\"G\"和两位数字组成，从G00～G99共100种。</li>\n<li class=\"bullet\">S 指令代码 主轴转速功能，由\"S\"和其后若干位数字组成。</li>\n<li class=\"bullet\">M指令代码 辅助操作功能，主要有两类，一类是主轴的正、反转，开、停，冷却液的开、关等；另一类是程序控制指令，进行子程序调用、结束等。</li>\n<li class=\"bullet\">T功能代码 刀具功能，用选择刀具和进行刀具补偿。选择刀具是在自动工作方式下对刀架上固定的刀具进行选择、换刀并固定；刀具补偿是对刀具磨损或对刀时的位置互差进行补偿。它由代码\"T\"和若干位数字组成。</li>\n<h3 class=\"section-title\" id=\"sec-12-6\">i5数控系统</h3>\n<li class=\"bullet\">i5机床操作与编程方式 请参考资源共享课--数车--教学案例中的资源。</li>\n<p class=\"para\">i5数控车削系统 由沈阳机床自主研发的具有自主知识产权的智能化数控系统基于PC的数控技术，数控系统是一台高品质的工控机，具有高速运算能力和扩展性，高达16G存储空间，支持USB和网络通讯，全键盘，12″彩色触摸屏。</p>\n<li class=\"arrow\">采用EtherCAT实时数字总线技术，配备自主研发的HSHA系列全数字伺服驱动器，具有高速、高精和高响应的特点。</li>\n<h3 class=\"section-title\" id=\"sec-12-7\">自动生产线与柔性制造</h3>\n<h4 class=\"subsection-title\" id=\"sub-12-7-1\">自动生产线</h4>\n<p class=\"para\">组成：自动化加工设备、工件输送装置、切屑输送装置、控制系统、刀具等。</p>\n<p class=\"para\">分类：刚性自动生产线、柔性自动生产线</p>\n<h4 class=\"subsection-title\" id=\"sub-12-7-2\">柔性制造技术</h4>\n<p class=\"para\">柔性制造系统基本结构：自动化加工设备、工件储运系统、刀具储运系统、多层计算机控制系统等基本组成部分</p>\n<p class=\"para\">扩展部分：自动清洗工作站、自动去毛刺设备、自动测量设备、集中切屑运输系统、集中冷却润滑系统等。</p>\n<h4 class=\"subsection-title\" id=\"sub-12-7-3\">集成制造系统（CIMS）</h4>\n<h3 class=\"section-title\" id=\"sec-12-8\">工业机器人</h3>\n<h2 class=\"chapter-title\" id=\"chap-13\">特种加工</h2>\n<h3 class=\"section-title\" id=\"sec-13-1\">特种加工需求</h3>\n<li class=\"bullet\">1）解决各种难加工材料的问题；</li>\n<li class=\"bullet\">2）解决各种特殊复杂表面的加工问题；</li>\n<li class=\"bullet\">3）解决各种具有特殊要求的零件的加工问题。</li>\n<h3 class=\"section-title\" id=\"sec-13-2\">特种加工特点</h3>\n<p class=\"para\">不是主要依靠机械能通过刀具等来切除金属或非金属材料，而是主要用其他能量形式，如电能、化学能、光能、声能、热能或与机械能组合等形式直接加工零件，以获得所需的几何形形状、尺寸精度和表面粗糙度的加工方法。</p>\n<p class=\"para\">加工用的工具材料可以低于被加工材料的硬度；</p>\n<p class=\"para\">加工过程中工具和工件之间不存在显著的机械切削力。</p>\n<h3 class=\"section-title\" id=\"sec-13-3\">特种加工种类</h3>\n<p class=\"para\">按其能量来源和工作原理的不同，在生产中应用较多的可分为电火花加工、电解加工、激光加工、超声波加工和一些新兴的特种加工。</p>\n<h3 class=\"section-title\" id=\"sec-13-4\">电火花加工</h3>\n<p class=\"para\">电火花加工是利用工具电极和工件两极之间脉冲放电时产生的电腐蚀现象对工件进行尺寸加工的加工方法。</p>\n<p class=\"para\">电火花加工的主要特点是脉冲放电的能量密度很高，可以加工用常规机械加工方法难以加工或无法加工的材料和形状。加工时，工具电极与工件不直接接触，两者之间的宏观作用力小，不受工具和工件刚度限制，有利于实现微细加工，而且工具电极材料不需比被加工的工件材料硬，因此工具电极制造容易。</p>\n<h3 class=\"section-title\" id=\"sec-13-5\">特种加工的能源形式</h3>\n<p class=\"para\">特种加工一般按照利用的能量形式分类如下：</p>\n<li class=\"bullet\">电、热能：电火花加工、电子束加工、等离子弧加工；</li>\n<li class=\"bullet\">电、机械能：离子束加工；</li>\n<li class=\"bullet\">电、化学能：电解加工；电解抛光；</li>\n<li class=\"bullet\">电、化学、机械能：电解磨削、电解珩磨、阳极机械磨削；</li>\n<li class=\"bullet\">光、热能：激光加工；</li>\n<li class=\"bullet\">化学能：化学加工、化学抛光；</li>\n<li class=\"bullet\">声、机械能：超声波加工；</li>\n<li class=\"bullet\">机械能：磨料喷射加工、磨料流加工、液体喷射加工。</li>\n<h3 class=\"section-title\" id=\"sec-13-6\">电火花线切割加工</h3>\n<h4 class=\"subsection-title\" id=\"sub-13-6-1\">电火花线切割加工机床</h4>\n<p class=\"para\">电火花线切割加工机床由机床主体、工作液系统、高频电源和控制装置等组成。</p>\n<p class=\"para\">机床主体 机床主要由床身、丝架、走丝机构和X-Y数控工作台等四部分组成。钼丝绕在贮丝筒上，并经过丝架上的导轮来回高速走动，贮丝筒由电机直接驱动，通过限拉开关控制正、反向。工件固定在X-Y数控工作台上。X-Y数控工作台分别有亮台步进电机驱动，控制装置控制步进电各自按预定的控制程序，根据火花间隙状态作伺服进给移动，切割出所需的工件。</p>\n<p class=\"para\">工作液系统 工作液由泵压送到加工区外围，由钼丝带入加工区。工作液经过滤后循环使用。</p>\n<p class=\"para\">高频电源 高频电源产生高频矩形脉冲，其阳极加至工件，阴极加至电极丝（钼丝）。脉冲信号的幅度值、脉冲和脉冲宽度等可以调节，以适应不同工况的需要。</p>\n<p class=\"para\">控制装置 控制装置是以专用的计算机为核心的控制系统。系统按照输入的程序指令控制机床加工，其间需进行大量的插补运算、判别。变频进给系统则将加工中检测到的放电间隙平均电压反馈给控制系统，控制系统根据此反馈信号调节加工（工作台）速度。</p>\n<p class=\"para\">加工程序输入方法有多种，常用的有键盘输入、纸带输入和自动编程系统编程后自动转化成加工程序直接输入。</p>\n<h4 class=\"subsection-title\" id=\"sub-13-6-2\">电火花线切割加工原理及特点</h4>\n<p class=\"para\">电火花线切割加工是用连续移动的钼丝、钨丝或铜丝作为线电极代替电火花成型加工中的成型电极而形成的加工方法。加工时金属丝为阴极，工件为阳极，两极通过直流高频脉冲电流，机床工作台带动工件在两个坐标方向作进给运动。</p>\n<p class=\"para\">电火花线切割加工不需要专门的工具电极，并且作为工具电极的金属丝在加工中不断移动，基本上无损耗；加工方便，生产周期短，成本低；加工精度高；生长率高，机床加工所需的功率小。</p>\n<h2 class=\"chapter-title\" id=\"chap-14\">3D打印技术</h2>\n<h3 class=\"section-title\" id=\"sec-14-1\">逆向工程基本概念和过程</h3>\n<h3 class=\"section-title\" id=\"sec-14-2\">STL文件格式</h3>\n<li class=\"arrow\">STL是计算机图形系统中表达三角形网格的一种文件格式。 每个小三角形用 3 个顶点坐标和一个法向量来描述，三角形的大小可以根据精度要求进行选择。</li>\n<li class=\"arrow\">常见3D打印格式有：STL、STP、IGS、OBJ、3DM、3DS等，其中STL格式简单，但只能描述三维物体几何信息中封闭的面或者体，不支持颜色材质等信息。</li>\n<li class=\"arrow\">作为CAD/CAM系统接口文件格式的工业标准之一，在计算机图形学处理CG,数字几何处理如CAD，和数字几何工业应用如3D打印机支持中最为常见，即所有成型机都可以接收STL文件格式进行打印。</li>\n<li class=\"arrow\">STL 文件有二进制码和 ASCll 码两种，二进制码输出形式所占空间比 ASCII 码输出形式的文件所占用的空间小得多，但ASCII码输出形式可以阅读和检查。</li>\n<li class=\"arrow\">典型的CAD 软件都带有转换和输出 STL 格式文件的功能。</li>\n<h3 class=\"section-title\" id=\"sec-14-3\">FDM快速成形方法</h3>\n<p class=\"para\">FDM——Fused Deposition Modeling，熔融沉积成型</p>\n<h3 class=\"section-title\" id=\"sec-14-4\">其它快速成形方法</h3>\n<li class=\"bullet\">SLA——Stereo Lithography Apparatus，光敏树脂选择性固化成形</li>\n<li class=\"bullet\">3DP——Three Dimensional Printing，喷墨粘粉式技术或粘合剂喷射成形</li>\n<li class=\"bullet\">SLS——Selective Laser Sintering，粉末材料选择性激光烧结成形</li>\n<li class=\"bullet\">LOM——Laminated Object Manufacturing，箔材叠层实体成形</li>\n<h2 class=\"chapter-title\" id=\"chap-15\">CAD/CAM</h2>\n<h3 class=\"section-title\" id=\"sec-15-1\">CAD/CAM技术</h3>\n<p class=\"para\">利用计算机作为主要技术手段，对产品从构思到投放市场的整个过程中的信息进行分析和处理，生成和运用各种数字信息和图形信息，进行产品的设计与制造。</p>\n<p class=\"para\">CAD/CAM技术不是传统设计、制造流程的方法的简单映像，也不是局限于在个别步骤或环节中部分的使用计算机作为工具，而是将计算机科学与工程领域的专业技术以及人的智慧和经验以现代的科学方法为指导结合起来，在设计、制造的全过程中各尽所长，尽可能的利用计算机系统来完成那些重复性高、劳动量大、计算复杂以及单纯靠人工难以完成的工作，辅助而非代替工程技术人员完成整个过程，以获得最佳效果。</p>\n<p class=\"para\">CAD/CAM系统以及算计硬件、软件为支持环境，通过各个功能模块（分系统）实现对产品的描述、计算、分析、优化、绘图、工艺规程设计、仿真以及NC加工。</p>\n<p class=\"para\">广义的CAD/CAM集成系统还应包括生产规划、管理、质量控制等方面。</p>\n<p class=\"para\">CAD/CAM技术可以应用在许多领域，机械制造是最早也是最广泛应用CAD/CAM技术的领域。随着CAD/CAM技术的发展，建筑、电子、化工的领域也开始应用该技术。</p>\n<h3 class=\"section-title\" id=\"sec-15-2\">常用CAD/CAM软件</h3>\n<li class=\"bullet\">Cimatron</li>\n<li class=\"bullet\">Pro/Engineer</li>\n<li class=\"bullet\">Unigraphics(UG)</li>\n<li class=\"bullet\">SOLIDEDGE</li>\n<li class=\"bullet\">AutoCAD</li>\n<li class=\"bullet\">SolidWorks</li>\n<li class=\"bullet\">I-DEAS</li>\n<li class=\"bullet\">CAXA</li>\n<p class=\"para\">CAD软件造型的典型方法</p>";
+
+// ============================================================
+// DATA: Work type organization
+// ============================================================
+const WORK_TYPES = ["导论/安全", "激光", "焊接", "铸造", "热处理", "车床", "数铣/齿", "钳工", "数车", "WEDM", "CAD", "VR", "机电", "3D"];
+const WT_COUNTS = {"导论/安全": {"judge": 35, "single": 45}, "激光": {"judge": 9, "single": 9}, "焊接": {"judge": 10, "single": 10}, "铸造": {"judge": 10, "single": 10}, "热处理": {"judge": 10, "single": 10}, "车床": {"judge": 19, "single": 18}, "数铣/齿": {"judge": 15, "single": 17}, "钳工": {"judge": 17, "single": 16}, "数车": {"judge": 17, "single": 15}, "WEDM": {"judge": 15, "single": 15}, "CAD": {"judge": 15, "single": 15}, "VR": {"judge": 15, "single": 14}, "机电": {"judge": 14, "single": 15}, "3D": {"judge": 15, "single": 15}};
+
+// ============================================================
+// APP STATE
+// ============================================================
+let state = {
+  currentModule: 'knowledge',
+  currentSidebar: 'knowledge',
+  currentQbankFilter: 'all',
+
+  // Practice state
+  practiceQuestions: [],
+  practiceIndex: 0,
+  practiceAnswers: [],
+  practiceLocked: false,
+  practiceDone: false,
+  practiceSettings: {},
+
+  // Exam state
+  examQuestions: [],
+  examAnswers: {},
+  examTimer: null,
+  examTimeLeft: 0,
+  examSubmitted: false,
+
+  // Wrong book
+  wrongQuestions: JSON.parse(localStorage.getItem('wrongQuestions') || '[]'),
+  examRecords: JSON.parse(localStorage.getItem('examRecords') || '[]')
+};
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  initKnowledgeContent();
+  initSidebar();
+  initQbank();
+  initEvents();
+  updateWrongBookDisplay();
+  initSidebarHover();
+  initMain3DTilt();
+  var btt=document.getElementById("btt");if(btt){window.addEventListener("scroll",function(){if(window.pageYOffset>200||document.documentElement.scrollTop>200){btt.classList.add("sh")}else{btt.classList.remove("sh")}});btt.onclick=function(){window.scrollTo({top:0,behavior:"smooth"})};}  // Set initial slider positions after layout settles
+  setTimeout(() => {
+    updateNavSlider();
+    updateSubtabSlider();
+  }, 100);
+  window.addEventListener('resize', () => {
+    updateNavSlider();
+    updateSubtabSlider();
+  });
+});
+
+// ============================================================
+// KNOWLEDGE CONTENT
+// ============================================================
+function initKnowledgeContent() {
+  var container = document.getElementById('knowledgeContent');
+  container.innerHTML = KNOWLEDGE_HTML;
+  // Wrap each chapter in a div for filtering
+  var children = Array.from(container.children);
+  container.innerHTML = '';
+  var wrapper = null;
+  children.forEach(function(el) {
+    if (el.classList.contains('chapter-title')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'chapter-wrapper';
+      wrapper.dataset.chapterId = el.id;
+      container.appendChild(wrapper);
+    }
+    if (wrapper) { wrapper.appendChild(el); }
+    else { container.appendChild(el); }
+  });
+  buildKnowledgeTree();
+  setTimeout(function() {
+    document.querySelectorAll('#knowledgeContent .chapter-wrapper').forEach(function(w) {
+      w.classList.add('ch-enter');
+    });
+  }, 50);
+}
+
+function filterChapter(chapterId) {
+  var wrappers = document.querySelectorAll('#knowledgeContent .chapter-wrapper');
+  wrappers.forEach(function(w) {
+    if (!chapterId || w.dataset.chapterId === chapterId) {
+      w.style.display = 'block';
+      w.classList.remove('ch-enter');
+      void w.offsetWidth;
+      w.classList.add('ch-enter');
+    } else {
+      w.classList.remove('ch-enter');
+      w.style.display = 'none';
+    }
+  });
+  document.querySelectorAll('.tree-item-header').forEach(function(h) { h.classList.remove('active-chapter'); });
+  if (chapterId) {
+    var hdr = document.querySelector('.tree-item-header[data-chapter="' + chapterId + '"]');
+    if (hdr) hdr.classList.add('active-chapter');
+  }
+}
+
+function buildKnowledgeTree() {
+  var container = document.getElementById('sidebar-knowledge');
+  var chapters = document.querySelectorAll('.chapter-title');
+  var html = '<div class="tree">';
+
+  // "全部章节" at top
+  html += '<div class="tree-item">' +
+    '<div class="tree-item-header" onclick="filterChapter(\'\')">' +
+      '<span class="sidebar-text">📂 全部章节</span>' +
+    '</div>' +
+  '</div>';
+
+  chapters.forEach(function(ch, idx) {
+    var chText = ch.textContent;
+    html += '<div class="tree-item">' +
+      '<div class="tree-item-header" data-chapter="' + ch.id + '" onclick="filterChapter(' + "'" + ch.id + "'" + ')">' +
+        '<i class="tree-arrow" onclick="toggleTree(this);event.stopPropagation();">▶</i>' +
+        '<span class="sidebar-text">' + chText + '</span>' +
+      '</div>' +
+      '<div class="tree-children" id="tree-ch-' + idx + '">';
+
+    var sib = ch.nextElementSibling;
+    while (sib && !sib.classList.contains('chapter-title')) {
+      if (sib.classList.contains('section-title') && sib.id) {
+        html += '<button class="tree-leaf" onclick="scrollToSection(' + "'" + sib.id + "'" + ')">' +
+          '<span class="sidebar-text">' + sib.textContent + '</span></button>';
+        var subSib = sib.nextElementSibling;
+        while (subSib && !subSib.classList.contains('chapter-title') && !subSib.classList.contains('section-title')) {
+          if (subSib.classList.contains('subsection-title') && subSib.id) {
+            html += '<button class="tree-leaf" style="padding-left:64px;font-size:11px;" onclick="scrollToSection(' + "'" + subSib.id + "'" + ')">' +
+              '<span class="sidebar-text">' + subSib.textContent + '</span></button>';
+          }
+          subSib = subSib.nextElementSibling;
+        }
+      }
+      sib = sib.nextElementSibling;
+    }
+    html += '</div></div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}function toggleTree(el) {
+  // Toggle expand/collapse
+  var icon = el;
+  if (icon.tagName !== 'I') icon = el.querySelector('i');
+  if (!icon) return;
+  var children = icon.parentElement.nextElementSibling;
+  if (!children) return;
+  icon.classList.toggle('expanded');
+  children.classList.toggle('open');
+}
+
+
+function scrollToSection(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    // Show parent chapter first
+    var wrapper = el.closest('.chapter-wrapper');
+    if (wrapper) filterChapter(wrapper.dataset.chapterId);
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.style.transition = 'background 0.6s, box-shadow 0.6s';
+    el.style.background = 'rgba(78, 205, 196, 0.15)';
+    el.style.boxShadow = 'inset 0 0 30px rgba(78, 205, 196, 0.1), 0 0 20px rgba(78, 205, 196, 0.05)';
+    setTimeout(function() {
+      el.style.background = '';
+      el.style.boxShadow = '';
+    }, 2000);
+  }
+  closeSidebar();
+}function initSidebar() {
+  // Show knowledge sidebar by default
+  document.getElementById('sidebar-knowledge').style.display = 'block';
+  initQbankSidebar();
+  initPracticeSidebar();
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  if (window.innerWidth < 768) {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+
+}
+
+function toggleSidebar() {
+  if (window.innerWidth < 768) return; // not on mobile
+  document.body.classList.toggle('sidebar-collapsed');
+  const icon = document.getElementById('sidebarToggleIcon');
+  if (icon) {
+    icon.textContent = document.body.classList.contains('sidebar-collapsed') ? '▶' : '◀';
+  }
+}
+
+// ============================================================
+// QUESTION BANK DISPLAY
+// ============================================================
+function initQbank() {
+  const filter = document.getElementById('qbankFilter');
+  filter.innerHTML = '<option value="all">全部工种</option>';
+  WORK_TYPES.forEach(wt => {
+    filter.innerHTML += `<option value="${wt}">${wt}</option>`;
+  });
+  // Populate custom dropdown panel
+  const panel = document.getElementById('qbankSelectPanel');
+  panel.innerHTML = '<div class="custom-select-option selected" data-value="all">全部工种</div>';
+  WORK_TYPES.forEach(wt => {
+    panel.innerHTML += `<div class="custom-select-option" data-value="${wt}">${wt}</div>`;
+  });
+  // Click handler via event delegation on panel
+  panel.addEventListener('click', function(e) {
+    const opt = e.target.closest('.custom-select-option');
+    if (!opt) return;
+    // Update hidden select
+    filter.value = opt.dataset.value;
+    state.currentQbankFilter = opt.dataset.value;
+    // Update label
+    document.getElementById('qbankSelectLabel').textContent = opt.textContent;
+    // Update selected state
+    panel.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    // Close dropdown
+    document.getElementById('qbankSelectWrap').classList.remove('open');
+    // Trigger render
+    renderQbank();
+  });
+  filter.addEventListener('change', function() {
+    state.currentQbankFilter = this.value;
+    // Sync custom dropdown label
+    const label = document.getElementById('qbankSelectLabel');
+    const match = panel.querySelector(`[data-value="${this.value}"]`);
+    if (match) label.textContent = match.textContent;
+    renderQbank();
+  });
+  renderQbank();
+}
+
+function initQbankSidebar() {
+  const container = document.getElementById('sidebar-qbank');
+  let html = '<div class="work-type-list">';
+  // Add "全部" option at the top
+  const totalAll = Object.values(WT_COUNTS).reduce((sum, c) => sum + c.judge + c.single, 0);
+  html += `<button class="work-type-item" onclick="filterQbank('all')">
+    📂
+    <span class="sidebar-text">全部工种</span>
+    <span class="count">${totalAll}题</span>
+  </button>`;
+  WORK_TYPES.forEach(wt => {
+    const c = WT_COUNTS[wt] || {judge: 0, single: 0};
+    const total = c.judge + c.single;
+    html += `<button class="work-type-item" onclick="filterQbank('${wt}')">
+      📁
+      <span class="sidebar-text">${wt}</span>
+      <span class="count">${total}题</span>
+    </button>`;
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function filterQbank(wt) {
+  document.getElementById('qbankFilter').value = wt;
+  state.currentQbankFilter = wt;
+  renderQbank();
+  if (state.currentModule !== 'qbank') {
+    switchModule('qbank');
+  }
+  closeSidebar();
+}
+
+function renderQbank() {
+  // Reset all-answers toggle state
+  allAnswersShown = false;
+  const toggleBtn = document.getElementById('btnToggleAnswers');
+  if (toggleBtn) {
+    toggleBtn.textContent = '展开所有答案';
+    toggleBtn.classList.remove('active');
+  }
+
+  const container = document.getElementById('qbankContent');
+  const filter = state.currentQbankFilter;
+
+  let filtered = filter === 'all' ? ALL_QUESTIONS : ALL_QUESTIONS.filter(q => q.work_type === filter);
+
+  // Update stats
+  const judgeCount = filtered.filter(q => q.type === 'judge').length;
+  const singleCount = filtered.filter(q => q.type === 'single').length;
+  document.getElementById('qbankStats').textContent = `共 ${filtered.length} 题（判断 ${judgeCount} 题，单选 ${singleCount} 题）`;
+
+  // Group by work type, then by type
+  const groups = {};
+  filtered.forEach(q => {
+    const key = q.work_type + '|' + q.type;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(q);
+  });
+
+  let html = '';
+  for (const [key, qs] of Object.entries(groups)) {
+    const [wt, type] = key.split('|');
+    const typeLabel = type === 'judge' ? '判断题' : '单选题';
+    html += `<div class="q-group">
+      <div class="q-group-header">${wt} - ${typeLabel}（${qs.length}题）</div>`;
+
+    qs.forEach((q, idx) => {
+      html += `<div class="q-card">
+        <div class="q-meta">
+          <span class="q-type-badge ${type}">${typeLabel}</span>
+          工种: ${q.work_type}
+        </div>
+        <div class="q-text">${idx+1}. ${q.text}</div>`;
+
+      if (q.type === 'single' && q.options && q.options.length > 0) {
+        html += `<div class="q-options">`;
+        q.options.forEach(opt => {
+          html += `<div>${opt}</div>`;
+        });
+        html += `</div>`;
+      }
+
+      html += `<button class="btn-answer" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="q-answer">正确答案：${q.answer}</div>
+      </div>`;
+    });
+
+    html += '</div>';
+  }
+
+  if (!html) html = '<p style="color:var(--text-muted);text-align:center;padding:40px;">该筛选条件下无题目。</p>';
+  container.innerHTML = html;
+
+  // Fade-in animation same as knowledge chapter
+  container.classList.remove('qfade');
+  void container.offsetWidth;
+  container.classList.add('qfade');
+
+  // Add 3D tilt effect
+  addCardTiltEffect();
+}
+
+function toggleAnswer(btn) {
+  var answer = btn.nextElementSibling;
+  if (answer.classList.contains('show')) {
+    answer.classList.remove('show');
+    answer.style.maxHeight = '';
+    btn.textContent = '显示答案';
+  } else {
+    answer.classList.add('show');
+    btn.textContent = '隐藏答案';
+  }
+}
+
+let allAnswersShown = false;
+
+function toggleAllAnswers() {
+  var btn = document.getElementById('btnToggleAnswers');
+  var answers = document.querySelectorAll('#qbankContent .q-answer');
+  var answerBtns = document.querySelectorAll('#qbankContent .btn-answer');
+
+  allAnswersShown = !allAnswersShown;
+
+  answers.forEach(function(el) {
+    el.classList.toggle('show', allAnswersShown);
+    if (!allAnswersShown) el.style.maxHeight = '';
+  });
+  answerBtns.forEach(function(el) {
+    el.textContent = allAnswersShown ? '隐藏答案' : '显示答案';
+  });
+
+  if (btn) {
+    btn.textContent = allAnswersShown ? '隐藏所有答案' : '展开所有答案';
+    btn.classList.toggle('active', allAnswersShown);
+  }
+}
+
+// ============================================================
+// PRACTICE SIDEBAR
+// ============================================================
+function initPracticeSidebar() {
+  updatePracticeSidebar('practice-mode');
+}
+
+function updatePracticeSidebar(subtabName) {
+  const container = document.getElementById('sidebar-practice');
+  let html = '<div class="practice-settings">';
+
+  if (subtabName === 'practice-mode') {
+    html += `
+      <h3 style="color:var(--accent-green);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📝 刷题设置</span></h3>
+
+      <label><span class="sidebar-text">工种</span></label>
+      <div class="custom-select-wrap" id="practiceWorkTypeWrap">
+        <div class="custom-select-trigger" onclick="toggleCustomSelect(this)">
+          <span id="practiceWorkTypeLabel">全部工种</span>
+        </div>
+        <div class="custom-select-panel" id="practiceWorkTypePanel">
+          <div class="custom-select-option selected" data-value="all" onclick="selectCustomOption(this)">全部工种</div>`;
+    WORK_TYPES.forEach(wt => { html += `<div class="custom-select-option" data-value="${wt}" onclick="selectCustomOption(this)">${wt}</div>`; });
+    html += `</div></div>
+      <select id="practiceWorkType" style="display:none"><option value="all">全部工种</option>`;
+    WORK_TYPES.forEach(wt => { html += `<option value="${wt}">${wt}</option>`; });
+    html += `</select>
+
+
+
+      <label><span class="sidebar-text">判断题数量</span></label>
+      <div class="count-input-group">
+        <input type="number" id="practiceJudgeCount" value="5" min="0" max="200" oninput="syncPreset(this)">
+        <div class="preset-btns">
+          <button type="button" class="preset-btn active" onclick="document.getElementById('practiceJudgeCount').value=5; highlightPreset(this)">5</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('practiceJudgeCount').value=10; highlightPreset(this)">10</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('practiceJudgeCount').value=20; highlightPreset(this)">20</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('practiceJudgeCount').value=30; highlightPreset(this)">30</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('practiceJudgeCount').value=document.getElementById('practiceJudgeCount').max||50; highlightPreset(this)">自定义</button>
+        </div>
+      </div>
+
+      <label><span class="sidebar-text">单选题数量</span></label>
+      <div class="count-input-group">
+        <input type="number" id="practiceSingleCount" value="5" min="0" max="200" oninput="syncPreset(this)">
+        <div class="preset-btns">
+          <button type="button" class="preset-btn active" onclick="document.getElementById('practiceSingleCount').value=5; highlightPreset(this)">5</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('practiceSingleCount').value=10; highlightPreset(this)">10</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('practiceSingleCount').value=20; highlightPreset(this)">20</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('practiceSingleCount').value=30; highlightPreset(this)">30</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('practiceSingleCount').value=document.getElementById('practiceSingleCount').max||50; highlightPreset(this)">自定义</button>
+        </div>
+      </div>
+
+      <button class="btn-start" onclick="startPractice()"><span class="sidebar-text">▶ 开始刷题</span></button>`;} else if (subtabName === 'exam-mode') {
+    html += `
+      <h3 style="color:var(--accent-blue);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📄 考试设置</span></h3>
+
+      <label><span class="sidebar-text">考试工种</span></label>
+      <div class="custom-select-wrap" id="examWorkTypeWrap">
+        <div class="custom-select-trigger" onclick="toggleCustomSelect(this)">
+          <span id="examWorkTypeLabel">全部工种</span>
+        </div>
+        <div class="custom-select-panel" id="examWorkTypePanel">
+          <div class="custom-select-option selected" data-value="all" onclick="selectCustomOption(this)">全部工种</div>`;
+    WORK_TYPES.forEach(wt => { html += `<div class="custom-select-option" data-value="${wt}" onclick="selectCustomOption(this)">${wt}</div>`; });
+    html += `</div></div>
+      <select id="examWorkType" style="display:none"><option value="all">全部工种</option>`;
+    WORK_TYPES.forEach(wt => { html += `<option value="${wt}">${wt}</option>`; });
+    html += `</select>
+
+      <label><span class="sidebar-text">判断题数量</span></label>
+      <div class="count-input-group">
+        <input type="number" id="examJudgeCount" value="10" min="0" max="100" oninput="syncPreset(this)">
+        <div class="preset-btns">
+          <button type="button" class="preset-btn active" onclick="document.getElementById('examJudgeCount').value=5; highlightPreset(this)">5</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('examJudgeCount').value=10; highlightPreset(this)">10</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('examJudgeCount').value=20; highlightPreset(this)">20</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('examJudgeCount').value=30; highlightPreset(this)">30</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('examJudgeCount').value=document.getElementById('examJudgeCount').max||100; highlightPreset(this)">自定义</button>
+        </div>
+      </div>
+
+      <label><span class="sidebar-text">单选题数量</span></label>
+      <div class="count-input-group">
+        <input type="number" id="examSingleCount" value="20" min="0" max="100" oninput="syncPreset(this)">
+        <div class="preset-btns">
+          <button type="button" class="preset-btn" onclick="document.getElementById('examSingleCount').value=5; highlightPreset(this)">5</button>
+          <button type="button" class="preset-btn active" onclick="document.getElementById('examSingleCount').value=20; highlightPreset(this)">20</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('examSingleCount').value=30; highlightPreset(this)">30</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('examSingleCount').value=50; highlightPreset(this)">50</button>
+          <button type="button" class="preset-btn" onclick="document.getElementById('examSingleCount').value=document.getElementById('examSingleCount').max||100; highlightPreset(this)">自定义</button>
+        </div>
+      </div>
+
+      <label><span class="sidebar-text">倒计时（分钟，0=不计时）</span></label>
+      <input type="number" id="examTimer" value="30" min="0" max="180">
+
+      <button class="btn-start" onclick="startExam()" style="background:var(--accent-blue);"><span class="sidebar-text">📄 开始考试</span></button>`;
+  } else if (subtabName === 'wrong-book') {
+    const wq = state.wrongQuestions;
+    html += `
+      <h3 style="color:var(--accent-orange);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📕 错题本</span></h3>
+      <p style="color:var(--text-muted);font-size:12px;margin-bottom:12px;"><span class="sidebar-text">共 ${wq.length} 道错题</span></p>
+      <button class="btn-start" onclick="clearWrongBook()" style="background:var(--bg-secondary);color:var(--accent-red);border:1px solid var(--accent-red);">
+        <span class="sidebar-text">🗑 清空错题本</span>
+      </button>`;
+  }
+
+  html += '</div>';
+  container.innerHTML = html
+  var cp = container.querySelector('.practice-settings');
+  if(cp) cp.classList.add('sbpc');;
+  updateCountLimits();
+  ['practiceJudgeCount','practiceSingleCount','examJudgeCount','examSingleCount'].forEach(function(id) {
+    var inp = document.getElementById(id);
+    if (inp) syncPreset(inp);
+  });
+}
+function startPractice() {
+  const wt = document.getElementById('practiceWorkType').value;
+  const judgeCount = parseInt(document.getElementById('practiceJudgeCount').value) || 0;
+  const singleCount = parseInt(document.getElementById('practiceSingleCount').value) || 0;
+
+  if (judgeCount + singleCount === 0) { alert('请至少设置一题'); return; }
+
+  let judgePool = ALL_QUESTIONS.filter(q => q.type === 'judge');
+  let singlePool = ALL_QUESTIONS.filter(q => q.type === 'single');
+  if (wt !== 'all') {
+    judgePool = judgePool.filter(q => q.work_type === wt);
+    singlePool = singlePool.filter(q => q.work_type === wt);
+  }
+
+  var selected;
+  if (judgeCount > 0 && singleCount === 0) {
+    // Judge only with dedup
+    if (judgePool.length < judgeCount) { alert('判断题不足，仅有' + judgePool.length + '题'); return; }
+    var usedJt = {}; selected = [];
+    shuffleArray(judgePool).forEach(function(q) {
+      if (selected.length < judgeCount && !usedJt[q.text]) { selected.push(q); usedJt[q.text] = true; }
+    });
+  } else if (singleCount > 0 && judgeCount === 0) {
+    // Single only with dedup
+    if (singlePool.length < singleCount) { alert('单选题不足，仅有' + singlePool.length + '题'); return; }
+    var usedSt = {}; selected = [];
+    shuffleArray(singlePool).forEach(function(q) {
+      if (selected.length < singleCount && !usedSt[q.text]) { selected.push(q); usedSt[q.text] = true; }
+    });
+  } else {
+    // Mixed
+    var jc = Math.min(judgeCount, judgePool.length);
+    var sc = Math.min(singleCount, singlePool.length);
+    if (jc + sc === 0) { alert('该条件下没有题目'); return; }
+    // Judges first, singles second
+    var usedTxt = {};
+    var jSel = [], sSel = [];
+    shuffleArray(judgePool).forEach(function(q){if(jSel.length<jc&&!usedTxt[q.text]){jSel.push(q);usedTxt[q.text]=true;}});
+    shuffleArray(singlePool).forEach(function(q){if(sSel.length<sc&&!usedTxt[q.text]){sSel.push(q);usedTxt[q.text]=true;}});
+    selected = jSel.concat(sSel);
+  }
+
+  state.practiceQuestions = selected;
+  state.practiceIndex = 0;
+  state.practiceAnswers = new Array(selected.length).fill(null);
+  state.practiceLocked = false;
+  state.practiceDone = false;
+
+  document.getElementById('practiceSetup').style.display = 'none';
+  document.getElementById('practiceArea').style.display = 'block';
+
+  renderPracticeQuestion();
+  switchSubTab('practice-mode');
+  closeSidebar();
+}function renderPracticeQuestion() {
+  const area = document.getElementById('practiceArea');
+  const q = state.practiceQuestions[state.practiceIndex];
+  const idx = state.practiceIndex;
+  const total = state.practiceQuestions.length;
+  const userAns = state.practiceAnswers[idx];
+  const isLocked = state.practiceLocked || userAns !== null;
+
+  if (state.practiceDone) {
+    renderPracticeResult();
+    return;
+  }
+
+  let html = `<div class="question-display">
+    <div class="q-number">第 ${idx+1}/${total} 题 | ${q.work_type} | ${q.type === 'judge' ? '判断题' : '单选题'}</div>
+    <div class="q-text">${q.text}</div>`;
+
+  if (q.type === 'single' && q.options && q.options.length > 0) {
+    q.options.forEach(opt => {
+      const letter = opt.charAt(0);
+      const selected = userAns === letter ? ' selected' : '';
+      const locked = isLocked ? ' locked' : '';
+      let extra = '';
+      if (isLocked && userAns !== null) {
+        if (letter === q.answer) extra += ' correct';
+        if (userAns === letter && letter !== q.answer) extra += ' wrong';
+      }
+      html += `<button class="q-option${selected}${locked}${extra}" onclick="practiceSelect('${letter}')" ${isLocked ? 'disabled' : ''}>
+        ${opt}
+      </button>`;
+    });
+  } else {
+    // Judge type
+    const selectedTrue = userAns === '对' ? ' selected' : '';
+    const selectedFalse = userAns === '错' ? ' selected' : '';
+    const locked = isLocked ? ' locked' : '';
+    let extraT = '', extraF = '';
+    if (isLocked && userAns !== null) {
+      if (q.answer === '对') extraT += ' correct';
+      else extraF += ' correct';
+      if (userAns === '对' && q.answer !== '对') extraT += ' wrong';
+      if (userAns === '错' && q.answer !== '错') extraF += ' wrong';
+    }
+    html += `<button class="q-option${selectedTrue}${locked}${extraT}" onclick="practiceSelect('对')" ${isLocked ? 'disabled' : ''}>对</button>
+    <button class="q-option${selectedFalse}${locked}${extraF}" onclick="practiceSelect('错')" ${isLocked ? 'disabled' : ''}>错</button>`;
+  }
+
+  // Feedback
+  if (isLocked && userAns !== null) {
+    const isCorrect = userAns === q.answer;
+    const cls = isCorrect ? 'correct' : 'wrong';
+    html += `<div class="q-feedback ${cls}">
+      ${isCorrect ? '✅ 回答正确！' : '❌ 回答错误。'} 正确答案：${q.answer}
+    </div>`;
+  }
+
+  html += `</div>
+
+  <div class="question-nav">
+    <button onclick="practiceGoTo(${idx-1})" ${idx === 0 ? 'disabled' : ''}>◀ 上一题</button>
+    <button onclick="practiceGoTo(${idx+1})" ${idx >= total-1 ? 'disabled' : ''}>下一题 ▶</button>
+    <button class="primary" onclick="finishPractice()" style="margin-left:auto;">完成并查看结果</button>
+  </div>`;
+
+  if (isLocked) {
+    html += `<div style="text-align:center;color:var(--text-muted);font-size:12px;margin-top:8px;">
+      本题已作答，答案已锁定。使用上一题/下一题浏览。
+    </div>`;
+  }
+
+  area.innerHTML = html;
+}
+
+function practiceSelect(answer) {
+  const idx = state.practiceIndex;
+  if (state.practiceLocked || state.practiceAnswers[idx] !== null) return;
+
+  state.practiceAnswers[idx] = answer;
+  const q = state.practiceQuestions[idx];
+  const isCorrect = answer === q.answer;
+
+  // Add to wrong book if wrong
+  if (!isCorrect) {
+    addToWrongBook(q);
+  }
+
+  renderPracticeQuestion();
+}
+
+function practiceGoTo(newIdx) {
+  if (newIdx < 0 || newIdx >= state.practiceQuestions.length) return;
+  state.practiceIndex = newIdx;
+  renderPracticeQuestion();
+}
+
+function finishPractice() {
+  const total = state.practiceQuestions.length;
+  const answered = state.practiceAnswers.filter(a => a !== null).length;
+
+  if (answered < total) {
+    if (!confirm(`还有 ${total - answered} 题未作答，确定要完成吗？`)) return;
+  }
+
+  state.practiceLocked = true;
+  state.practiceDone = true;
+  renderPracticeResult();
+}
+
+function renderPracticeResult() {
+  const total = state.practiceQuestions.length;
+  let correct = 0;
+  const wrongList = [];
+
+  state.practiceQuestions.forEach((q, i) => {
+    if (state.practiceAnswers[i] === q.answer) {
+      correct++;
+    } else if (state.practiceAnswers[i] !== null) {
+      wrongList.push({q, userAnswer: state.practiceAnswers[i]});
+    }
+  });
+
+  const rate = total > 0 ? Math.round(correct / total * 100) : 0;
+
+  let html = `<div class="stats-box">
+    <div class="big-number">${rate}%</div>
+    <div style="font-size:14px;color:var(--text-muted);margin-top:4px;">正确率</div>
+    <div class="stats-detail">
+      <div class="stat-item"><span class="num" style="color:var(--accent-green);">${correct}</span><span class="label">正确</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--accent-red);">${total - correct}</span><span class="label">错误</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--accent-blue);">${total}</span><span class="label">总题</span></div>
+    </div>
+  </div>
+
+  <div class="question-nav" style="justify-content:center;">
+    <button onclick="resetPractice()">🔄 重新刷题</button>
+    <button onclick="showWrongBook()">📑 查看错题</button>
+  </div>`;
+
+  // Show wrong answers
+  if (wrongList.length > 0) {
+    html += '<h3 style="color:var(--accent-red);margin:20px 0 10px;">错题回顾</h3>';
+    wrongList.forEach((item, i) => {
+      html += `<div class="q-card">
+        <div class="q-text">${item.q.text}</div>
+        <div style="font-size:12px;color:var(--accent-red);">你的答案：${item.userAnswer}</div>
+        <div style="font-size:12px;color:var(--accent-green);">正确答案：${item.q.answer}</div>
+      </div>`;
+    });
+  }
+
+  document.getElementById('practiceArea').innerHTML = html;
+}
+
+function resetPractice() {
+  state.practiceQuestions = [];
+  state.practiceAnswers = [];
+  state.practiceIndex = 0;
+  state.practiceLocked = false;
+  state.practiceDone = false;
+
+  document.getElementById('practiceSetup').style.display = 'block';
+  document.getElementById('practiceArea').style.display = 'none';
+}
+
+// ============================================================
+// EXAM MODE
+// ============================================================
+function startExam() {
+  const wt = document.getElementById('examWorkType').value;
+  const judgeCount = parseInt(document.getElementById('examJudgeCount').value) || 0;
+  const singleCount = parseInt(document.getElementById('examSingleCount').value) || 0;
+  const timerMinutes = parseInt(document.getElementById('examTimer').value) || 0;
+
+  if (judgeCount + singleCount === 0) {
+    alert('请设置至少一题。');
+    return;
+  }
+
+  // Filter questions
+  let judgePool = ALL_QUESTIONS.filter(q => q.type === 'judge');
+  let singlePool = ALL_QUESTIONS.filter(q => q.type === 'single');
+  if (wt !== 'all') {
+    judgePool = judgePool.filter(q => q.work_type === wt);
+    singlePool = singlePool.filter(q => q.work_type === wt);
+  }
+
+  if (judgePool.length < judgeCount || singlePool.length < singleCount) {
+    alert(`题库不足：判断题需${judgeCount}题（有${judgePool.length}题），单选题需${singleCount}题（有${singlePool.length}题）。请减少题目数量。`);
+    return;
+  }
+
+  // Dedup: track used texts across both pools
+  var usedTexts = {};
+  var judgeSel = [], singleSel = [];
+  shuffleArray(judgePool).forEach(function(q) {
+    if (judgeSel.length < judgeCount && !usedTexts[q.text]) {
+      judgeSel.push(q); usedTexts[q.text] = true;
+    }
+  });
+  shuffleArray(singlePool).forEach(function(q) {
+    if (singleSel.length < singleCount && !usedTexts[q.text]) {
+      singleSel.push(q); usedTexts[q.text] = true;
+    }
+  });
+  // Judges first, singles second (not shuffled)
+  state.examQuestions = judgeSel.concat(singleSel);
+  state.examAnswers = {};
+  state.examSubmitted = false;
+
+  // Timer
+  if (timerMinutes > 0) {
+    state.examTimeLeft = timerMinutes * 60;
+    startExamTimer();
+  } else {
+    state.examTimeLeft = 0;
+  }
+
+  document.getElementById('examSetup').style.display = 'none';
+  document.getElementById('examArea').style.display = 'block';
+
+  renderExam();
+  switchSubTab('exam-mode');
+  closeSidebar();
+}
+
+function startExamTimer() {
+  if (state.examTimer) clearInterval(state.examTimer);
+  state.examTimer = setInterval(() => {
+    state.examTimeLeft--;
+    updateExamTimerDisplay();
+    if (state.examTimeLeft <= 0) {
+      clearInterval(state.examTimer);
+      state.examTimer = null;
+      alert('时间到！自动交卷。');
+      submitExam();
+    }
+  }, 1000);
+}
+
+function updateExamTimerDisplay() {
+  const el = document.getElementById('examTimerDisplay');
+  if (!el) return;
+  const m = Math.floor(state.examTimeLeft / 60);
+  const s = state.examTimeLeft % 60;
+  el.textContent = `⏱ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  if (state.examTimeLeft < 60) el.classList.add('warning');
+  else el.classList.remove('warning');
+}
+
+function renderExam() {
+  const area = document.getElementById('examArea');
+  const qs = state.examQuestions;
+
+  let html = '<div class="exam-layout">';
+
+  // === LEFT: Questions ===
+  html += '<div class="exam-questions">';
+  qs.forEach((q, i) => {
+    const userAns = state.examAnswers[i];
+    html += `<div class="question-display" id="exam-q-${i}" style="margin-bottom:12px;">
+      <div class="q-number">第 ${i+1} 题 | ${q.work_type} | ${q.type === 'judge' ? '判断题' : '单选题'} ${userAns !== undefined ? '✅ 已答' : '⬜ 未答'}</div>
+      <div class="q-text">${q.text}</div>`;
+
+    if (q.type === 'single' && q.options && q.options.length > 0) {
+      q.options.forEach(opt => {
+        const letter = opt.charAt(0);
+        const selected = userAns === letter ? ' selected' : '';
+        html += `<button class="q-option${selected}" onclick="examSelect(${i}, '${letter}')" ${state.examSubmitted ? 'disabled' : ''}>${opt}</button>`;
+      });
+    } else {
+      const selectedT = userAns === '对' ? ' selected' : '';
+      const selectedF = userAns === '错' ? ' selected' : '';
+      html += `<button class="q-option${selectedT}" onclick="examSelect(${i}, '对')" ${state.examSubmitted ? 'disabled' : ''}>对</button>
+      <button class="q-option${selectedF}" onclick="examSelect(${i}, '错')" ${state.examSubmitted ? 'disabled' : ''}>错</button>`;
+    }
+
+    if (state.examSubmitted) {
+      const isCorrect = userAns === q.answer;
+      html += `<div class="q-feedback ${isCorrect ? 'correct' : 'wrong'}">
+        ${isCorrect ? '✅ 正确' : '❌ 错误，正确答案：' + q.answer + (userAns !== undefined ? '，你的答案：'+userAns : '')}
+      </div>`;
+    }
+    html += '</div>';
+  });
+  html += '</div>'; // close exam-questions
+
+  // === RIGHT: Timer + Answer Card + Submit ===
+  html += '<div class="exam-panel">';
+
+  if (state.examTimeLeft > 0) {
+    html += '<div class="exam-timer" id="examTimerDisplay">⏱ ' + formatTime(state.examTimeLeft) + '</div>';
+  }
+
+  // Answer card
+  html += '<div class="exam-card"><div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;font-weight:500;">📋 答题卡</div><div style="display:flex;flex-wrap:wrap;gap:4px;">';
+  qs.forEach((q, i) => {
+    const answered = state.examAnswers[i] !== undefined;
+    const isCorrect = state.examSubmitted ? (state.examAnswers[i] === q.answer) : false;
+    let borderColor, bgColor, textColor;
+    if (state.examSubmitted) {
+      if (isCorrect) { borderColor = 'var(--accent-green)'; bgColor = 'rgba(78,205,196,0.15)'; textColor = 'var(--accent-green)'; }
+      else if (answered) { borderColor = 'var(--accent-red)'; bgColor = 'rgba(232,85,80,0.15)'; textColor = 'var(--accent-red)'; }
+      else { borderColor = 'var(--border-color)'; bgColor = 'var(--bg-secondary)'; textColor = 'var(--text-muted)'; }
+    } else {
+      borderColor = answered ? 'var(--accent-green)' : 'var(--border-color)';
+      bgColor = answered ? 'rgba(78,205,196,0.1)' : 'var(--bg-secondary)';
+      textColor = answered ? 'var(--accent-green)' : 'var(--text-muted)';
+    }
+    html += '<button onclick="examGoTo(' + i + ')" style="padding:6px 10px;font-size:12px;border:1px solid ' + borderColor + ';background:' + bgColor + ';color:' + textColor + ';border-radius:4px;cursor:pointer;">' + (i+1) + '</button>';
+  });
+  html += '</div></div>'; // close answer card
+
+  // Submit
+  if (!state.examSubmitted) {
+    var a = Object.keys(state.examAnswers).length;
+    var t = state.examQuestions.length;
+    html += '<div class="exam-submit"><span style="color:var(--text-secondary);font-size:13px;">已答 ' + a + '/' + t + ' 题</span><button class="pr" onclick="submitExam()" style="display:block;width:100%;margin-top:8px;">✓ 交卷</button></div>';
+  }
+
+  html += '</div>'; // close exam-panel
+  html += '</div>'; // close exam-layout
+
+  area.innerHTML = html;
+  if (state.examTimeLeft > 0) updateExamTimerDisplay();
+}
+
+function examSelect(idx, answer) {
+  if (state.examSubmitted) return;
+  state.examAnswers[idx] = answer;
+  renderExam();
+}
+
+function examGoTo(idx) {
+  const el = document.getElementById(`exam-q-${idx}`);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function submitExam() {
+  if (state.examSubmitted) return;
+
+  const answered = Object.keys(state.examAnswers).length;
+  const total = state.examQuestions.length;
+
+  if (answered < total) {
+    if (!confirm(`还有 ${total - answered} 题未作答，确定要交卷吗？`)) return;
+  }
+
+  if (state.examTimer) {
+    clearInterval(state.examTimer);
+    state.examTimer = null;
+  }
+
+  state.examSubmitted = true;
+
+  // Calculate score
+  let correct = 0;
+  const wrongList = [];
+  state.examQuestions.forEach((q, i) => {
+    if (state.examAnswers[i] === q.answer) {
+      correct++;
+    } else {
+      wrongList.push({q, userAnswer: state.examAnswers[i] || '未作答', index: i});
+    }
+  });
+
+  // Score: each question contributes equally to 100
+  const pointsPerQuestion = 100 / total;
+  const score = Math.round(correct * pointsPerQuestion * 10) / 10;
+
+  // Save exam record
+  const record = {
+    date: new Date().toLocaleString(),
+    total,
+    correct,
+    score,
+    wrongCount: total - correct,
+    details: wrongList.map(w => ({
+      text: w.q.text,
+      answer: w.q.answer,
+      userAnswer: w.userAnswer,
+      workType: w.q.work_type,
+      type: w.q.type
+    }))
+  };
+  state.examRecords.push(record);
+  localStorage.setItem('examRecords', JSON.stringify(state.examRecords));
+
+  // Also add wrong answers to wrong book
+  wrongList.forEach(w => addToWrongBook(w.q));
+
+  // Show results before rendering exam
+  renderExam();
+
+  // Add score box at top
+  const area = document.getElementById('examArea');
+  const scoreHtml = `<div class="stats-box">
+    <div class="big-number">${score}</div>
+    <div style="font-size:14px;color:var(--text-muted);margin-top:4px;">总分（满分100）</div>
+    <div class="stats-detail">
+      <div class="stat-item"><span class="num" style="color:var(--accent-green);">${correct}</span><span class="label">正确</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--accent-red);">${total - correct}</span><span class="label">错误</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--accent-blue);">${total}</span><span class="label">总题</span></div>
+    </div>
+    <div class="question-nav" style="justify-content:center;margin-top:12px;">
+      <button onclick="resetExam()">🔄 重新考试</button>
+    </div>
+  </div>`;
+
+  area.innerHTML = scoreHtml + area.innerHTML;
+}
+
+function resetExam() {
+  state.examQuestions = [];
+  state.examAnswers = {};
+  state.examSubmitted = false;
+  if (state.examTimer) {
+    clearInterval(state.examTimer);
+    state.examTimer = null;
+  }
+  document.getElementById('examSetup').style.display = 'block';
+  document.getElementById('examArea').style.display = 'none';
+}
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
+
+// ============================================================
+// WRONG BOOK
+// ============================================================
+function addToWrongBook(q) {
+  const wq = state.wrongQuestions;
+  // Check if already exists
+  const exists = wq.some(w => w.text === q.text);
+  if (!exists) {
+    wq.push(q);
+    localStorage.setItem('wrongQuestions', JSON.stringify(wq));
+  }
+}
+
+
+function showWrongBook() {
+  switchModule('practice');
+  switchSubTab('wrong-book');
+  updateWrongBookDisplay();
+  closeSidebar();
+}
+
+function updateWrongBookDisplay() {
+  const container = document.getElementById('wrongBookContent');
+  const wq = state.wrongQuestions;
+
+  if (wq.length === 0) {
+    container.innerHTML = `<div class="stats-box">
+      <div style="font-size:40px;margin-bottom:10px;">📕</div>
+      <p style="color:var(--text-muted);">错题本为空，继续加油！</p>
+    </div>`;
+    return;
+  }
+
+  let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <h3 style="color:var(--accent-orange);">错题本（${wq.length}题）</h3>
+    <div style="display:flex;gap:8px;">
+      <button onclick="clearWrongBook()" style="padding:6px 14px;background:none;border:1px solid var(--accent-red);color:var(--accent-red);border-radius:var(--radius);cursor:pointer;font-size:12px;font-family:inherit;">清空错题本</button>
+    </div>
+  </div>
+  <div class="wrong-book">`;
+
+  wq.forEach((q, idx) => {
+    html += `<div class="wrong-item">
+      <div class="q-meta">
+        <span class="q-type-badge ${q.type}">${q.type === 'judge' ? '判断题' : '单选题'}</span>
+        ${q.work_type}
+      </div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-answer-text">正确答案：${q.answer}</div>
+      <div style="margin-top:8px;">
+        <button class="btn-remove" onclick="removeFromWrongBook(${idx})">移出错题本</button>
+      </div>
+    </div>`;
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function removeFromWrongBook(idx) {
+  state.wrongQuestions.splice(idx, 1);
+  localStorage.setItem('wrongQuestions', JSON.stringify(state.wrongQuestions));
+  updateWrongBookDisplay();
+}
+
+function clearWrongBook() {
+  if (!confirm('确定要清空错题本吗？')) return;
+  state.wrongQuestions = [];
+  localStorage.setItem('wrongQuestions', JSON.stringify(state.wrongQuestions));
+  updateWrongBookDisplay();
+}
+
+// ============================================================
+// NAVIGATION HELPERS
+// ============================================================
+function switchModule(moduleName) {
+  // Switch main content
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(n => n.classList.remove('active'));
+
+  document.getElementById('module-' + moduleName).classList.add('active');
+  document.querySelector(`.nav-btn[data-module="${moduleName}"]`).classList.add('active');
+  state.currentModule = moduleName;
+
+  // Switch sidebar content with slide-bounce animation
+  document.querySelectorAll('.sidebar-panel').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('sbpc-panel');
+  });
+  var targetPanel = document.getElementById('sidebar-' + moduleName);
+  targetPanel.style.display = 'block';
+  // Force reflow so animation replays
+  void targetPanel.offsetWidth;
+  targetPanel.classList.add('sbpc-panel');
+
+  // Update nav slider position
+  updateNavSlider();
+
+  // Init subtab slider when switching to practice
+  if (moduleName === 'practice') {
+    setTimeout(updateSubtabSlider, 80);
+  }
+  // Reset chapter filter when switching to knowledge
+  if (moduleName === 'knowledge') {
+    document.querySelectorAll('.tree-item-header').forEach(function(h) { h.classList.remove('active-chapter'); });
+  }
+}
+
+
+function updateNavSlider() {
+  const activeBtn = document.querySelector('.nav-btn.active');
+  const slider = document.getElementById('navSlider');
+  if (!activeBtn || !slider) return;
+  slider.style.left = activeBtn.offsetLeft + 'px';
+  slider.style.width = activeBtn.offsetWidth + 'px';
+}
+
+function switchSubTab(subtabName) {
+  document.querySelectorAll('.practice-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.practice-subtab').forEach(t => t.classList.remove('active'));
+
+  document.getElementById('panel-' + subtabName).classList.add('active');
+  document.querySelector(`.practice-subtab[data-subtab="${subtabName}"]`).classList.add('active');
+
+  // Update subtab slider position
+  updateSubtabSlider();
+  // Switch sidebar content to match the active subtab
+  updatePracticeSidebar(subtabName);
+}
+
+function updateSubtabSlider() {
+  const activeTab = document.querySelector('.practice-subtab.active');
+  const slider = document.getElementById('subtabSlider');
+  if (!activeTab || !slider) return;
+  slider.style.left = activeTab.offsetLeft + 'px';
+  slider.style.width = activeTab.offsetWidth + 'px';
+}
+
+// ============================================================
+// EVENT BINDING
+// ============================================================
+function initEvents() {
+  // Top nav
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      switchModule(this.dataset.module);
+    });
+  });
+
+  // Practice subtabs
+  document.querySelectorAll('.practice-subtab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      switchSubTab(this.dataset.subtab);
+      if (this.dataset.subtab === 'wrong-book') updateWrongBookDisplay();
+    });
+  });
+
+  // Mobile menu
+  document.getElementById('menuToggle').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('show');
+  });
+  document.getElementById('sidebarOverlay').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.remove('open');
+    this.classList.remove('show');
+  });
+}
+
+// ============================================================
+// UTILITY
+// ============================================================
+function highlightPreset(el) {
+  var btns = el.parentElement.querySelectorAll('.preset-btn');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+function syncPreset(input) {
+  // Clamp value to valid range
+  var max = parseInt(input.max);
+  var min = parseInt(input.min) || 0;
+  var val = parseInt(input.value);
+  if (isNaN(val) || val < min) { val = min; input.value = min; }
+  else if (val > max) { val = max; input.value = max; }
+  else input.value = val;  // normalize (remove leading zeros)
+  // Match preset buttons
+  var btns = input.parentElement.querySelectorAll('.preset-btn');
+  var matched = false;
+  btns.forEach(function(b) {
+    if (b.textContent === '自定义') return;
+    if (parseInt(b.textContent) === val) {
+      b.classList.add('active');
+      matched = true;
+    } else {
+      b.classList.remove('active');
+    }
+  });
+  // Highlight custom if no preset matches
+  btns.forEach(function(b) {
+    if (b.textContent === '自定义') b.classList.toggle('active', !matched);
+  });
+}
+
+
+function initMain3DTilt() {
+  var baseTrans = {
+    main: 'width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    sidebar: 'width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    nav: 'padding 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)'
+  };
+  function addTilt(selector, sensY, sensX, key) {
+    var el = document.querySelector(selector);
+    if (!el) return;
+    el.addEventListener('mousemove', function(e) {
+      var viewCenterX = window.innerWidth / 2;
+      var viewCenterY = window.innerHeight / 2;
+      var rotateY = ((e.clientX - viewCenterX) / viewCenterX) * sensY;
+      var rotateX = ((viewCenterY - e.clientY) / viewCenterY) * sensX;
+      el.style.transform = 'perspective(1200px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+    });
+    el.addEventListener('mouseleave', function() {
+      el.style.transform = '';
+      el.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)' + (baseTrans[key] ? ', ' + baseTrans[key] : '');
+    });
+    el.addEventListener('mouseenter', function() {
+      el.style.transition = 'transform 0.08s ease-out' + (baseTrans[key] ? ', ' + baseTrans[key] : '');
+    });
+  }
+  addTilt('.main-content', 2, 0.3, 'main');
+  addTilt('.sidebar', 1.5, 1, 'sidebar');
+  addTilt('.top-nav', 1.2, 0.5, 'nav');
+}
+
+function addCardTiltEffect() {
+  const cards = document.querySelectorAll('#qbankContent .q-card, .question-display');
+  cards.forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (centerY - y) / 12;
+      const rotateY = (x - centerX) / 12;
+      this.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateZ(12px)';
+      this.style.boxShadow = '0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(78,205,196,0.08)';
+    });
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+      this.style.boxShadow = '';
+      this.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease';
+    });
+    card.addEventListener('mouseenter', function() {
+      this.style.transition = 'transform 0.1s ease';
+    });
+  });
+}
+
+
+
+function toggleCustomSelect(el) {
+  const wrap = el.closest('.custom-select-wrap');
+  const isOpen = wrap.classList.contains('open');
+  // Close all other custom selects
+  document.querySelectorAll('.custom-select-wrap.open').forEach(w => w.classList.remove('open'));
+  if (!isOpen) {
+    wrap.classList.add('open');
+    // Animate panel items with stagger
+    const items = wrap.querySelectorAll('.custom-select-option');
+    items.forEach((item, i) => {
+      item.style.animation = 'none';
+      item.offsetHeight; // trigger reflow
+      item.style.animation = `fadeInUp 0.3s ease forwards ${i * 0.04}s`;
+    });
+  }
+}
+
+function selectCustomOption(el) {
+  const wrap = el.closest('.custom-select-wrap');
+  if (!wrap) return;
+  var label = wrap.querySelector('.custom-select-trigger span');
+  var panel = wrap.querySelector('.custom-select-panel');
+  var selectId = wrap.id.replace('Wrap', '');
+  var select = document.getElementById(selectId);
+  if (label) label.textContent = el.textContent;
+  if (panel) {
+    panel.querySelectorAll('.custom-select-option').forEach(function(o) { o.classList.remove('selected'); });
+    el.classList.add('selected');
+  }
+  if (select) select.value = el.dataset.value;
+  wrap.classList.remove('open');
+  // Update count limits when practice/exam work type changes
+  if (selectId === 'practiceWorkType' || selectId === 'examWorkType') updateCountLimits();
+}
+
+function updateCountLimits() {
+  var pwt = document.getElementById('practiceWorkType');
+  if (pwt) {
+    var wt = pwt.value;
+    var jm = ALL_QUESTIONS.filter(function(q) { return q.type === 'judge' && (wt === 'all' || q.work_type === wt); }).length;
+    var sm = ALL_QUESTIONS.filter(function(q) { return q.type === 'single' && (wt === 'all' || q.work_type === wt); }).length;
+    var pj = document.getElementById('practiceJudgeCount');
+    var ps = document.getElementById('practiceSingleCount');
+    if (pj) { pj.max = jm; showMax(pj, jm); }
+    if (ps) { ps.max = sm; showMax(ps, sm); }
+  }
+  var ewt = document.getElementById('examWorkType');
+  if (ewt) {
+    var wt2 = ewt.value;
+    var jm2 = ALL_QUESTIONS.filter(function(q) { return q.type === 'judge' && (wt2 === 'all' || q.work_type === wt2); }).length;
+    var sm2 = ALL_QUESTIONS.filter(function(q) { return q.type === 'single' && (wt2 === 'all' || q.work_type === wt2); }).length;
+    var ej = document.getElementById('examJudgeCount');
+    var es = document.getElementById('examSingleCount');
+    if (ej) { ej.max = jm2; showMax(ej, jm2); }
+    if (es) { es.max = sm2; showMax(es, sm2); }
+  }
+}
+function showMax(input, max) {
+  var el = input.parentNode.querySelector('.max-hint');
+  if (!el) { el = document.createElement('span'); el.className = 'max-hint'; input.parentNode.appendChild(el); }
+  el.textContent = '上限 ' + max + ' 题';
+}
+
+// Close custom selects on outside click
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.custom-select-wrap')) {
+    document.querySelectorAll('.custom-select-wrap.open').forEach(w => w.classList.remove('open'));
+  }
+});
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+var hi=false;
+function initSidebarHover(){
+  if(hi)return;hi=true;
+  document.addEventListener('mouseover',function(e){
+    var item=e.target.closest('.tree-item-header,.tree-leaf,.work-type-item,.practice-subtab,.nav-btn');
+    if(item){item.style.transition='transform 0.2s,box-shadow 0.2s';item.style.transform='translateY(-2px)';item.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';}
+  });
+  document.addEventListener('mouseout',function(e){
+    var item=e.target.closest('.tree-item-header,.tree-leaf,.work-type-item,.practice-subtab,.nav-btn');
+    if(item){item.style.transform='translateY(0)';item.style.boxShadow='';item.style.transition='transform 0.3s,box-shadow 0.3s';}
+  });
+}
+
+
+
+
+
+</script>
+<button class="btt" id="btt">↑</button>
 </body>
 </html>
