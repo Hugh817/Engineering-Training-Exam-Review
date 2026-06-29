@@ -1,4 +1,10 @@
 # 🏭 工程训练机考复习系统
+## 🌐 在线访问
+
+直接打开下方链接即可使用，无需下载或配置任何环境：
+
+> **[https://hugh817.github.io/Engineering-Training-Exam-Review/](https://hugh817.github.io/Engineering-Training-Exam-Review/)**
+
 
 > **浙江大学工程训练课程 · 机考复习平台**  
 > 基于纯前端技术的交互式复习与模拟考试系统，涵盖工程训练全部核心知识模块。
