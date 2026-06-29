@@ -9,35 +9,38 @@
 /* ===== GLOBAL RESET & VARIABLES ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg-primary: #0f1320;
-  --bg-secondary: #161b2e;
-  --bg-card: #1a2140;
-  --bg-sidebar: #0a0f1e;
-  --text-primary: #e0e4f0;
-  --text-secondary: #9aa4c8;
-  --text-muted: #5a6488;
-  --accent-green: #4ecdc4;
-  --accent-blue: #5b8def;
-  --accent-orange: #f0a030;
-  --accent-red: #e85550;
-  --accent-purple: #8b5cf6;
-  --border-color: #1e2a50;
+  --bg-primary: #090b18;
+  --bg-secondary: #0e1124;
+  --bg-card: rgba(14, 18, 38, 0.60);
+  --bg-sidebar: rgba(8, 10, 20, 0.55);
+  --text-primary: #e6edf6;
+  --text-secondary: #99aac6;
+  --text-muted: #5c6e8e;
+  --accent: #3dd4c8;
+  --accent-dim: rgba(61, 212, 200, 0.15);
+  --accent-glow: rgba(61, 212, 200, 0.25);
+  --red: #e84a4a;
+  --red-dim: rgba(232, 74, 74, 0.12);
+  --border-color: rgba(61, 212, 200, 0.07);
   --sidebar-width: 320px;
   --sidebar-collapsed: 80px;
-  --header-height: 52px;
-  --radius: 8px;
-  --transition: 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  --glow-green: rgba(78, 205, 196, 0.3);
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --transition: 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  --transition-bounce: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.6);
 }
 html { scroll-behavior: smooth; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(78, 205, 196, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(91, 141, 239, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(240, 160, 48, 0.04) 0%, transparent 50%),
-    linear-gradient(135deg, #070b17 0%, #0f1426 30%, #0a0f1e 60%, #0f1a2e 100%);
+    radial-gradient(ellipse 600px 600px at 15% 25%, rgba(61, 212, 200, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 85% 30%, rgba(61, 212, 200, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 800px 800px at 50% 80%, rgba(61, 212, 200, 0.03) 0%, transparent 70%),
+    linear-gradient(170deg, #03050e 0%, #090c1e 35%, #070a18 65%, #0a0e20 100%);
   background-attachment: fixed;
+  background-size: cover;
   color: var(--text-primary);
   line-height: 1.7;
   height: 100vh;
@@ -45,8 +48,8 @@ body {
   flex-direction: column;
   overflow: hidden auto;
 }
-a { color: var(--accent-blue); text-decoration: none; }
-a:hover { color: var(--accent-green); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent); }
 
 /* ===== TOP NAV ===== */
 .top-nav {
@@ -62,15 +65,21 @@ a:hover { color: var(--accent-green); }
   position: relative;
   display: flex;
   justify-content: center;
-  gap: 2px;
-  padding: 6px 6px;
-  background: rgba(8, 12, 25, 0.4);
-  backdrop-filter: blur(16px) saturate(200%);
-  -webkit-backdrop-filter: blur(16px) saturate(200%);
-  border: 1px solid rgba(78, 205, 196, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(78, 205, 196, 0.03);
+  gap: 3px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 99px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(61, 212, 200, 0.03),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.08),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.04);
   pointer-events: auto;
+  transform: translateZ(0);
+  will-change: transform;
 }
 .nav-btn {
   padding: 7px 22px 9px;
@@ -87,20 +96,24 @@ a:hover { color: var(--accent-green); }
   white-space: nowrap;
 }
 .nav-btn:hover { color: var(--text-primary); }
-.nav-btn.active { color: var(--accent-green); }
+.nav-btn.active { color: var(--accent); }
 
 /* Sliding block */
 .nav-slider {
   position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 6px;
-  background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(78, 205, 196, 0.08));
-  border: 1px solid rgba(78, 205, 196, 0.25);
-  border-radius: 10px;
-  transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  top: 5px;
+  bottom: 5px;
+  left: 8px;
+  background: linear-gradient(135deg, rgba(61, 212, 200, 0.20), rgba(61, 212, 200, 0.05));
+  border: 1px solid rgba(61, 212, 200, 0.25);
+  border-radius: 99px;
+  transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2), width 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
   z-index: 1;
-  box-shadow: 0 0 20px var(--glow-green), inset 0 1px 0 rgba(78, 205, 196, 0.15);
+  box-shadow:
+    0 0 30px var(--accent-glow),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.15),
+    inset -1px -1px 1px 1px rgba(61, 212, 200, 0.10);
+  transform: translateZ(0);
 }
 
 /* Keep button text above slider */
@@ -114,44 +127,62 @@ a:hover { color: var(--accent-green); }
   display: flex;
   flex: 1;
   min-height: 0;
-  /* perspective removed */
-  /* perspective-origin removed */
 }
 
 /* ===== SIDEBAR ===== */
 .sidebar {
   width: var(--sidebar-width);
   flex-shrink: 0;
-  background: rgba(8, 12, 25, 0.35);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
   display: flex;
   flex-direction: column;
-  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
   margin: 32px 12px 32px 32px;
-  border-radius: 14px;
-  border: 1px solid rgba(78, 205, 196, 0.08);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(78, 205, 196, 0.03);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+    0 8px 48px rgba(0, 0, 0, 0.5);
+}
+.sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255,255,255,0.08), transparent 50%),
+    radial-gradient(circle at 85% 100%, rgba(61,212,200,0.03), transparent 50%);
+  pointer-events: none;
 }
 .sidebar-header {
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(78, 205, 196, 0.06);
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 52px;
-  background: rgba(255, 255, 255, 0.02);
+  min-height: 58px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 .sidebar-header .logo-icon {
-  font-size: 20px;
-  color: var(--accent-green);
+  font-size: 22px;
+  color: var(--accent);
   flex-shrink: 0;
   width: 32px;
   text-align: center;
+  filter: drop-shadow(0 0 10px rgba(61, 212, 200, 0.4));
 }
 .sidebar-header h1 {
   font-size: 16px;
-  color: var(--accent-green);
+  color: var(--accent);
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -159,24 +190,30 @@ a:hover { color: var(--accent-green); }
 }
 .sidebar-toggle {
   margin-left: auto;
-  background: none;
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   color: var(--text-muted);
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--transition);
+  transition: var(--transition-glass);
   flex-shrink: 0;
   font-size: 12px;
+  box-shadow:
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.08),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.03);
+  position: relative;
+  backdrop-filter: blur(8px);
 }
 .sidebar-toggle:hover {
-  color: var(--accent-green);
-  border-color: var(--accent-green);
-  box-shadow: 0 0 8px var(--glow-green);
+  color: var(--accent);
+  border-color: rgba(61, 212, 200, 0.3);
+  box-shadow: 0 0 16px var(--accent-glow), inset 2px 2px 1px 0 rgba(255, 255, 255, 0.12);
+  transform: scale(1.1) rotate(0deg);
 }
 .sidebar-text {
   transition: opacity 0.15s ease;
@@ -202,22 +239,25 @@ a:hover { color: var(--accent-green); }
 }
 .sidebar-collapsed .sidebar-toggle {
   margin-left: auto;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
-  background: rgba(10, 15, 30, 0.6);
-  border: 1px solid rgba(78, 205, 196, 0.08);
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
   z-index: 10;
+  box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.08), inset -1px -1px 1px 1px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
 }
 .sidebar-collapsed .sidebar-header {
-  padding: 12px 6px;
+  padding: 14px 6px;
   justify-content: center;
   gap: 4px;
 }
 .sidebar-collapsed .sidebar-toggle:hover {
-  border-color: var(--accent-green);
-  box-shadow: 0 0 12px var(--glow-green);
+  border-color: rgba(61, 212, 200, 0.3);
+  box-shadow: 0 0 16px var(--accent-glow), inset 2px 2px 1px 0 rgba(255, 255, 255, 0.12);
+  transform: scale(1.1);
 }
 .sidebar-collapsed .tree-item-header {
   padding: 8px 10px;
@@ -276,13 +316,13 @@ a:hover { color: var(--accent-green); }
   color: var(--text-secondary);
 }
 .tree-item-header:hover {
-  background: rgba(78, 205, 196, 0.08);
+  background: rgba(61, 212, 200, 0.08);
   color: var(--text-primary);
 }
 .tree-item-header i {
   width: 16px;
   font-size: 10px;
-  color: var(--accent-blue);
+  color: var(--accent);
   transition: transform var(--transition);
 }
 .tree-item-header i.expanded { transform: rotate(90deg); }
@@ -302,7 +342,7 @@ a:hover { color: var(--accent-green); }
   text-align: left;
   font-family: inherit;
 }
-.tree-leaf:hover { color: var(--accent-blue); background: rgba(69, 183, 209, 0.06); }
+.tree-leaf:hover { color: var(--accent); background: rgba(61, 212, 200, 0.06); }
 
 /* Question bank sidebar */
 .work-type-list { padding: 8px 0; }
@@ -321,8 +361,8 @@ a:hover { color: var(--accent-green); }
   text-align: left;
   font-family: inherit;
 }
-.work-type-item:hover { background: rgba(78, 205, 196, 0.08); color: var(--text-primary); }
-.work-type-item.active { color: var(--accent-green); background: rgba(78, 205, 196, 0.12); }
+.work-type-item:hover { background: rgba(61, 212, 200, 0.08); color: var(--text-primary); }
+.work-type-item.active { color: var(--accent); background: rgba(61, 212, 200, 0.12); }
 .work-type-item .count {
   margin-left: auto;
   font-size: 11px;
@@ -353,7 +393,7 @@ a:hover { color: var(--accent-green); }
 }
 .practice-settings select:focus, .practice-settings input:focus {
   outline: none;
-  border-color: var(--accent-green);
+  border-color: var(--accent);
 }
 .count-input-group {
   display: flex;
@@ -363,7 +403,7 @@ a:hover { color: var(--accent-green); }
 .count-input-group input[type="number"] {
   width: 100%;
 }
-.max-hint{color:var(--accent-orange);font-size:12px;font-weight:500;margin-left:6px}
+.max-hint{color:var(--accent);font-size:12px;font-weight:500;margin-left:6px}
 .preset-btns {
   display: flex;
   gap: 4px;
@@ -381,19 +421,19 @@ a:hover { color: var(--accent-green); }
   font-family: inherit;
 }
 .preset-btn:hover {
-  border-color: var(--accent-green);
-  color: var(--accent-green);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .preset-btn.active {
-  background: rgba(78, 205, 196, 0.15);
-  border-color: var(--accent-green);
-  color: var(--accent-green);
+  background: rgba(61, 212, 200, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .btn-start {
   width: 100%;
   padding: 10px;
   margin-top: 18px;
-  background: var(--accent-green);
+  background: var(--accent);
   color: #0a0a1a;
   border: none;
   border-radius: var(--radius);
@@ -416,13 +456,15 @@ a:hover { color: var(--accent-green); }
 .content-inner {
   width: 100%;
   max-width: 1000px;
-  padding: 20px 32px 60px;
-  background: rgba(10, 15, 30, 0.3);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  border-radius: var(--radius);
-  border: 1px solid rgba(78, 205, 196, 0.06);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  padding: 28px 32px 60px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 8px 40px rgba(0,0,0,0.4);
 }
 
 /* Module containers */
@@ -434,8 +476,27 @@ a:hover { color: var(--accent-green); }
 .exam-layout{display:flex;gap:20px;align-items:flex-start}
 .exam-questions{flex:1;min-width:0}
 .exam-panel{width:220px;flex-shrink:0;position:sticky;top:80px}
-.exam-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px;margin-top:12px}
-.exam-submit{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px;margin-top:12px;text-align:center}
+.exam-card{
+  background:rgba(22,28,52,0.6);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(61,212,200,0.08);
+  border-radius:12px;
+  padding:12px;
+  margin-top:12px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.exam-submit{
+  background:rgba(22,28,52,0.6);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(61,212,200,0.08);
+  border-radius:12px;
+  padding:12px;
+  margin-top:12px;
+  text-align:center;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.02);
+}
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -443,23 +504,34 @@ a:hover { color: var(--accent-green); }
 
 /* ===== KNOWLEDGE STYLES ===== */
 .knowledge-container h2.chapter-title {
-  color: var(--accent-green);
-  font-size: 22px;
+  color: var(--accent);
+  font-size: 21px;
   margin: 32px 0 16px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--accent-green);
+  padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: rgba(61, 212, 200, 0.04);
   scroll-margin-top: 20px;
 }
 .knowledge-container h3.section-title {
-  color: var(--accent-orange);
+  color: var(--text-primary);
   font-size: 17px;
+  font-weight: 600;
   margin: 20px 0 10px;
+  padding: 8px 14px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: rgba(255, 255, 255, 0.02);
   scroll-margin-top: 20px;
 }
 .knowledge-container h4.subsection-title {
-  color: var(--accent-green);
+  color: var(--accent);
   font-size: 15px;
   margin: 14px 0 8px;
+  padding: 6px 12px;
+  border-left: 2px solid rgba(61, 212, 200, 0.15);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.02);
   scroll-margin-top: 20px;
   font-weight: 500;
 }
@@ -476,7 +548,7 @@ a:hover { color: var(--accent-green); }
 }
 .knowledge-container .bullet::before {
   content: '•';
-  color: var(--accent-green);
+  color: var(--accent);
   font-weight: bold;
   display: inline-block;
   width: 1em;
@@ -490,7 +562,7 @@ a:hover { color: var(--accent-green); }
 }
 .knowledge-container .arrow::before {
   content: '▸';
-  color: var(--accent-blue);
+  color: var(--accent);
   display: inline-block;
   width: 1em;
   margin-left: -1em;
@@ -533,8 +605,8 @@ a:hover { color: var(--accent-green); }
   z-index: 2;
 }
 .custom-select-trigger:hover {
-  border-color: var(--accent-green);
-  box-shadow: 0 0 8px var(--glow-green);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 .custom-select-trigger::after {
   content: '';
@@ -586,13 +658,13 @@ a:hover { color: var(--accent-green); }
   font-family: inherit;
 }
 .custom-select-option:hover {
-  background: rgba(78, 205, 196, 0.1);
+  background: rgba(61, 212, 200, 0.1);
   color: var(--text-primary);
   padding-left: 20px;
 }
 .custom-select-option.selected {
-  color: var(--accent-green);
-  background: rgba(78, 205, 196, 0.08);
+  color: var(--accent);
+  background: rgba(61, 212, 200, 0.08);
 }
 .btn-toggle-answers {
   padding: 6px 16px;
@@ -607,14 +679,14 @@ a:hover { color: var(--accent-green); }
   white-space: nowrap;
 }
 .btn-toggle-answers:hover {
-  border-color: var(--accent-orange);
-  color: var(--accent-orange);
-  box-shadow: 0 0 10px rgba(240, 160, 48, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 10px rgba(61, 212, 200, 0.15);
 }
 .btn-toggle-answers.active {
-  background: rgba(240, 160, 48, 0.12);
-  border-color: var(--accent-orange);
-  color: var(--accent-orange);
+  background: rgba(61, 212, 200, 0.12);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .qbank-stats {
   font-size: 13px;
@@ -624,39 +696,59 @@ a:hover { color: var(--accent-green); }
 
 .q-group {
   margin-bottom: 24px;
-  background: rgba(26, 33, 64, 0.85);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid rgba(30, 42, 80, 0.6);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(78, 205, 196, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 4px 24px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.6);
+}
+.q-group:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 .q-group-header {
   padding: 12px 16px;
-  background: var(--bg-secondary);
+  background: linear-gradient(180deg, rgba(61, 212, 200, 0.06), transparent);
   font-size: 15px;
   font-weight: 600;
-  color: var(--accent-blue);
-  border-bottom: 1px solid var(--border-color);
+  color: var(--accent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 .q-card {
-  margin: 14px 0;
-  padding: 18px 20px;
-  background: rgba(26, 33, 64, 0.7);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(30, 42, 80, 0.5);
+  margin: 12px;
+  padding: 16px 18px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-left: 3px solid rgba(61, 212, 200, 0.12);
   border-radius: var(--radius);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
-  animation: fadeInUp 0.35s ease forwards;
-  transform-style: preserve-3d;
-  will-change: transform;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 2px 12px rgba(0,0,0,0.2);
+  animation: fadeInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.6) forwards;
   cursor: default;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.6);
 }
 .q-card:hover {
-  border-color: rgba(78, 205, 196, 0.25);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 0 20px rgba(78,205,196,0.06);
+  border-color: rgba(255, 255, 255, 0.07);
+  border-left-color: rgba(61, 212, 200, 0.35);
+  transform: translateX(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 6px 24px rgba(0,0,0,0.3);
 }
 .q-card .q-text {
   font-size: 14px;
@@ -676,8 +768,8 @@ a:hover { color: var(--accent-green); }
   font-weight: 600;
   margin-right: 6px;
 }
-.q-type-badge.judge { background: rgba(243, 156, 18, 0.2); color: var(--accent-orange); }
-.q-type-badge.single { background: rgba(69, 183, 209, 0.2); color: var(--accent-blue); }
+.q-type-badge.judge { background: var(--accent-dim); color: var(--accent); }
+.q-type-badge.single { background: rgba(61, 212, 200, 0.2); color: var(--accent); }
 .q-card .q-options {
   margin: 6px 0;
   font-size: 13px;
@@ -689,11 +781,11 @@ a:hover { color: var(--accent-green); }
   overflow: hidden;
   padding: 0 12px;
   margin-top: 8px;
-  background: rgba(78, 205, 196, 0.08);
-  border-left: 3px solid var(--accent-green);
+  background: rgba(61, 212, 200, 0.08);
+  border-left: 3px solid var(--accent);
   border-radius: 0 var(--radius) var(--radius) 0;
   font-size: 13px;
-  color: var(--accent-green);
+  color: var(--accent);
   opacity: 1;
   transition: max-height 0.35s ease, padding 0.35s ease;
 }
@@ -710,8 +802,8 @@ a:hover { color: var(--accent-green); }
   font-family: inherit;
 }
 .q-card .btn-answer:hover {
-  border-color: var(--accent-green);
-  color: var(--accent-green);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* ===== PRACTICE / EXAM STYLES ===== */
@@ -726,14 +818,19 @@ a:hover { color: var(--accent-green); }
   position: relative;
   display: flex;
   gap: 4px;
-  padding: 5px 6px;
-  background: rgba(8, 12, 25, 0.4);
-  backdrop-filter: blur(16px) saturate(200%);
-  -webkit-backdrop-filter: blur(16px) saturate(200%);
-  border: 1px solid rgba(91, 141, 239, 0.1);
-  border-radius: 14px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(91, 141, 239, 0.03);
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(61, 212, 200, 0.03),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.06),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.03);
   pointer-events: auto;
+  transform: translateZ(0);
 }
 .practice-subtab {
   padding: 7px 20px;
@@ -750,19 +847,23 @@ a:hover { color: var(--accent-green); }
   white-space: nowrap;
 }
 .practice-subtab:hover { color: var(--text-primary); }
-.practice-subtab.active { color: var(--accent-blue); }
+.practice-subtab.active { color: var(--accent); }
 
 .subtab-slider {
   position: absolute;
   top: 4px;
   bottom: 4px;
   left: 6px;
-  background: linear-gradient(135deg, rgba(91, 141, 239, 0.15), rgba(91, 141, 239, 0.08));
-  border: 1px solid rgba(91, 141, 239, 0.25);
+  background: linear-gradient(135deg, rgba(61, 212, 200, 0.18), rgba(61, 212, 200, 0.06));
+  border: 1px solid rgba(61, 212, 200, 0.30);
   border-radius: 8px;
   transition: left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 1;
-  box-shadow: 0 0 12px rgba(91, 141, 239, 0.2), inset 0 1px 0 rgba(91, 141, 239, 0.1);
+  box-shadow:
+    0 0 16px rgba(61, 212, 200, 0.25),
+    inset 0 1px 0 rgba(61, 212, 200, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transform: translateZ(0);
 }
 
 .practice-panel { display: none; animation: fadeIn 0.3s ease; }
@@ -770,14 +871,17 @@ a:hover { color: var(--accent-green); }
 
 /* Question display */
 .question-display, .stats-box, .wrong-item {
-  background: rgba(26, 33, 64, 0.85);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: var(--radius);
+  background: rgba(16, 22, 42, 0.70);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
   padding: 24px;
   margin: 16px 0;
-  border: 1px solid rgba(30, 42, 80, 0.6);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(78, 205, 196, 0.05);
+  border: 1px solid rgba(61, 212, 200, 0.06);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
 }
 .question-display .q-number {
   font-size: 12px;
@@ -804,21 +908,21 @@ a:hover { color: var(--accent-green); }
   width: 100%;
   text-align: left;
 }
-.question-display .q-option:hover { border-color: var(--accent-blue); }
+.question-display .q-option:hover { border-color: var(--accent); }
 .question-display .q-option.selected {
-  border-color: var(--accent-blue);
-  background: rgba(69, 183, 209, 0.1);
+  border-color: var(--accent);
+  background: rgba(61, 212, 200, 0.1);
   color: var(--text-primary);
 }
 .question-display .q-option.correct {
-  border-color: var(--accent-green);
-  background: rgba(78, 205, 196, 0.12);
-  color: var(--accent-green);
+  border-color: var(--accent);
+  background: rgba(61, 212, 200, 0.12);
+  color: var(--accent);
 }
 .question-display .q-option.wrong {
-  border-color: var(--accent-red);
+  border-color: var(--red);
   background: rgba(231, 76, 60, 0.1);
-  color: var(--accent-red);
+  color: var(--red);
 }
 .question-display .q-option.locked { cursor: default; opacity: 0.85; }
 
@@ -829,8 +933,8 @@ a:hover { color: var(--accent-green); }
   font-size: 14px;
   animation: fadeIn 0.3s ease;
 }
-.q-feedback.correct { background: rgba(78, 205, 196, 0.1); color: var(--accent-green); border-left: 3px solid var(--accent-green); }
-.q-feedback.wrong { background: rgba(231, 76, 60, 0.1); color: var(--accent-red); border-left: 3px solid var(--accent-red); }
+.q-feedback.correct { background: rgba(61, 212, 200, 0.1); color: var(--accent); border-left: 3px solid var(--accent); }
+.q-feedback.wrong { background: rgba(231, 76, 60, 0.1); color: var(--red); border-left: 3px solid var(--red); }
 
 /* Nav buttons */
 .question-nav {
@@ -850,12 +954,12 @@ a:hover { color: var(--accent-green); }
   font-size: 13px;
   font-family: inherit;
 }
-.question-nav button:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+.question-nav button:hover { border-color: var(--accent); color: var(--text-primary); }
 .question-nav button:disabled { opacity: 0.4; cursor: not-allowed; }
 .question-nav button.primary {
-  background: var(--accent-green);
+  background: var(--accent);
   color: #0a0a1a;
-  border-color: var(--accent-green);
+  border-color: var(--accent);
   font-weight: 600;
 }
 .question-nav button.primary:hover { background: #3dbeb6; }
@@ -872,7 +976,7 @@ a:hover { color: var(--accent-green); }
 .stats-box .big-number {
   font-size: 48px;
   font-weight: 700;
-  color: var(--accent-green);
+  color: var(--accent);
 }
 .stats-box .stats-detail {
   display: flex;
@@ -897,12 +1001,12 @@ a:hover { color: var(--accent-green); }
   margin-bottom: 10px;
 }
 .wrong-book .wrong-item .q-text { font-size: 14px; margin-bottom: 6px; }
-.wrong-book .wrong-item .q-answer-text { font-size: 12px; color: var(--accent-green); }
+.wrong-book .wrong-item .q-answer-text { font-size: 12px; color: var(--accent); }
 .wrong-book .btn-remove {
   padding: 3px 12px;
   background: none;
-  border: 1px solid var(--accent-red);
-  color: var(--accent-red);
+  border: 1px solid var(--red);
+  color: var(--red);
   border-radius: var(--radius);
   cursor: pointer;
   font-size: 11px;
@@ -915,14 +1019,14 @@ a:hover { color: var(--accent-green); }
 .exam-timer {
   font-size: 18px;
   font-weight: 600;
-  color: var(--accent-orange);
+  color: var(--accent);
   text-align: center;
   padding: 12px;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 12px;
 }
-.exam-timer.warning { color: var(--accent-red); animation: pulse 1s infinite; }
+.exam-timer.warning { color: var(--red); animation: pulse 1s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
 /* ===== RESPONSIVE ===== */
@@ -933,51 +1037,54 @@ a:hover { color: var(--accent-green); }
   left: 10px;
   z-index: 200;
   padding: 8px 12px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: rgba(8, 12, 25, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(61, 212, 200, 0.08);
   color: var(--text-primary);
   border-radius: var(--radius);
   cursor: pointer;
   font-size: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+}
+.menu-toggle:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 12px var(--accent-glow);
 }
 .sidebar-overlay {
   display: none;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 99;
 }
 
 /* ===== ANIMATIONS & SMOOTH EFFECTS ===== */
 /* Card hover lift */
-.q-group, .question-display, .stats-box, .wrong-book .wrong-item {
+.question-display, .stats-box, .wrong-book .wrong-item {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.q-group:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(78, 205, 196, 0.08);
-  border-color: rgba(78, 205, 196, 0.2);
-}
 .question-display:hover, .stats-box:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(61, 212, 200, 0.04);
+  border-color: rgba(61, 212, 200, 0.12);
 }
 .wrong-book .wrong-item:hover {
-  transform: translateX(4px);
-  border-color: rgba(78, 205, 196, 0.15);
+  transform: translateX(6px);
+  border-color: rgba(61, 212, 200, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(61, 212, 200, 0.05);
 }
 
-/* Sidebar items smooth glow */
+/* Sidebar items smooth glow - metal accent edge */
 .tree-item-header:hover, .work-type-item:hover {
-  background: rgba(78, 205, 196, 0.08);
-  box-shadow: inset 2px 0 0 var(--accent-green);
+  background: linear-gradient(90deg, rgba(61, 212, 200, 0.10), transparent);
+  box-shadow: inset 2px 0 0 var(--accent), inset 0 1px 0 rgba(255,255,255,0.02);
 }
 
-/* Buttons glow pulse */
-.btn-start:hover {
-  box-shadow: 0 0 24px var(--glow-green);
-  transform: translateY(-2px);
-}
+/* Buttons glow pulse (enhanced via btn-start CSS override above) */
 
 /* Question options click feedback */
 .q-option:active:not(:disabled) {
@@ -986,9 +1093,9 @@ a:hover { color: var(--accent-green); }
 
 /* Smooth knowledge section scroll highlight */
 @keyframes highlightPulse {
-  0% { box-shadow: inset 0 0 0 0 rgba(78, 205, 196, 0); }
-  50% { box-shadow: inset 0 0 20px 4px rgba(78, 205, 196, 0.1); }
-  100% { box-shadow: inset 0 0 0 0 rgba(78, 205, 196, 0); }
+  0% { box-shadow: inset 0 0 0 0 rgba(61, 212, 200, 0); }
+  50% { box-shadow: inset 0 0 20px 4px rgba(61, 212, 200, 0.1); }
+  100% { box-shadow: inset 0 0 0 0 rgba(61, 212, 200, 0); }
 }
 
 /* Fade in for dynamically loaded content */
@@ -1047,18 +1154,14 @@ a:hover { color: var(--accent-green); }
   .nav-slider { top: 3px; bottom: 3px; left: 4px; border-radius: 8px; }
 }
 
-body::before,body::after{content:'';position:fixed;border-radius:50%;z-index:-1;pointer-events:none}
-body::before{width:600px;height:600px;background:radial-gradient(circle,rgba(78,205,196,0.07),transparent 70%);top:-150px;left:-150px;animation:f1 25s ease-in-out infinite}
-body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(91,141,239,0.05),transparent 70%);bottom:-120px;right:-120px;animation:f2 30s ease-in-out infinite}
-@keyframes f1{0%,100%{transform:translate(0,0)scale(1);opacity:0.5}33%{transform:translate(120px,80px)scale(1.15);opacity:1}66%{transform:translate(-60px,140px)scale(0.85);opacity:0.3}}
-@keyframes f2{0%,100%{transform:translate(0,0)scale(1);opacity:0.5}33%{transform:translate(-100px,-80px)scale(1.2);opacity:1}66%{transform:translate(80px,-120px)scale(0.8);opacity:0.3}}
+
 
 @keyframes sbe{from{opacity:0;transform:translateY(-10px)scaleY(0.95)}to{opacity:1;transform:translateY(0)scaleY(1)}}
 .sbpc{animation:sbe 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;transform-origin:top center}
 
-.sidebar-select-enhanced{width:100%;padding:8px 12px;background:var(--bg-primary);color:var(--text-primary);border:1px solid var(--border-color);border-radius:var(--r);font-size:13px;font-family:inherit;cursor:pointer;transition:border-color 0.3s,box-shadow 0.3s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235a6488' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
-.sidebar-select-enhanced:focus{outline:none;border-color:var(--ag)!important;box-shadow:0 0 12px var(--gl)!important}
-.sidebar-select-enhanced:hover{border-color:var(--ag)}
+.sidebar-select-enhanced{width:100%;padding:8px 12px;background:var(--bg-primary);color:var(--text-primary);border:1px solid var(--border-color);border-radius:var(--radius);font-size:13px;font-family:inherit;cursor:pointer;transition:border-color 0.3s,box-shadow 0.3s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235a6488' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+.sidebar-select-enhanced:focus{outline:none;border-color:var(--accent)!important;box-shadow:0 0 12px var(--accent-glow)!important}
+.sidebar-select-enhanced:hover{border-color:var(--accent)}
 
 /* Sidebar panel enter animation */
 .sbpc-panel{animation:panelEnter 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;transform-origin:top center}
@@ -1068,55 +1171,1132 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(91,1
 .ch-enter{animation:chEnter 0.6s ease-out both}
 @keyframes chEnter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .qfade{animation:qfade 0.6s ease-out both}
-/* === Enhanced Elastic Keyframes === */
-@keyframes slideOutLeft { 0%{opacity:1;transform:translateX(0)scale(1)}100%{opacity:0;transform:translateX(-80px)scale(0.88)rotateY(-8deg)} }
-@keyframes slideOutRight { 0%{opacity:1;transform:translateX(0)scale(1)}100%{opacity:0;transform:translateX(80px)scale(0.88)rotateY(8deg)} }
-@keyframes slideInLeft { 0%{opacity:0;transform:translateX(-70px)scale(0.92)}45%{opacity:1;transform:translateX(8px)scale(1.03)}65%{transform:translateX(-4px)scale(0.99)}82%{transform:translateX(2px)scale(1.005)}100%{opacity:1;transform:translateX(0)scale(1)} }
-@keyframes slideInRight { 0%{opacity:0;transform:translateX(70px)scale(0.92)}45%{opacity:1;transform:translateX(-8px)scale(1.03)}65%{transform:translateX(4px)scale(0.99)}82%{transform:translateX(-2px)scale(1.005)}100%{opacity:1;transform:translateX(0)scale(1)} }
-@keyframes optPop { 0%{opacity:0;transform:translateX(-16px)scale(0.88)}50%{opacity:1;transform:translateX(4px)scale(1.06)}75%{transform:translateX(-2px)scale(0.98)}92%{transform:translateX(1px)scale(1.01)}100%{opacity:1;transform:translateX(0)scale(1)} }
-@keyframes optPopRtl { 0%{opacity:0;transform:translateX(16px)scale(0.88)}50%{opacity:1;transform:translateX(-4px)scale(1.06)}75%{transform:translateX(2px)scale(0.98)}92%{transform:translateX(-1px)scale(1.01)}100%{opacity:1;transform:translateX(0)scale(1)} }
-@keyframes gridBounce { 0%{opacity:0;transform:scale(0)rotate(-12deg)}55%{opacity:1;transform:scale(1.2)rotate(3deg)}75%{transform:scale(0.93)rotate(-1deg)}90%{transform:scale(1.03)rotate(0.5deg)}100%{opacity:1;transform:scale(1)rotate(0deg)} }
-@keyframes chapSpring { 0%{opacity:0;transform:translateY(35px)scale(0.93)}50%{opacity:1;transform:translateY(-8px)scale(1.02)}72%{transform:translateY(4px)scale(0.99)}88%{transform:translateY(-2px)scale(1.005)}100%{opacity:1;transform:translateY(0)scale(1)} }
-@keyframes elasticSquash { 0%{transform:scale(1)}35%{transform:scale(0.90,1.12)}60%{transform:scale(1.06,0.96)}80%{transform:scale(0.98,1.02)}100%{transform:scale(1)} }
-@keyframes popIn { 0%{opacity:0;transform:scale(0.3)}55%{opacity:1;transform:scale(1.12)}75%{transform:scale(0.94)}92%{transform:scale(1.03)}100%{opacity:1;transform:scale(1)} }
-@keyframes floatUp { 0%{opacity:0;transform:translateY(25px)}100%{opacity:1;transform:translateY(0)} }
-@keyframes cardEnter { 0%{opacity:0;transform:perspective(800px)rotateY(-12deg)translateX(-30px)scale(0.92)}50%{opacity:1;transform:perspective(800px)rotateY(2deg)translateX(5px)scale(1.015)}75%{transform:perspective(800px)rotateY(-0.5deg)translateX(-2px)scale(0.995)}100%{opacity:1;transform:perspective(800px)rotateY(0)translateX(0)scale(1)} }
-@keyframes wrongShake { 0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)rotate(-1deg)}30%{transform:translateX(10px)rotate(1deg)}45%{transform:translateX(-7px)rotate(-0.5deg)}60%{transform:translateX(7px)rotate(0.5deg)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)} }
-@keyframes qbankEnter { 0%{opacity:0;transform:translateX(-30px)scale(0.96)}50%{opacity:1;transform:translateX(4px)scale(1.01)}100%{opacity:1;transform:translateX(0)scale(1)} }
-@keyframes moduleSlideUp { 0%{opacity:0;transform:translateY(30px)scale(0.97)}100%{opacity:1;transform:translateY(0)scale(1)} }
-@keyframes countBounce { 0%{transform:scale(0.2);opacity:0}55%{transform:scale(1.2);opacity:1}75%{transform:scale(0.92)}92%{transform:scale(1.04)}100%{transform:scale(1)} }
-@keyframes sectionSlide { 0%{opacity:0;transform:translateY(-10px)scaleY(0.92)}100%{opacity:1;transform:translateY(0)scaleY(1)} }
-@keyframes celebratePop { 0%{transform:scale(1)}30%{transform:scale(1.08)}55%{transform:scale(0.95)}75%{transform:scale(1.03)}92%{transform:scale(0.99)}100%{transform:scale(1)} }
+@keyframes qfade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.tree-item-header.active-chapter{background:rgba(61,212,200,0.12);color:var(--accent);border-right:3px solid var(--accent)}
 
-.slide-out-left { animation:slideOutLeft 0.35s cubic-bezier(0.55,0,0.8,0) forwards; }
-.slide-out-right { animation:slideOutRight 0.35s cubic-bezier(0.55,0,0.8,0) forwards; }
-.slide-in-left { animation:slideInLeft 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-.slide-in-right { animation:slideInRight 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-.option-enter { animation:optPop 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards; opacity:0; }
-.option-enter-left { animation:optPopRtl 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards; opacity:0; }
-.option-enter:nth-child(1), .option-enter-left:nth-child(1) { animation-delay:0.04s; }
-.option-enter:nth-child(2), .option-enter-left:nth-child(2) { animation-delay:0.08s; }
-.option-enter:nth-child(3), .option-enter-left:nth-child(3) { animation-delay:0.12s; }
-.option-enter:nth-child(4), .option-enter-left:nth-child(4) { animation-delay:0.16s; }
-.grid-enter { animation:gridBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; opacity:0; }
-.grid-enter:nth-child(1) { animation-delay:0.02s; }
-.grid-enter:nth-child(2) { animation-delay:0.04s; }
-.grid-enter:nth-child(3) { animation-delay:0.06s; }
-.grid-enter:nth-child(4) { animation-delay:0.08s; }
-.grid-enter:nth-child(5) { animation-delay:0.10s; }
-.grid-enter:nth-child(6) { animation-delay:0.12s; }
-.chapter-enter { animation:chapSpring 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards; opacity:0; }
-.qbank-enter { animation:qbankEnter 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; opacity:0; }
-.module-enter { animation:moduleSlideUp 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-.card-enter { animation:cardEnter 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.btt {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s, visibility 0.4s, transform 0.3s, box-shadow 0.3s;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 4px 20px rgba(0,0,0,0.4);
+}
+.btt.sh { opacity: 1; visibility: visible; }
+.btt:hover {
+  transform: scale(1.1);
+  color: var(--accent);
+  border-color: rgba(61, 212, 200, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 6px 30px rgba(0,0,0,0.5),
+    0 0 30px var(--accent-glow);
+}
+.btt:active { transform: scale(0.95); }
+
+.bta{padding:6px 16px;background:var(--bs);border:1px solid var(--bd);color:var(--ts);border-radius:var(--radius);cursor:pointer;transition:0.3s;font-family:inherit}
+.bta:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Sticky */
+.exam-sticky-top{position:sticky;top:0;z-index:20;background:rgba(18,26,50,0.9);backdrop-filter:blur(10px);padding:8px 16px;border-radius:var(--radius);margin-bottom:12px}
+.exam-sticky-bot{position:sticky;bottom:0;z-index:20;background:rgba(18,26,50,0.9);backdrop-filter:blur(10px);padding:12px 16px;border-radius:var(--radius);margin-top:12px;text-align:center}
+.pr{background:var(--accent);color:#0a0a1a;border:1px solid var(--accent);padding:10px 32px;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.3s;min-width:120px}
+.pr:hover{background:#3dbeb6;transform:translateY(-2px);box-shadow:0 6px 20px rgba(61,212,200,0.4)}
+.pr:active{transform:translateY(0)}
+
+/* ====================================================================
+   ===== REFINED GLASS — Apple Liquid Glass Web Approximation  =====
+   ====================================================================
+   Based on taste-skill Appendix C: honest web approximation of
+   Apple's Liquid Glass (Apple platform-only official).
+   ==================================================================== */
+
+/* --- Glass panel base (for containers) --- */
+.glass-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 60px rgba(0, 0, 0, 0.5);
+}
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255,255,255,0.10), transparent 50%),
+    radial-gradient(circle at 85% 100%, rgba(61,212,200,0.06), transparent 50%);
+  pointer-events: none;
+}
+
+/* --- Glass card (smaller containers) --- */
+.glass-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Pill-shaped Glass Button --- */
+.glass-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 30px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 99px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  outline: none;
+  transform-origin: center center;
+  user-select: none;
+}
+.glass-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 50%);
+  pointer-events: none;
+}
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+.glass-btn:active {
+  transform: scale(0.96);
+}
+
+/* Glass Button — accent variant */
+.glass-btn.glass-accent {
+  background: rgba(61, 212, 200, 0.12);
+  border-color: rgba(61, 212, 200, 0.22);
+}
+.glass-btn.glass-accent:hover {
+  background: rgba(61, 212, 200, 0.18);
+  border-color: rgba(61, 212, 200, 0.30);
+  box-shadow:
+    0 0 40px var(--accent-glow),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.glass-btn.glass-danger {
+  background: rgba(232, 85, 80, 0.10);
+  border-color: rgba(232, 85, 80, 0.16);
+}
+.glass-btn.glass-danger:hover {
+  background: rgba(232, 85, 80, 0.16);
+  border-color: rgba(232, 85, 80, 0.24);
+}
+
+/* --- Button overrides using glass-btn --- */
+.btn-start,
+.question-nav button.primary,
+.pr {
+  background: rgba(61, 212, 200, 0.12) !important;
+  border: 1px solid rgba(61, 212, 200, 0.20) !important;
+  border-radius: 99px !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow:
+    0 0 20px rgba(61, 212, 200, 0.08),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.10),
+    inset -1px -1px 1px 1px rgba(61, 212, 200, 0.06) !important;
+  transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2) !important;
+}
+.btn-start:hover,
+.question-nav button.primary:hover,
+.pr:hover {
+  background: rgba(61, 212, 200, 0.18) !important;
+  border-color: rgba(61, 212, 200, 0.30) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow:
+    0 8px 40px rgba(61, 212, 200, 0.25),
+    0 0 60px var(--accent-glow),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+.btn-start:active,
+.question-nav button.primary:active,
+.pr:active {
+  transform: translateY(0) scale(0.96) !important;
+}
+
+/* --- Glass nav buttons --- */
+.nav-btn {
+  padding: 7px 24px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+  border-radius: 99px;
+}
+.nav-btn:hover { color: var(--text-primary); transform: scale(1.05); }
+.nav-btn.active { color: var(--accent); }
+
+/* --- Glass practice subtabs --- */
+.practice-subtab {
+  padding: 7px 22px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 99px;
+  transition: color 0.3s ease, transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  font-family: inherit;
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+}
+.practice-subtab:hover { color: var(--text-primary); transform: scale(1.05); }
+.practice-subtab.active { color: var(--accent); }
+
+.subtab-slider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 6px;
+  background: rgba(61, 212, 200, 0.15);
+  border: 1px solid rgba(61, 212, 200, 0.20);
+  border-radius: 99px;
+  transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2), width 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  z-index: 1;
+  box-shadow:
+    0 0 24px rgba(61, 212, 200, 0.15),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.10);
+  transform: translateZ(0);
+}
+
+.question-display, .stats-box, .wrong-item {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  margin: 16px 0;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.04);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+.question-display:hover, .stats-box:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(61, 212, 200, 0.04),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.06);
+  border-color: rgba(61, 212, 200, 0.08);
+}
+
+/* --- Question option glass style --- */
+.question-display .q-option {
+  display: block;
+  padding: 10px 14px;
+  margin: 6px 0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+  backdrop-filter: blur(4px);
+}
+.question-display .q-option:hover {
+  border-color: rgba(61, 212, 200, 0.2);
+  transform: scale(1.01);
+  background: rgba(255, 255, 255, 0.05);
+}
+.question-display .q-option.selected {
+  border-color: rgba(61, 212, 200, 0.3) !important;
+  background: rgba(61, 212, 200, 0.08) !important;
+  color: var(--text-primary) !important;
+  box-shadow: inset 2px 2px 1px 0 rgba(255,255,255,0.05);
+}
+.question-display .q-option.correct {
+  border-color: rgba(61, 212, 200, 0.3) !important;
+  background: rgba(61, 212, 200, 0.08) !important;
+  color: var(--accent) !important;
+}
+.question-display .q-option.wrong {
+  border-color: rgba(232, 85, 80, 0.3) !important;
+  background: rgba(232, 85, 80, 0.08) !important;
+  color: var(--red) !important;
+}
+
+/* --- Chat-bubble feedback --- */
+.q-feedback {
+  margin-top: 12px;
+  padding: 12px 18px;
+  border-radius: var(--radius-xl);
+  font-size: 14px;
+  animation: fadeIn 0.4s ease;
+  backdrop-filter: blur(8px);
+}
+.q-feedback.correct {
+  background: rgba(61, 212, 200, 0.08);
+  color: var(--accent);
+  border: 1px solid rgba(61, 212, 200, 0.15);
+  box-shadow: inset 2px 2px 1px 0 rgba(255,255,255,0.04);
+}
+.q-feedback.wrong {
+  background: rgba(232, 85, 80, 0.08);
+  color: var(--red);
+  border: 1px solid rgba(232, 85, 80, 0.15);
+  box-shadow: inset 2px 2px 1px 0 rgba(255,255,255,0.04);
+}
+
+/* --- Answer reveal --- */
+.q-card .q-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  margin-top: 8px;
+  background: rgba(61, 212, 200, 0.04);
+  border: 1px solid rgba(61, 212, 200, 0.08);
+  border-left: none;
+  border-radius: var(--radius-xl);
+  font-size: 13px;
+  color: var(--accent);
+  opacity: 1;
+  transition: max-height 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2), padding 0.5s ease;
+  backdrop-filter: blur(4px);
+}
+.q-card .q-answer.show { padding: 8px 16px; max-height: 120px; }
+
+.q-card .btn-answer {
+  padding: 5px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  border-radius: 99px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  font-family: inherit;
+  backdrop-filter: blur(4px);
+}
+.q-card .btn-answer:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(61, 212, 200, 0.06);
+  transform: scale(1.03);
+}
+
+/* --- Exam panel glass --- */
+.exam-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  padding: 12px;
+  margin-top: 12px;
+  box-shadow:
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.04),
+    0 4px 20px rgba(0,0,0,0.2);
+}
+.exam-submit {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  padding: 12px;
+  margin-top: 12px;
+  text-align: center;
+  box-shadow:
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* --- Timer glass --- */
+.exam-timer {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent);
+  text-align: center;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(61, 212, 200, 0.12) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow:
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 20px rgba(61, 212, 200, 0.04);
+}
+
+/* --- Wrong book --- */
+.wrong-book .wrong-item {
+  border-left: 3px solid rgba(61, 212, 200, 0.10) !important;
+  border-radius: var(--radius-xl) !important;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2) !important;
+}
+.wrong-book .wrong-item:hover {
+  border-left-color: var(--accent) !important;
+  border-color: rgba(61, 212, 200, 0.12) !important;
+  transform: translateX(8px) !important;
+}
+.wrong-book .btn-remove {
+  padding: 4px 16px;
+  background: rgba(232, 85, 80, 0.06);
+  border: 1px solid rgba(232, 85, 80, 0.15);
+  color: var(--red);
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 11px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  font-family: inherit;
+  backdrop-filter: blur(4px);
+}
+.wrong-book .btn-remove:hover {
+  background: rgba(232, 85, 80, 0.12);
+  transform: scale(1.05);
+}
+
+/* --- Question nav buttons --- */
+.question-nav button {
+  padding: 8px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  font-size: 13px;
+  font-family: inherit;
+  backdrop-filter: blur(4px);
+}
+.question-nav button:hover {
+  border-color: rgba(61, 212, 200, 0.2);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(1.02);
+}
+.question-nav button:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+
+/* --- Custom select glass --- */
+.custom-select-trigger {
+  padding: 8px 14px;
+  padding-right: 32px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  user-select: none;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+.custom-select-trigger:hover {
+  border-color: rgba(61, 212, 200, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.custom-select-panel {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  right: 0;
+  background: rgba(10, 14, 28, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: none;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.35s ease;
+  z-index: 10;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+}
+.custom-select-option {
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+.custom-select-option:hover {
+  background: rgba(61, 212, 200, 0.06);
+  color: var(--text-primary);
+  padding-left: 22px;
+}
+.custom-select-option.selected {
+  color: var(--accent);
+  background: rgba(61, 212, 200, 0.05);
+}
+
+/* --- Glass sidebar items --- */
+.tree-item-header:hover, .work-type-item:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: inset 2px 0 0 var(--accent), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.tree-item-header.active-chapter {
+  background: rgba(61,212,200,0.08) !important;
+  border-right: 3px solid var(--accent) !important;
+  box-shadow: inset 2px 0 0 var(--accent), 0 0 20px rgba(61,212,200,0.06);
+}
+.work-type-item.active {
+  color: var(--accent);
+  background: rgba(61, 212, 200, 0.06) !important;
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+/* --- Toggle answer button --- */
+.btn-toggle-answers {
+  padding: 6px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border-radius: 99px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  font-family: inherit;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+.btn-toggle-answers:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(61, 212, 200, 0.06);
+  box-shadow: 0 0 20px rgba(61, 212, 200, 0.08);
+}
+.btn-toggle-answers.active {
+  background: rgba(61, 212, 200, 0.08);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- Glass stat numbers --- */
+.stats-box .big-number {
+  background: linear-gradient(135deg, var(--accent), #7de8e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(61, 212, 200, 0.4));
+}
+
+/* --- Back to top — glass pill --- */
+.btt {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--accent);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.08),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.4s, visibility 0.4s, transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2), box-shadow 0.3s;
+  transform-origin: center center;
+}
+.btt.sh { opacity: 1; visibility: visible; }
+.btt:hover {
+  transform: scale(1.15);
+  box-shadow:
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.12),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 30px var(--accent-glow);
+  border-color: rgba(61, 212, 200, 0.2);
+}
+.btt:active {
+  transform: scale(0.92);
+}
+
+/* --- Menu toggle glass --- */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.06);
+  transition: all 0.3s ease;
+}
+.menu-toggle:hover {
+  border-color: rgba(61, 212, 200, 0.2);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+}
+
+/* --- Sidebar overlay with blur --- */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99;
+}
+
+/* --- Preset button glass --- */
+.preset-btn {
+  padding: 4px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border-radius: 99px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  font-family: inherit;
+  backdrop-filter: blur(4px);
+}
+.preset-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(61, 212, 200, 0.05);
+  transform: scale(1.05);
+}
+.preset-btn.active {
+  background: rgba(61, 212, 200, 0.08);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- Sidebar settings --- */
+.practice-settings select, .practice-settings input {
+  width: 100%;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  font-size: 13px;
+  font-family: inherit;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+.practice-settings select:focus, .practice-settings input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(61, 212, 200, 0.06), 0 0 24px var(--accent-glow);
+}
+.practice-settings label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+/* --- Sidebar scrollbar --- */
+.sidebar-content::-webkit-scrollbar { width: 3px; }
+.sidebar-content::-webkit-scrollbar-track { background: transparent; }
+.sidebar-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+
+/* --- Global scrollbar --- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* --- Glow from old body::before/after --- */
+body::before {
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(61,212,200,0.06), transparent 70%);
+  top: -250px;
+  left: -250px;
+  animation: liquidOrb1 25s ease-in-out infinite;
+}
+body::after {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(91,141,239,0.05), transparent 70%);
+  bottom: -180px;
+  right: -180px;
+  animation: liquidOrb2 30s ease-in-out infinite;
+}
+body::before,body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes liquidOrb1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  33% { transform: translate(100px, -80px) scale(1.2); opacity: 0.6; }
+  66% { transform: translate(-60px, 100px) scale(0.85); opacity: 0.2; }
+}
+@keyframes liquidOrb2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+  33% { transform: translate(-90px, 60px) scale(1.15); opacity: 0.5; }
+  66% { transform: translate(80px, -80px) scale(0.9); opacity: 0.15; }
+}
+
+/* ================================================================
+   Scroll Fade-In — simple reveal as cards enter viewport
+   ================================================================ */
+
+.scroll-3d-stage {
+  margin-bottom: 60px;
+}
+
+.scroll-3d-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: visible;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+}
+.scroll-3d-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 12px 40px rgba(0,0,0,0.35),
+    0 0 30px rgba(61,212,200,0.04);
+  border-color: rgba(61,212,200,0.08);
+}
+
+/* Hero scroll module (full-width billboard) */
+.scroll-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  perspective: 1000px;
+  margin-bottom: 20px;
+}
+
+.scroll-hero-inner {
+  width: 100%;
+  max-width: 900px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.scroll-hero-header {
+  text-align: center;
+  margin-bottom: 20px;
+  will-change: transform;
+}
+
+.scroll-hero-card {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  border-radius: var(--radius-xl);
+  border: 2px solid rgba(108, 108, 108, 0.5);
+  padding: 8px;
+  background: rgba(34, 34, 34, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 9px 20px rgba(0, 0, 0, 0.29),
+    0 37px 37px rgba(0, 0, 0, 0.26),
+    0 84px 50px rgba(0, 0, 0, 0.15),
+    0 149px 60px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.scroll-hero-card-inner {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border-radius: calc(var(--radius-xl) - 6px);
+  overflow: hidden;
+  background: rgba(15, 20, 40, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Scroll-triggered reveal for section items */
+.scroll-reveal-item {
+  opacity: 0;
+  transform: translateY(30px) rotateX(8deg);
+  transition: none;
+  will-change: transform, opacity;
+}
+
+/* ================================================================
+   Stagger Card Carousel — one-question-at-a-time animation
+   ================================================================ */
+
+.stagger-wrap {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  overflow: hidden;
+  margin: 0 auto;
+  animation: staggerEnter 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes staggerEnter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stagger-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  cursor: pointer;
+  padding: 24px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+    0 12px 48px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.stagger-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255,255,255,0.08), transparent 50%),
+    radial-gradient(circle at 85% 100%, rgba(61,212,200,0.04), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stagger-card.center {
+  z-index: 10;
+  width: 380px;
+  height: 420px;
+  background:
+    linear-gradient(135deg, rgba(61,212,200,0.08), rgba(61,212,200,0.03));
+  border-color: rgba(61, 212, 200, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 12px 60px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(61, 212, 200, 0.08);
+  transform: translate(-50%, -65%) translateX(0px) rotate(0deg);
+}
+
+.stagger-card.side {
+  z-index: 0;
+  width: 300px;
+  height: 340px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.stagger-card.dim {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stagger-card .diagonal-line {
+  position: absolute;
+  display: block;
+  transform-origin: top right;
+  transform: rotate(45deg);
+  right: -2px;
+  top: 34px;
+  width: 50px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.stagger-card.center .diagonal-line { background: rgba(61, 212, 200, 0.18); }
+
+.stagger-card .card-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  background: rgba(61, 212, 200, 0.08);
+  color: var(--accent);
+  border: 1px solid rgba(61, 212, 200, 0.08);
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.25);
+  flex-shrink: 0;
+  width: fit-content;
+}
+.stagger-card.side .card-badge {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  border-color: rgba(255, 255, 255, 0.03);
+}
+
+.stagger-card .card-text {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+  flex: 1;
+  overflow-y: auto;
+}
+.stagger-card.side .card-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.stagger-card .card-options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.stagger-card .card-opt {
+  display: block;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+.stagger-card .card-opt:hover { border-color: rgba(61, 212, 200, 0.2); background: rgba(61,212,200,0.04); }
+.stagger-card .card-opt.sel { border-color: var(--accent); background: rgba(61,212,200,0.08); color: var(--accent); }
+.stagger-card .card-opt.correct { border-color: var(--accent); background: rgba(61,212,200,0.1); color: var(--accent); }
+.stagger-card .card-opt.wrong { border-color: var(--red); background: rgba(232,85,80,0.06); color: var(--red); }
+.stagger-card .card-opt.locked { cursor: default; opacity: 0.7; }
+
+.stagger-card .card-feedback {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: rgba(61,212,200,0.06);
+  border: 1px solid rgba(61,212,200,0.1);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.stagger-nav {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+.stagger-nav-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 4px 16px rgba(0,0,0,0.25);
+}
+.stagger-nav-btn:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.12);
+  color: var(--text-primary);
+  transform: scale(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 6px 24px rgba(0,0,0,0.35);
+}
+.stagger-nav-btn:active { transform: scale(0.92); }
+.stagger-nav-btn:disabled { opacity: 0.2; cursor: default; transform: none !important; }
+
+.stagger-progress {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  z-index: 15;
+  background: rgba(0,0,0,0.3);
+  padding: 3px 10px;
+  border-radius: 99px;
+  backdrop-filter: blur(8px);
+}
 </style>
 
 
 
 </head>
 <body>
-<canvas id="particleCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
 
+<!-- SVG filters for glossy glass / specular lighting effects -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+      <feTurbulence type="fractalNoise" baseFrequency="0.001 0.005" numOctaves="1" seed="17" result="turbulence"/>
+      <feComponentTransfer in="turbulence" result="mapped">
+        <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5"/>
+        <feFuncG type="gamma" amplitude="0" exponent="1" offset="0"/>
+        <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5"/>
+      </feComponentTransfer>
+      <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap"/>
+      <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lightingColor="white" result="specLight">
+        <fePointLight x="-200" y="-200" z="300"/>
+      </feSpecularLighting>
+      <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage"/>
+      <feDisplacementMap in="SourceGraphic" in2="softMap" scale="200" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="glass-shine" x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.003 0.003" numOctaves="2" seed="5" result="turbulence"/>
+      <feGaussianBlur in="turbulence" stdDeviation="4" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="3" specularConstant="0.8" specularExponent="80" lightingColor="#3dd4c8" result="light">
+        <fePointLight x="300" y="-100" z="200"/>
+      </feSpecularLighting>
+      <feComposite in="light" in2="SourceGraphic" operator="in" result="shine"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="shine"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
 
 <!-- Mobile menu toggle -->
 <button class="menu-toggle" id="menuToggle">☰</button>
@@ -1132,12 +2312,6 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(91,1
       <i id="sidebarToggleIcon">◀</i>
     </button>
   </div>
-    <div class="sidebar-mode-tabs">
-      <button class="sidebar-mode-tab active" data-sidebar="knowledge" onclick="switchSidebar('knowledge')">📚 知识</button>
-      <button class="sidebar-mode-tab" data-sidebar="qbank" onclick="switchSidebar('qbank')">📂 题库</button>
-      <button class="sidebar-mode-tab" data-sidebar="practice" onclick="switchSidebar('practice')">⚙️ 刷题</button>
-    </div>
-
   <div class="sidebar-content" id="sidebarContent">
     <!-- Knowledge tree (populated by JS) -->
     <div id="sidebar-knowledge" class="sidebar-panel"></div>
@@ -1229,151 +2403,6 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(91,1
 
 <script>
 // ============================================================
-// PARTICLE SYSTEM
-// ============================================================
-var canvas = document.getElementById('particleCanvas');
-var ctx = canvas.getContext('2d');
-var particles = [];
-var mouseX = -9999, mouseY = -9999;
-var mouseDown = false;
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = document.documentElement.scrollHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-function Particle() {
-  this.x = Math.random() * canvas.width;
-  this.y = Math.random() * canvas.height;
-  this.size = Math.random() * 3 + 1.5;
-  this.speedX = (Math.random() - 0.5) * 0.6;
-  this.speedY = (Math.random() - 0.5) * 0.6;
-  this.hue = 25 + Math.random() * 30;  // warm orange range
-  this.sat = 80 + Math.random() * 20;
-  this.light = 55 + Math.random() * 25;
-  this.opacity = 0.3 + Math.random() * 0.4;
-  this.life = 100;
-  this.maxLife = 100;
-}
-Particle.prototype.update = function() {
-  // Mouse interaction
-  var dx = mouseX - this.x;
-  var dy = mouseY - this.y;
-  var dist = Math.sqrt(dx*dx + dy*dy);
-  if (dist < 120) {
-    var force = (120 - dist) / 120;
-    if (mouseDown) {
-      this.speedX -= dx * force * 0.012;
-      this.speedY -= dy * force * 0.012;
-    } else {
-      this.speedX += dx * force * 0.005;
-      this.speedY += dy * force * 0.005;
-    }
-  }
-  // Friction
-  this.speedX *= 0.985;
-  this.speedY *= 0.985;
-  this.x += this.speedX;
-  this.y += this.speedY;
-  // Wrap
-  if (this.x < -10) this.x = canvas.width + 10;
-  if (this.x > canvas.width + 10) this.x = -10;
-  if (this.y < -10) this.y = canvas.height + 10;
-  if (this.y > canvas.height + 10) this.y = -10;
-  // Life decay for burst particles
-  if (this.life < this.maxLife) {
-    this.life--;
-    this.opacity = (this.life / this.maxLife) * 0.8;
-  }
-}
-Particle.prototype.draw = function() {
-  var lifeFactor = this.life / this.maxLife;
-  var alpha = this.opacity * lifeFactor;
-  // Glow
-  var grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 4);
-  grad.addColorStop(0, 'hsla('+this.hue+','+this.sat+'%,'+this.light+'%,'+alpha+')');
-  grad.addColorStop(0.5, 'hsla('+this.hue+','+this.sat+'%,'+(this.light+10)+'%,'+(alpha*0.3)+')');
-  grad.addColorStop(1, 'hsla('+this.hue+','+this.sat+'%,'+(this.light+20)+'%,0)');
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.arc(this.x, this.y, this.size * 2.5, 0, Math.PI * 2);
-  ctx.fill();
-  // Core
-  ctx.beginPath();
-  ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
-  ctx.fillStyle = 'hsla(40,100%,90%,'+(alpha*0.7)+')';
-  ctx.fill();
-  // Connections
-  particles.forEach(function(other) {
-    if (other === this) return;
-    var dx = this.x - other.x;
-    var dy = this.y - other.y;
-    var d = Math.sqrt(dx*dx + dy*dy);
-    if (d < 80) {
-      ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(other.x, other.y);
-      ctx.strokeStyle = 'hsla('+this.hue+',60%,60%,'+((1-d/80)*0.08)+')';
-      ctx.lineWidth = 0.5;
-      ctx.stroke();
-    }
-  }, this);
-}
-
-// Init particles
-var PARTICLE_COUNT = 120;
-for (var i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-
-// Events
-document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
-document.addEventListener('mousedown', function() { mouseDown = true; });
-document.addEventListener('mouseup', function() { mouseDown = false; });
-document.addEventListener('touchmove', function(e) { var t = e.touches[0]; if (t) { mouseX = t.clientX; mouseY = t.clientY; } }, { passive: true });
-document.addEventListener('touchstart', function(e) { var t = e.touches[0]; if (t) { mouseX = t.clientX; mouseY = t.clientY; } mouseDown = true; }, { passive: true });
-document.addEventListener('touchend', function() { mouseDown = false; }, { passive: true });
-
-// Burst
-function burstParticles(x, y, count) {
-  count = count || 15;
-  for (var i = 0; i < count; i++) {
-    var p = new Particle();
-    p.x = x; p.y = y;
-    var angle = Math.random() * Math.PI * 2;
-    var speed = 2 + Math.random() * 5;
-    p.speedX = Math.cos(angle) * speed;
-    p.speedY = Math.sin(angle) * speed;
-    p.hue = 15 + Math.random() * 35;
-    p.size = Math.random() * 4 + 2;
-    p.opacity = 1;
-    p.life = 50 + Math.random() * 40;
-    p.maxLife = p.life;
-    particles.push(p);
-  }
-  if (particles.length > PARTICLE_COUNT + 80) {
-    particles = particles.slice(-PARTICLE_COUNT - 80);
-  }
-}
-
-// Click burst
-document.addEventListener('click', function(e) { burstParticles(e.clientX, e.clientY, 25); });
-
-// Hover burst on interactive elements
-document.addEventListener('mouseover', function(e) {
-  var el = e.target.closest('.nav-btn, .q-option, .btn-start, .tree-leaf, .practice-subtab, .work-type-item, .preset-btn, .sidebar-mode-tab, .answer-dot');
-  if (el) burstParticles(e.clientX, e.clientY, 6);
-}, true);
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(function(p) { p.update(); p.draw(); });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
-
-
-// ============================================================
 // DATA: All questions
 // ============================================================
 const ALL_QUESTIONS = [{"text": "钻孔时，应戴好手套清除切屑，防止手被切屑划伤。（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 1}, {"text": "车削时要注意安全，必须穿合适的工作服，带好手套，女生还要戴好工作帽。（ ）", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "凡二人以上共同作业时，其中应指定一人负责指挥。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "在剪切作业时，光线强度，湿度变化都能影响作业的安全。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "运转中的机械设备对人的伤害主要有撞伤、压伤、轧伤、卷缠等。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "车间内的安全通道应保持畅通，任何情况下都不允许阻断。（ ）", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "穿脚趾及脚跟外露的凉鞋、拖鞋进入作业场所更方便操作。（ ）", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "当实践操作学习和安全发生矛盾时，要把学习放在首位（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "机器保护罩的首要作用是让机器看起来更美观。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 9}, {"text": "在车间里可以直接跨越或横跨运转设备的运转部位来传递物件（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "在钳工加工过程中，及时清除锤子、冲头、錾子等工具上的毛刺主要是为了让工具更整洁。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 11}, {"text": "当需要移动照明灯、电焊机等固定安装的电气设备时，一般可以在不切断电源的情况下直接移动（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 12}, {"text": "清洗电动机械时可以不用关掉电源。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 13}, {"text": "发生电气设备火灾时，应立即切断电源，可用二氧化碳、干粉等灭火器灭火（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 14}, {"text": "对于容易产生静电的场所，应保持地面环境一定的湿度，或铺设导电性能好的地板。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 15}, {"text": "实习生在变换岗位时必须接受相应岗位的安全教育培训（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 16}, {"text": "操作前，应检查设备或工作场地，排除各类故障和隐患（ ）。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 17}, {"text": "人体安全电压是36V，安全电流为10mA；当电流为100mA时，则为致命电流。（ ）", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 18}, {"text": "空气断路器至少包括短路保护、过电流保护功能，还可以选配分励控制、欠压保护等附加功能。配置齐全的空气断路器与漏电保护器联合使用能在故障状态（如负载短路、负载过电流、低电压等）和正常使用状态下均切断电气回路，起到更好的人身安全保护作用", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 19}, {"text": "在金属冷加工中也可能经常发生烫伤事件。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 20}, {"text": "锻件温度过低时，操作者应该立刻停止，拒绝锻打。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 21}, {"text": "钻孔时，当钻尖快要钻穿工件时，应加快钻尖的下降速度保证迅速钻透。( )", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 22}, {"text": "空气断路器至少包括短路保护、过电流保护功能。因此，空气断路器能起到漏电保护作用", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 23}, {"text": "实习人员可以边上岗作业，边进行安全生产教育和培训。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 24}, {"text": "齿轮传动机构中，两齿轮开始咬合的部位最危险。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 25}, {"text": "同一开关或插座严禁直接控制两台以上用电设备；开关箱内电源插座必须装设漏电保护器。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 26}, {"text": "严禁用铜丝、铝丝、铁丝等代替开关箱或设备内的保险丝。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 27}, {"text": "安全标志由安全色、几何图形和图形符号构成，分为禁止标志、警告标志、指令标志和提示标志四类。其中，警告标志图案为三角形。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 28}, {"text": "操纵装置是用来对机械的运行状态进行控制的装置，应该与人体运动器官的特性相适应，并与操作任务要求相适应。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 29}, {"text": "在压力机操作时使用手用工具可以代替人手伸进危险区送取料。如果配备了手用工具，可以部分取代甚至不用安全装置。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 30}, {"text": "在金属锯床上的操作者确认关机后更换锋利刀片，或关机清理切削碎屑时可戴手套，在金属切削车床在进行车削工件时不应戴手套。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 31}, {"text": "在进行机械安全风险评价时，对那些可能导致最严重的损伤或有对健康的危害，如果发生概率极低，就可以不必考虑。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 32}, {"text": "机器运行处于正常状态下是没有危险的，只有在非正常状态才存在危险。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "错", "num": 33}, {"text": "机床运转时，不准用手检查工件表面粗糙度及测量工件尺寸。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 34}, {"text": "凡高度在2.0米以下的传动部件（皮带、齿轮、联轴）以及飞轮、电锯等危险部件或危险部位都必须设防护装置。", "type": "judge", "work_type": "导论/安全", "section": "报告", "options": [], "answer": "对", "num": 35}, {"text": "下列哪种伤害不属于车间操作时的机械伤害范围。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 体育课扭伤脚踝坚持参加实践", "B. 金属切屑飞出伤人", "C. 夹具不牢固导致物件飞出伤人"], "answer": "A", "num": 1}, {"text": "在未做好以下哪项工作以前，千万不要开动机器。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 通知指导教师", "B. 检查过所有安全护罩是否安全可靠", "C. 机件擦洗"], "answer": "B", "num": 2}, {"text": "手用工具不应放在工作台边缘是因为( ) 。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 会造成工作台超过负荷", "B. 取用不方便", "C. 工具易于坠落伤人"], "answer": "C", "num": 3}, {"text": "清除电焊熔渣或多余的金属时，应怎样做才能减少危险?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 佩戴眼罩和手套等个人防护器具", "B. 清除的方向须靠向身体", "C. 须开风扇，加强空气流通，减少吸入金属雾气"], "answer": "A", "num": 4}, {"text": "任何电气设备在未验明无电之前，一律认为( ) 。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 有电", "B. 可能有电", "C. 无电"], "answer": "A", "num": 5}, {"text": "当操作打磨工具时，必须使用哪类个人防护用具?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 围裙", "B. 防潮服", "C. 护眼罩"], "answer": "C", "num": 6}, {"text": "下列哪种操作是不正确的?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 戴深色眼镜从事电焊", "B. 借助推送木棒操作剪切机械", "C. 操作机床时，戴防护手套"], "answer": "C", "num": 7}, {"text": "机床工作结束后，应最先做哪些安全工作? ( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 关闭机床电器系统和切断电源", "B. 清理机床", "C. 润滑机床"], "answer": "A", "num": 8}, {"text": "漏电保护器的使用是防止( )。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 电压波动", "B. 触电事故", "C. 电器超负荷"], "answer": "B", "num": 9}, {"text": "《气瓶安全监察规程》规定，盛装一般气体的气瓶，每( )年检验1次?", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 2", "B. 3", "C. 5"], "answer": "C", "num": 10}, {"text": "操作砂轮时，下列哪项是不安全的?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 操作者站在砂轮的正面操作", "B. 使用前检查砂轮有无破裂和损伤", "C. 用力均匀磨削"], "answer": "A", "num": 11}, {"text": "焊接作业所使用的气瓶应存放在下列哪种地方?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 隔烟房内", "B. 密闭地方", "C. 阴凉而空气流通的地方"], "answer": "B", "num": 12}, {"text": "刚刚车削下来的钢件切屑有较高的温度，甚至可以达到( )，极易引起烫伤。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 500°C以下", "B. 600~700°C", "C. 800~1000°C"], "answer": "B", "num": 13}, {"text": "压力加工中的自由锻操作时，下列规定哪项是不正确的? ( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 用夹钳取送模具", "B. 切断金属毛坯时要轻击", "C. 气锤开动前，应先空锤试打"], "answer": "C", "num": 14}, {"text": "在下列哪种情况下，不可以对机器进行清洗工作?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 没有指导教师在场", "B. 机器在开动中", "C. 没有操作手册"], "answer": "B", "num": 15}, {"text": "如果因电器引起火灾，在许可的情况下，你必须首先?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 找到适合的灭火器扑救", "B. 大声呼叫", "C. 将有开关的电源关掉"], "answer": "C", "num": 16}, {"text": "实习生在操作机械时穿着的“三紧”是指①工作服袖口紧②工作服领口紧③工作服下摆紧④工作服小而紧。( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②④", "B. ①③④", "C. ①②③"], "answer": "C", "num": 17}, {"text": "下列哪项是对铸工浇铸操作有不安全的影响?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 操作前对工具进行预热", "B. 保持操作场所干燥", "C. 正面对着冒口操作"], "answer": "C", "num": 18}, {"text": "操作机械时，护罩处于关闭位置，而护罩一旦处于开放位置，就会使机械停止运作，指的是下列哪种护罩的运作方式?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 触模式护罩", "B. 固定式护罩", "C. 互锁式护罩"], "answer": "C", "num": 19}, {"text": "工作任务紧张，忽然操作员发现运动着的机器传动轴里卷入不少纱线，该怎么办?( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 先不理会，待擦洗机器时再清洗", "B. 关机后进行清理", "C. 不停机，用铁钩清理"], "answer": "B", "num": 20}, {"text": "应用下列哪种方法清理机械器具上的油污? ( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 用汽油清洗", "B. 用压缩空气喷射吹去", "C. 用干净抹布擦掉"], "answer": "C", "num": 21}, {"text": "以下是操作人员易于接近的各种可动零、部件机械危险部位：①旋转铀②相对传动部件，如开式的啮合齿轮③不连续的旋转零件，如风机叶片。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②", "B. ①②③", "C. ②③"], "answer": "B", "num": 22}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①皮带与皮带轮，链与链轮②旋转的砂轮③活动板和固定板之间靠近时的压板。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ②③", "B. ①②", "C. ①②③"], "answer": "C", "num": 23}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①往复式冲压工具，如冲头和模具②带状切割工具，如带锯③蜗轮和蜗杆。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②③", "B. ②③", "C. ①②"], "answer": "A", "num": 24}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①高速旋转运动部件的表面②联接杆与链环之间的夹子③旋转的刀具、刃具。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ②③", "B. ①②③", "C. ①②"], "answer": "B", "num": 25}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①旋转的曲轴和曲柄②旋转运动部件上的凸出物，如键、定位螺丝③旋转的搅拌机、搅拌翅。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②", "B. ②③", "C. ①②③"], "answer": "C", "num": 26}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①运动皮带上的金属接头(皮带扣)②飞轮③联轴节上的固定螺丝④过热过冷的表面。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②③", "B. ①②③④", "C. ②③"], "answer": "B", "num": 27}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位：①带尖角、锐边或利棱的零部件②锋利的工具③带有危险表面的旋转圆筒，如脱粒机。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ②③", "B. ①②", "C. ①②③"], "answer": "C", "num": 28}, {"text": "以下哪项属于操作人员可能接近的可动零、部件机械危险部位，或者危险加工区域：①电动工具的把柄②设备表面上的毛刺、尖角、利棱、凹凸不平的表面③机械加工设备的工作区。（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②③", "B. ①②", "C. ②③"], "answer": "A", "num": 29}, {"text": "机床上使用的局部照明灯，电压不得超过( )", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 220V", "B. 380V", "C. 36V"], "answer": "C", "num": 30}, {"text": "工人操作机械设备时，应穿紧身适合的工作服的目的是防止( )。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 着凉", "B. 被机器弄污", "C. 被机器转动部分缠绕"], "answer": "C", "num": 31}, {"text": "所有机械的危险部位，首先应（ ），来确保工作安全。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 标上机器制造商铭牌", "B. 涂上安全警示色", "C. 安装合适安全防护装置"], "answer": "C", "num": 32}, {"text": "操作转动的机器设备时，最重要的是不应佩戴( )。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 手套", "B. 戒指", "C. 手表"], "answer": "A", "num": 33}, {"text": "机械危害的基本形式有（ ）：①挤压危险 ②剪切危险③缠绕危险④冲击危险 ⑤高压流体喷射危险", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②④⑤", "B. ①②③⑤", "C. ①②③④⑤", "D. ②③④⑤"], "answer": "C", "num": 34}, {"text": "冲剪压机设备的安全防护装置哪几种（ ）：①防护栅栏②安全模 ③双手按钮 ④光电保护装置", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①②③④", "B. ①②④", "C. ①③④", "D. ②③④"], "answer": "A", "num": 35}, {"text": "下列行为属于现场违章操作的是（ ）。①设备设施超速、超温、超载运行 ②供料或送料速度过快 ③启用查封或报废的设备 ④调整、检修、清扫设备时未切断电源，测量工件时未停车", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. ①④", "B. ①②③④", "C. ②③④", "D. ①②③"], "answer": "B", "num": 36}, {"text": "双手按钮式安全装置的重新启动功能是指，在双手同时按压两个按钮时，只有（ ），机器才能运转。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 只要一只手离开按钮，机器就停止运转；当这只手再次按压按钮，机器就能重新运转", "B. 如果一只手离开按钮，机器不停止运转；只有在双手都离开按钮，机器才停止运转", "C. 只要一只手离开按钮，机器就停止运转；只有双手都离开按钮然后再次按压全部按钮，机器才能重新运转", "D. 只有双手都离开按钮，机器才能停止运转；只要一只手再次按压按钮，机器就能重新运转"], "answer": "C", "num": 37}, {"text": "由于有机粘结剂耐候性有限，磨削类机械使用有机结合剂（例如树脂、橡胶）的砂轮，其存放时间不应超过（ ）年，而且长时间存放的砂轮必须经回转试验合格后才可使用。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 1", "B. 2", "C. 3", "D. 4"], "answer": "A", "num": 38}, {"text": "在需要设置安全防护装置的危险点，使用安全信息，（ )安全防护装置。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 没必要设置", "B. 可以代替设置", "C. 不能代替设置", "D. 可以设置也可以不设置"], "answer": "C", "num": 39}, {"text": "为防止人体部位误通过而造成伤害，在防护栅栏与传动机构零部件的距离为135mm时，防护栅栏的间隙尺寸应不大于（ ）mm。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 30", "B. 20", "C. 40", "D. 50"], "answer": "B", "num": 40}, {"text": "在机械产品寿命周期的各环节中，决定机器产品安全性的最关键环节是（ ）。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 设计", "B. 制造", "C. 使用", "D. 维修"], "answer": "A", "num": 41}, {"text": "凡是操作人员的工作位置位于坠落基准面( )m 以上时，则必须在生产设备上配置供站立的平台和防坠落的防护栏杆。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 0.5", "B. 1", "C. 2", "D. 3"], "answer": "A", "num": 42}, {"text": "机械上常在防护装置上设置为检修用的可开启的活动门，应使活动门不关闭机器就不能开动；在机器运转时，活动门一打开机器就停止运转，这种功能称为( )。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 安全联锁", "B. 安全屏蔽", "C. 安全障碍", "D. 密封保护"], "answer": "A", "num": 43}, {"text": "下列操作哪一个不能防止焊接作业中的回火现象？（ ）", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 焊嘴不能过热", "B. 乙炔不能开得太大", "C. 焊炬不要过分接近熔融金属", "D. 如乙炔瓶内部已燃烧，要用自来水降温灭火"], "answer": "B", "num": 44}, {"text": "特种作业是指对（ ）容易发生伤亡事故的工作。", "type": "single", "work_type": "导论/安全", "section": "报告", "options": ["A. 周围职工", "B. 操作者本人及他人", "C. 操作者"], "answer": "B", "num": 45}, {"text": "激光切割过程中，可以采用填充材料来改善切割质量。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "激光切割设备的维护周期较长，一般不需要频繁更换零部件。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "激光切割只能用于金属材料的加工，不能用于非金属材料的加工。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "错", "num": 3}, {"text": "激光切割设备的价格较高，维护成本也相对较高。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "激光切割设备的操作相对简单，不需要专业的技术培训。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "错", "num": 5}, {"text": "激光切割在航空航天、汽车制造、电子制造等领域有广泛的应用。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "激光切割过程中，激光功率和频率的选择对切割效果有很大影响。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "激光切割过程中产生的热影响区（HAZ）较小，有利于提高零件的表面质量和减少变形。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "激光切割过程中，可以通过调整焦点位置来改变切割路径的形状。", "type": "judge", "work_type": "激光", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "激光切割是一种", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 热加工", "B. 冷加工", "C. 电加工", "D. 化学加工"], "answer": "A", "num": 1}, {"text": "激光加工的主要应用领域包括哪些？", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 金属材料切割", "B. 金属材料焊接", "C. 非金属材料加工", "D. 以上都是"], "answer": "D", "num": 2}, {"text": "激光加工的优点有哪些？", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 高精度和可重复性", "B. 快速加工速度和高效率", "C. 可以加工复杂形状和结构的材料，如微细孔、深腔等。", "D. 以上都是"], "answer": "D", "num": 3}, {"text": "激光加工的优势包括", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 激光头与工件不接触，不存在加工工具磨损问题", "B. 工件不易污染", "C. 无“切削力”作用于工件", "D. 以上都是"], "answer": "D", "num": 4}, {"text": "激光切割设备主要由（ ）组成。", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 激光器、主机、冷却系统、供气系统、电源、控制系统", "B. 激光器、主机、冷却系统、供气系统、电源", "C. 激光器、主机、冷却系统、供气系统", "D. 激光器、主机、冷却系统"], "answer": "C", "num": 5}, {"text": "在激光加工过程中，哪种气体通常用于保护镜片？", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. Oxygen", "B. Nitrogen", "C. Argon", "D. CO2"], "answer": "C", "num": 6}, {"text": "激光加工的适应场合不包括", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 可以对运动的工件进行加工", "B. 密封在玻璃壳内的材料加工", "C. 对光、热敏感的场合", "D. 在恶劣环境或其他人难以接近的地方，可用机器人进行激光加工"], "answer": "C", "num": 7}, {"text": "激光加工可以直接实现的工艺过程不包括", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 打孔", "B. 折弯", "C. 切割", "D. 焊接"], "answer": "B", "num": 8}, {"text": "激光进行微细加工的优势在于", "type": "single", "work_type": "激光", "section": "报告", "options": ["A. 激光束的发散角可小于1毫弧", "B. 光斑直径可小到微米量级", "C. 作用时间可以短到纳秒和皮秒", "D. 以上都是"], "answer": "D", "num": 9}, {"text": "导热性愈好的材料，愈适合于气割。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 1}, {"text": "压力焊焊接时需要加填充材料。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "电阻焊不仅可以连接同种金属，也可以连接不同金属。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "被钎焊连接的基体材料可称为母材。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "直流电源焊接时，正接法是焊条接正极，工件接负极，主要用于焊接较厚工件。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 5}, {"text": "厚度在3mm以下的焊件适合气焊。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "焊条直径愈粗，焊接电流愈小。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "铜焊是软钎焊，锡焊是硬钎焊。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "气焊时氧气阀和乙炔阀不可以同时开启。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "中碳钢、高碳钢可广泛用作焊接结构件。", "type": "judge", "work_type": "焊接", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "大批量生产汽车油箱、小型容器应采用（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 点焊", "B. 缝焊", "C. 对焊"], "answer": "B", "num": 1}, {"text": "下列材料中，焊接性最好的是（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 合金钢", "B. 低碳钢", "C. 中碳钢", "D. 高碳钢"], "answer": "B", "num": 2}, {"text": "焊接电流过大时，会造成（ ）", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 熔宽增大，熔深减小", "B. 熔宽减少，熔深增大", "C. 熔宽和熔深都增大", "D. 熔宽和熔深都减小"], "answer": "C", "num": 3}, {"text": "以下哪项属于焊条手弧焊使用的设备或工具。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 氧、乙炔气瓶", "B. 箱式加热炉、焊炬、割炬", "C. 交、直流弧焊机、焊条", "D. 焊丝"], "answer": "C", "num": 4}, {"text": "车刀上的硬质合金刀片可以采用（ ）方法连接在刀杆上。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 电弧焊或紧固件", "B. 钎焊或紧固件", "C. 氩弧焊", "D. 压力焊或紧固件"], "answer": "B", "num": 5}, {"text": "选择焊接电流首先取决于（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 焊接电压", "B. 焊件厚度", "C. 焊件材料", "D. 焊条粗细"], "answer": "D", "num": 6}, {"text": "气焊火焰是由（ ）组成。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 内焰和外焰", "B. 焰心和外焰", "C. 焰心、内焰和外焰"], "answer": "C", "num": 7}, {"text": "焊条牌号J422属于（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 酸性焊条", "B. 碱性焊条", "C. 焊丝", "D. 焊芯"], "answer": "A", "num": 8}, {"text": "以下说法正确的是：氧乙炔气焊爆溅的原因有①焊嘴轻微堵塞②焊嘴离焊件太近③焊件表面有残余的铁锈等杂质，可以④将乙炔气开大或把氧气关小，⑤将乙炔气关小或把氧气开大", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. ①②③④", "B. ①②④", "C. ②③⑤", "D. ①②③⑤"], "answer": "A", "num": 9}, {"text": "重要受力平板焊件宜采用的焊接接头形式是（ ）。", "type": "single", "work_type": "焊接", "section": "报告", "options": ["A. 搭接", "B. 对接", "C. 角接", "D. T形接"], "answer": "B", "num": 10}, {"text": "大量铸造生产中，为提高生产率，便于操作，常常用单一砂（指原砂）。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "错", "num": 1}, {"text": "砂型铸造时分型面可以选择在模样的任何截面处。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "用于铸造的合金称为铸造合金。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "型砂是制造砂型的主要成型材料。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "金属型能一型多铸，使用寿命长，相比较砂型可称之为永久型铸型。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "铸件重量大、壁厚差别大，合金的浇注温度应该在满足充型效果的前提下适度降低。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "合金的浇注温度越高越好。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "在浇注铸件过程中是不允许断流的。", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "铸造在造型时，舂砂太松，则会产生气孔", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "错", "num": 9}, {"text": "整模造型与分模造型相比，最大的特点是不会产生错箱缺陷", "type": "judge", "work_type": "铸造", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "下列零件毛坯中，适用于铸造生产的是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 机床主轴", "B. 机床床身", "C. 机床丝杠", "D. 机床齿轮"], "answer": "B", "num": 1}, {"text": "型砂透气性差，主要易于产生以下（ ）缺陷。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 气孔", "B. 粘砂、硬皮", "C. 应力、变形", "D. 裂纹"], "answer": "A", "num": 2}, {"text": "冒口的主要作用是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 排除金属液中的杂质", "B. 金属液流入铸型的一种通道", "C. 补给铸型冷却收缩时所需要的金属液体，以免产生缩孔"], "answer": "C", "num": 3}, {"text": "铸造的突出优点之一是能够制造（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 形状复杂的毛坯", "B. 形状简单的毛坯", "C. 小件毛坯"], "answer": "A", "num": 4}, {"text": "铸件重要加工面，如机床导轨面在铸型中的位向，即浇注位置首先考虑的是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 朝上", "B. 朝下", "C. 朝左", "D. 朝右"], "answer": "B", "num": 5}, {"text": "铸造起模前，在模样周围刷水是为了（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 提高型砂的耐火性", "B. 增加型砂的湿强度和可塑性", "C. 提高型砂的流动性", "D. 提高型砂的退让性"], "answer": "B", "num": 6}, {"text": "你在铸造实习中使用的模样是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 木模", "B. 金属模", "C. 塑料模", "D. 蜡模"], "answer": "A", "num": 7}, {"text": "将模样沿最大截面处分成两部分进行造型的方法，称为（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 整模造型", "B. 活块造型", "C. 分模造型", "D. 挖砂造型"], "answer": "C", "num": 8}, {"text": "铸件中的重要加工面或支撑面如机床导轨面，在造型时其位置应设置（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 朝上", "B. 首选朝下，次选侧面", "C. 侧面", "D. 朝下"], "answer": "B", "num": 9}, {"text": "当合金的浇注温度过高时，铸件易产生的缺陷是（ ）。", "type": "single", "work_type": "铸造", "section": "报告", "options": ["A. 粘砂", "B. 溢料", "C. 气孔", "D. 砂眼"], "answer": "A", "num": 10}, {"text": "焊接后为消除焊接应力，可采用退火工艺。（ ）", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "工业用的金属材料，最主要的性能是材料的物理性能，它是衡量金属材料的主要指标之一。（ ）", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "工业上使用的金属材料一般都是单晶体。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "错", "num": 3}, {"text": "布氏硬度、洛氏硬度和维氏硬度这三种硬度值之间，可以通过查表互相进行换算。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "在碳素钢中，为提高其性能，加入一种或多种合金元素，即成为合金钢", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "造成热处理变形的主要原因，是淬火冷却时工件内部产生的内应力所致。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "为了获得优良的淬火质量，细而长的轴类零件、薄而平的零件，应垂直淬入冷却液中。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "金属材料的塑性，随温度的升高而降低。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "淬火加高温回火的工艺称为调质处理。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "低碳钢为了达到硬而耐磨，可采用淬火热处理工艺。", "type": "judge", "work_type": "热处理", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "两种或两种以上的金属元素或金属元素与非金属元素，经过熔炼后，获得有金属特性的材料，通常称为（ ）。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 化合物", "B. 固溶体", "C. 机械混合物", "D. 合金"], "answer": "D", "num": 1}, {"text": "轻金属的密度一般小于（ ）。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 1克/厘米3", "B. 2.73克/厘米3", "C. 5克/厘米3"], "answer": "C", "num": 2}, {"text": "对形状复杂的零件，为防止或减小变形、开裂，应采用的以下哪种淬火方法最好。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 水中淬火", "B. 油中淬火", "C. 先水后油双介质淬火"], "answer": "B", "num": 3}, {"text": "有同样形状和大小的两块铁碳合金，其中一块是低碳钢，一块是灰铸铁，用什么简便的方法迅速将它们区别？", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 看表面", "B. 看断口", "C. 做力学性能"], "answer": "B", "num": 4}, {"text": "以下哪些不属于金属材料及热处理实践所需的仪器或设备。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 箱式电炉", "B. 邵氏硬度计", "C. 洛氏硬度计", "D. 维氏硬度计"], "answer": "B", "num": 5}, {"text": "铸造机床床身一般采用的材料是（ ）。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 铸钢", "B. 可锻铸铁", "C. 灰铸铁", "D. 球墨铸铁"], "answer": "C", "num": 6}, {"text": "以下硬度值标示中，哪一项的写法是正确的。（ ）", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. HBS240", "B. HRA80", "C. 55HRC", "D. HV800"], "answer": "C", "num": 7}, {"text": "选择材料时，应考虑哪些原则？（ ）", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 力学性能", "B. 使用性能和工艺性能", "C. 化学性能"], "answer": "B", "num": 8}, {"text": "用碳素工具钢制造的刀具能否用于高速切削？为什么？", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 能，因硬度高", "B. 不能，因硬度低", "C. 能，因红硬性好", "D. 不能，因红硬性差"], "answer": "D", "num": 9}, {"text": "淬火后零件立即进行回火处理的目的是（ ）。", "type": "single", "work_type": "热处理", "section": "报告", "options": ["A. 提高硬度", "B. 提高强度", "C. 降低脆性，提高韧性"], "answer": "C", "num": 10}, {"text": "用四爪卡盘安装工件时必须先找正、夹紧，才能进行加工。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "切削速度就是机床的转速。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "错", "num": 2}, {"text": "游标卡尺也可以用来测量毛坯的表面尺寸。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "在普通车床上钻孔，通常把钻头安装在尾座上，钻削时通常采用手动进给。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "车外圆时是通过丝杠传动，实现纵向自动走刀。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "错", "num": 5}, {"text": "用三爪卡盘夹住轴类零件，另一端用顶尖顶住，三爪卡盘夹住的毛柸部分越长越好。", "type": "judge", "work_type": "车床", "section": "预习", "options": [], "answer": "错", "num": 6}, {"text": "车床能够自动定心的夹具是（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 四爪卡盘", "B. 三爪卡盘", "C. 花盘"], "answer": "B", "num": 1}, {"text": "车床的种类很多，其中应用最广的是（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 立式车床", "B. 卧式车床", "C. 仪表车床", "D. 自动车床"], "answer": "B", "num": 2}, {"text": "测量Φ25±0.03mm的外圆尺寸时，应选用下列哪一种量具（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 钢尺", "B. 百分尺", "C. 百分表"], "answer": "B", "num": 3}, {"text": "三爪卡盘与四爪卡盘比较（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 两者都能自动定心，前者的定心精度比后者高", "B. 两者都能自动定心，后者的定心精度比后者高", "C. 前者能自动定心，而后者则不能，后者通过百分表定心的精度比前者高", "D. 前者能自动定心，而后者则不能，前者的定心精度比后者通过百分表定心的精度要高"], "answer": "C", "num": 4}, {"text": "安装车刀时，刀尖（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 应高于工件回转中心", "B. 应低于工件回转中心", "C. 与工件回转中心等高"], "answer": "C", "num": 5}, {"text": "常用切削加工刀具材料种类有（ ）。", "type": "single", "work_type": "车床", "section": "预习", "options": ["A. 风钢刀，钨钢刀，麻花钻", "B. 内圆、外圆、沟槽、端面车刀", "C. 高碳钢、合金钢", "D. 碳素工具钢、合金工具钢、高速钢、硬质合金"], "answer": "D", "num": 6}, {"text": "用四爪卡盘安装工件时必须先找正、夹紧，才能进行加工。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "切削速度就是机床的转速。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "游标卡尺也可以用来测量毛坯的表面尺寸。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "在普通车床上钻孔，通常把钻头安装在尾座上，钻削时通常采用手动进给。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "车外圆时是通过丝杠传动，实现纵向自动走刀。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "错", "num": 5}, {"text": "用三爪卡盘夹住轴类零件，另一端用顶尖顶住，三爪卡盘夹住的毛柸部分越长越好。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "错", "num": 6}, {"text": "方刀架用来安装车刀，最多可以同时安装4把车刀。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "在车床上安装工件时必须使被加工表面的轴线与车床主轴轴线重合。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "由于三爪卡盘的三个卡爪轴同时移动安装工件，因此工件的中心和机床主轴中心是同心的。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "大拖板与溜板箱相联，可带动车刀沿床身导轨作纵向运动。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "车端面时，为了不影响零件表面粗糙度，工件的转速要选高一些。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "错", "num": 11}, {"text": "采用转动小拖板法和偏移尾架法都可以加工锥体和锥孔。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 12}, {"text": "切断刀刃磨和安装应有两个对称的副偏角、副后角和主偏角。", "type": "judge", "work_type": "车床", "section": "报告", "options": [], "answer": "对", "num": 13}, {"text": "车床能够自动定心的夹具是（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 四爪卡盘", "B. 三爪卡盘", "C. 花盘"], "answer": "B", "num": 1}, {"text": "车床的种类很多，其中应用最广的是（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 立式车床", "B. 卧式车床", "C. 仪表车床", "D. 自动车床"], "answer": "B", "num": 2}, {"text": "测量Φ25±0.03mm的外圆尺寸时，应选用下列哪一种量具（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 钢尺", "B. 百分尺", "C. 百分表"], "answer": "B", "num": 3}, {"text": "三爪卡盘与四爪卡盘比较（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 两者都能自动定心，前者的定心精度比后者高", "B. 两者都能自动定心，后者的定心精度比后者高", "C. 前者能自动定心，而后者则不能，后者通过百分表定心的精度比前者高", "D. 前者能自动定心，而后者则不能，前者的定心精度比后者通过百分表定心的精度要高"], "answer": "C", "num": 4}, {"text": "安装车刀时，刀尖（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 应高于工件回转中心", "B. 应低于工件回转中心", "C. 与工件回转中心等高"], "answer": "C", "num": 5}, {"text": "常用切削加工刀具材料种类有（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 风钢刀，钨钢刀，麻花钻", "B. 内圆、外圆、沟槽、端面车刀", "C. 高碳钢、合金钢", "D. 碳素工具钢、合金工具钢、高速钢、硬质合金"], "answer": "D", "num": 6}, {"text": "安装车刀时，车刀下面的垫片应尽可能采用（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 多的薄垫片", "B. 少量的厚垫片", "C. 无所谓"], "answer": "B", "num": 7}, {"text": "车削轴件进行切断时，防止振动的调整方法是（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 减小进给量", "B. 提高切削速度", "C. 增大切削前角", "D. 增加刀头宽度"], "answer": "A", "num": 8}, {"text": "车削螺纹时，工件每转一周，车刀必须准确地移动（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 一个距离", "B. 一个螺距或导程"], "answer": "B", "num": 9}, {"text": "车外圆时，如果主轴转速增大，则进给量（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 增大", "B. 减小", "C. 不变", "D. 不确定"], "answer": "C", "num": 10}, {"text": "安装车刀时，刀具伸出的长度应为（ ）。", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. 越长越好", "B. 刀杆厚度的1.1～1.5倍", "C. 伸出刀架10mm", "D. 无规定"], "answer": "B", "num": 11}, {"text": "普通车床上加工零件能达到的经济精度等级为（ ）", "type": "single", "work_type": "车床", "section": "报告", "options": ["A. IT3～IT5", "B. IT6～IT8", "C. IT7～IT10", "D. IT10～IT12"], "answer": "C", "num": 12}, {"text": "数控机床只需要根据零件图样进行编程，不必考虑刀具运动还是工件运动", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "数控铣床的形式可以是卧式的，也可以是立式的。", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "数控系统是一种专用计算机控制系统，配有接口电路和伺服驱动装置。操作者通过数字、文字和符号组成的数值指令，控制动作位置、角度、速度等机械量和开关量，实现对一台或多台机械设备动作控制。", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "与传统手工雕刻手段相比CNC雕刻秉承了精细轻巧的特点，同时更加自动化。", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "对刀的目的是确定程序原点在机床坐标系中的位置，是建立工件坐标系的过程。", "type": "judge", "work_type": "数铣/齿", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "加工中心与数控铣床的主要区别是（）", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 数控系统复杂程度不同", "B. 机床精度不同", "C. 有无自动换刀系统", "D. 有无自动上下料系统"], "answer": "C", "num": 1}, {"text": "用于指令动作方式的辅助功能指令代码是（ ）代码。", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. F", "B. M", "C. T", "D. G"], "answer": "B", "num": 2}, {"text": "数控编程中，一个完整的程序是由若干个（ ）组成的。", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 字", "B. 程序段", "C. 字母", "D. 数字"], "answer": "B", "num": 3}, {"text": "CNC雕铣机可加工以下哪些材料（）", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 铜", "B. 钢", "C. 石膏", "D. 以上均可雕铣"], "answer": "D", "num": 4}, {"text": "雕铣机床可应用的行业可以是（）", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 木工行业", "B. 模具行业", "C. 广告行业", "D. 以上都是"], "answer": "D", "num": 5}, {"text": "采用齿轮铣刀可以加工齿形，该种加工方法属于（ ）。", "type": "single", "work_type": "数铣/齿", "section": "预习", "options": ["A. 范成法", "B. 成形法"], "answer": "B", "num": 6}, {"text": "数控机床只需要根据零件图样进行编程，不必考虑刀具运动还是工件运动", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "数控铣床的形式可以是卧式的，也可以是立式的。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "数控系统是一种专用计算机控制系统，配有接口电路和伺服驱动装置。操作者通过数字、文字和符号组成的数值指令，控制动作位置、角度、速度等机械量和开关量，实现对一台或多台机械设备动作控制。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "与传统手工雕刻手段相比CNC雕刻秉承了精细轻巧的特点，同时更加自动化。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "对刀的目的是确定程序原点在机床坐标系中的位置，是建立工件坐标系的过程。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "数控铣床的加工路线是指刀具中心的轨迹和方向。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "除了换刀程序外，加工中心的编程方法和数控铣床的编程方法基本相同", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "按机床刀具和工件相对运动布局结构，数控铣床有立式、卧式和立卧两用式三种。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "精雕数控铣床是使用小刀具、大功率和高速主轴电机的数控铣床，既可雕刻，也可铣削，使粗精加工均可在一个工位上完成，拓展了数控铣床的加工能力。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "铣齿加工可以加工直齿、斜齿、齿条和锥齿轮，并适合大批量生产。", "type": "judge", "work_type": "数铣/齿", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "加工中心与数控铣床的主要区别是（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 数控系统复杂程度不同", "B. 机床精度不同", "C. 有无自动换刀系统", "D. 有无自动上下料系统"], "answer": "C", "num": 1}, {"text": "数控机床主轴以800转/分钟转速正转时，其指令应该是", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. M03 S800", "B. M04 S800", "C. M03 S480000", "D. M04 S480000"], "answer": "A", "num": 2}, {"text": "用于指令动作方式的辅助功能指令代码是（ ）代码。", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. F", "B. M", "C. T", "D. G"], "answer": "B", "num": 3}, {"text": "数控编程中，一个完整的程序是由若干个（ ）组成的。", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 字", "B. 程序段", "C. 字母", "D. 数字"], "answer": "B", "num": 4}, {"text": "CNC雕铣机可加工以下哪些材料（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 铜", "B. 钢", "C. 石膏", "D. 以上均可雕铣"], "answer": "D", "num": 5}, {"text": "雕铣机床可应用的行业可以是（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 木工行业", "B. 模具行业", "C. 广告行业", "D. 以上都是"], "answer": "D", "num": 6}, {"text": "采用齿轮铣刀可以加工齿形，该种加工方法属于（ ）。", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 范成法", "B. 成形法"], "answer": "B", "num": 7}, {"text": "数控铣床编程中，辅助功能中表示程序计划停止的指令是（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. M00", "B. M01", "C. M03", "D. M30"], "answer": "B", "num": 8}, {"text": "数控铣床上铣一个正方形零件外轮廓，如果使用的铣刀直径比原来小1mm，则加工后的正方形尺寸差（）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 小1mm", "B. 小0.5mm", "C. 大1mm", "D. 大0.5mm"], "answer": "C", "num": 9}, {"text": "精密雕铣机床可以加工的对象包括 （）", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 文字", "B. 图案", "C. 纹理", "D. 以上都是"], "answer": "D", "num": 10}, {"text": "通常雕铣加工时的主轴转速较合理的是", "type": "single", "work_type": "数铣/齿", "section": "报告", "options": ["A. 10000-50000rpm", "B. 1000-3000rpm", "C. 300-2000rpm", "D. 5-50rpm"], "answer": "A", "num": 11}, {"text": "立式钻床刚性好，功率大，允许采用较大的切削用量，适用于加工中小型零件。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "开始推锉时，左手压力要大，右手压力要小，使锉刀保持水平。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "丝锥攻丝时，始终需要加压旋转，方能加工出完整的内螺纹。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "错", "num": 3}, {"text": "任何一台机器都是由多个零件装配而成。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "拆卸零件的顺序应与装配零件的顺序正好相反。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "台虎钳夹持工件的已加工表面时，应用软质铜或铝皮垫在钳口上，保护工件。", "type": "judge", "work_type": "钳工", "section": "预习", "options": [], "answer": "对", "num": 6}, {"text": "钳工划线时，用于正确划出并确定工件各部尺寸、几何形状和相对位置的点、线或面的基准，称为（ ）。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 设计基准", "B. 测量基准", "C. 划线基准", "D. 定位基准"], "answer": "C", "num": 1}, {"text": "钳工实习时制作小榔头的锤头合理工序是 ①取平划线基准面 ②划线 ③锉削 ④锯切 ⑤钻孔攻丝 ⑥修光", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. ②①③⑤④⑥", "B. ①②③④⑤⑥", "C. ①②④③⑤⑥", "D. ③①②④⑤⑥"], "answer": "C", "num": 2}, {"text": "锯切厚件时应选用（ ）。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 粗齿锯条", "B. 中齿锯条", "C. 细齿锯条", "D. 先细齿锯条，再粗齿锯条"], "answer": "A", "num": 3}, {"text": "装配次序应为（ ）。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 组件装配→部件装配→总装配", "B. 总装配→组件装配 →部件装配", "C. 部件装配→组件装配→总装配"], "answer": "A", "num": 4}, {"text": "以下机械连接方式中属于易拆的连接的是( )。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 焊接", "B. 螺栓", "C. 铆接", "D. 压合"], "answer": "B", "num": 5}, {"text": "用钻头在实体材料上加工出孔，称为（ ）。", "type": "single", "work_type": "钳工", "section": "预习", "options": ["A. 镗孔", "B. 铰孔", "C. 锪孔", "D. 钻孔"], "answer": "D", "num": 6}, {"text": "立式钻床刚性好，功率大，允许采用较大的切削用量，适用于加工中小型零件。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "开始推锉时，左手压力要大，右手压力要小，使锉刀保持水平。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "丝锥攻丝时，始终需要加压旋转，方能加工出完整的内螺纹。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 3}, {"text": "任何一台机器都是由多个零件装配而成。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "拆卸零件的顺序应与装配零件的顺序正好相反。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "台虎钳夹持工件的已加工表面时，应用软质铜或铝皮垫在钳口上，保护工件。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "用手锯锯割时，一般往复长度不应小于锯条长度的三分之二。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "顺时针旋转旋入的螺纹是左螺纹。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "正常锯切时，锯条返回仍需加压，但要轻轻拉回，速度要慢。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 9}, {"text": "为了使划出的线条清晰，划针应在工件上反复多次划线。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "锯切铜、铝等软金属时，应选取细齿锯条。", "type": "judge", "work_type": "钳工", "section": "报告", "options": [], "answer": "错", "num": 11}, {"text": "钳工划线时，用于正确划出并确定工件各部尺寸、几何形状和相对位置的点、线或面的基准，称为（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 设计基准", "B. 测量基准", "C. 划线基准", "D. 定位基准"], "answer": "C", "num": 1}, {"text": "钳工实习时制作小榔头的锤头合理工序是 ①取平划线基准面 ②划线 ③锉削 ④锯切 ⑤钻孔攻丝 ⑥修光", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. ②①③⑤④⑥", "B. ①②③④⑤⑥", "C. ①②④③⑤⑥", "D. ③①②④⑤⑥"], "answer": "C", "num": 2}, {"text": "锯切厚件时应选用（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 粗齿锯条", "B. 中齿锯条", "C. 细齿锯条", "D. 先细齿锯条，再粗齿锯条"], "answer": "A", "num": 3}, {"text": "装配次序应为（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 组件装配→部件装配→总装配", "B. 总装配→组件装配 →部件装配", "C. 部件装配→组件装配→总装配"], "answer": "A", "num": 4}, {"text": "以下机械连接方式中属于易拆的连接的是( )。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 焊接", "B. 螺栓", "C. 铆接", "D. 压合"], "answer": "B", "num": 5}, {"text": "用钻头在实体材料上加工出孔，称为（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 镗孔", "B. 铰孔", "C. 锪孔", "D. 钻孔"], "answer": "D", "num": 6}, {"text": "手工起锯的适宜角度为（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 0°", "B. 约小于15°", "C. 约30°", "D. 45°"], "answer": "B", "num": 7}, {"text": "8英寸的圆锉刀长度相当于（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 100mm", "B. 150mm", "C. 200mm"], "answer": "C", "num": 8}, {"text": "锉削余量较大平面时，应采用（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 顺向锉", "B. 交叉锉", "C. 推锉", "D. 先推锉，后顺向锉"], "answer": "B", "num": 9}, {"text": "锉削时，锉刀的用力应是在（ ）。", "type": "single", "work_type": "钳工", "section": "报告", "options": ["A. 锉削开始时", "B. 拉回锉刀时", "C. 推锉和拉回锉刀时", "D. 推锉时两手用力应变化"], "answer": "A", "num": 10}, {"text": "数控车床可以车削直线、斜线、圆弧、圆柱管螺纹、圆锥螺纹等，但是不能车削多头螺纹。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "错", "num": 1}, {"text": "数控车床的顺、逆方向判断方法是沿垂直于圆弧所在平面，从正向往负向看，刀具相对工件转动方向是顺时针用G02，反之用G03 。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "进给速度与主轴转速有关时，表示为进给量mm/r，一般是数控车床默认的状态。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "i5数控系统是国产的智能化数控系统 。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "随着数控车床的推广与应用，数控车床可以加工各种复杂成形表面。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "数控车削编程时，工件的工艺分析和加工参数确定是关键。", "type": "judge", "work_type": "数车", "section": "预习", "options": [], "answer": "对", "num": 6}, {"text": "数控车床的X轴往负方向进给1mm，则零件直径（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. 减小1mm", "B. 增大1mm", "C. 减小2mm", "D. 增大2mm"], "answer": "C", "num": 1}, {"text": "数控机床主要适用的场合是（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. 定型产品的大量生产", "B. 多品种小批量生产", "C. 中等精度的定型产品"], "answer": "B", "num": 2}, {"text": "在确定数控车床坐标系中，X、Y、Z的关系及正方向时，用（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. 左手笛卡尔坐标系", "B. 左手螺旋法则", "C. 右手笛卡尔坐标系", "D. 右手螺旋法则"], "answer": "C", "num": 3}, {"text": "数控车床加工的主要几何要素为（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. 斜线和直线", "B. 斜线和圆弧", "C. 直线和圆弧", "D. 圆弧和曲线"], "answer": "C", "num": 4}, {"text": "数控车床两个坐标轴设定分别是（）", "type": "single", "work_type": "数车", "section": "预习", "options": ["A. XY轴", "B. YZ轴", "C. XZ轴", "D. 根据机床类别设定"], "answer": "C", "num": 5}, {"text": "数控车床可以车削直线、斜线、圆弧、圆柱管螺纹、圆锥螺纹等，但是不能车削多头螺纹。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "错", "num": 1}, {"text": "数控车床的顺、逆方向判断方法是沿垂直于圆弧所在平面，从正向往负向看，刀具相对工件转动方向是顺时针用G02，反之用G03 。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "进给速度与主轴转速有关时，表示为进给量mm/r，一般是数控车床默认的状态。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "i5数控系统是国产的智能化数控系统 。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "随着数控车床的推广与应用，数控车床可以加工各种复杂成形表面。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "数控车削编程时，工件的工艺分析和加工参数确定是关键。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "数控车削中，T0001这样的指令表示撤消补偿。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "数控车床编程中，所有G指令后都需要指定主轴转速值", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "数控车床的螺纹切削循环，可加工直螺纹和锥螺纹。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "数控车床切断刀有两个副偏角。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "数控车床上，一个程序只可加工一个工件。", "type": "judge", "work_type": "数车", "section": "报告", "options": [], "answer": "错", "num": 11}, {"text": "数控车床的X轴往负方向进给1mm，则零件直径（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 减小1mm", "B. 增大1mm", "C. 减小2mm", "D. 增大2mm"], "answer": "C", "num": 1}, {"text": "数控机床主要适用的场合是（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 定型产品的大量生产", "B. 多品种小批量生产", "C. 中等精度的定型产品"], "answer": "B", "num": 2}, {"text": "在确定数控车床坐标系中，X、Y、Z的关系及正方向时，用（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 左手笛卡尔坐标系", "B. 左手螺旋法则", "C. 右手笛卡尔坐标系", "D. 右手螺旋法则"], "answer": "C", "num": 3}, {"text": "数控车床加工的主要几何要素为（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 斜线和直线", "B. 斜线和圆弧", "C. 直线和圆弧", "D. 圆弧和曲线"], "answer": "C", "num": 4}, {"text": "数控车床两个坐标轴设定分别是（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. XY轴", "B. YZ轴", "C. XZ轴", "D. 根据机床类别设定"], "answer": "C", "num": 5}, {"text": "用数控程序表示调用子程序的代码是（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. M98", "B. M99", "C. M03", "D. M30"], "answer": "A", "num": 6}, {"text": "在数控车床上，不能自动完成的功能为（）", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 车床的启动停止", "B. 装夹工件", "C. 纵横向进给", "D. 刀架转位、换刀"], "answer": "B", "num": 7}, {"text": "零件上既有孔又有面需要加工时，一般数控机床进行加工的顺序为（ ）。", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 先面后孔", "B. 先孔后面", "C. 孔面同时加工", "D. 以上皆可"], "answer": "A", "num": 8}, {"text": "数控机床关机时，第一动作为（ ）。", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 关闭数控系统电源", "B. 关闭机床总电源", "C. 数控系统复位", "D. 删除数控程序"], "answer": "C", "num": 9}, {"text": "序号字和功能字是由（ ）构成，一般数控程序中使用的常用功能字主要有（ ）。", "type": "single", "work_type": "数车", "section": "报告", "options": ["A. 数字，4种", "B. 字母和数字，4种", "C. 字母和数字，6种", "D. 字母，6种"], "answer": "C", "num": 10}, {"text": "特种加工是直接利用电能、光能、声能、热能、化学能、电化学能及特殊机械能等多种形式的能量实现去除材料来完成对零件的加工成型的工艺方法。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "数控电火花线切割机床能加工各种高硬度﹑高强度﹑高韧度的材料，但必须是低熔点的材料。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "错", "num": 2}, {"text": "电火花线切割机床能加工高强高硬度的绝缘材料。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "错", "num": 3}, {"text": "电火花线切割不能加工半导体材料。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "错", "num": 4}, {"text": "特种加工是直接利用各种能量对材料进行加工，其加工机理与金属切割加工相同。", "type": "judge", "work_type": "WEDM", "section": "预习", "options": [], "answer": "错", "num": 5}, {"text": "特种加工可以采用的能量包括（）", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. 电能、热能、光能", "B. 电化学能、化学能", "C. 声能及特殊机械能", "D. 以上均可以"], "answer": "D", "num": 1}, {"text": "以下不属于特种加工的是（）", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. 等离子弧加工", "B. 精密雕铣", "C. 激光加工", "D. 电火花加工"], "answer": "B", "num": 2}, {"text": "电火花线切割加工称为", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. EDMB", "B. ECM", "C. EBM", "D. WEDM"], "answer": "D", "num": 3}, {"text": "线切割加工的工件材料，应具有什么物理性能", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. 导电性", "B. 绝缘性", "C. 高密度", "D. 低熔点"], "answer": "A", "num": 4}, {"text": "线切割加工的材料范围是", "type": "single", "work_type": "WEDM", "section": "预习", "options": ["A. 黑色金属", "B. 非淬火材料", "C. 硬度必须小于HRC30", "D. 各种导电金属"], "answer": "D", "num": 5}, {"text": "特种加工是直接利用电能、光能、声能、热能、化学能、电化学能及特殊机械能等多种形式的能量实现去除材料来完成对零件的加工成型的工艺方法。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "数控电火花线切割机床能加工各种高硬度﹑高强度﹑高韧度的材料，但必须是低熔点的材料。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "电火花线切割机床能加工高强高硬度的绝缘材料。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 3}, {"text": "电火花线切割不能加工半导体材料。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 4}, {"text": "数控电火花线切割机床的编程，主要采用ISO编程、3B编程、图形化自动编程三种格式编写。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "特种加工是直接利用各种能量对材料进行加工，其加工机理与金属切割加工相同。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 6}, {"text": "在线切割加工中，当电压表、电流表的表针稳定不动，此时进给速度均匀、平稳，是线切割加工速度和表面粗糙度的最佳状态。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "电火花线切割加工过程中，电极丝与工件间火花放电是比较理想的状态。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "线切割机床加工路径生成的时候需要考虑刀具半径补偿。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "电火花线切割可以加工淬火钢、不锈钢和硬质合金、陶瓷、金刚石等。", "type": "judge", "work_type": "WEDM", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "特种加工可以采用的能量包括（）", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 电能、热能、光能", "B. 电化学能、化学能", "C. 声能及特殊机械能", "D. 以上均可以"], "answer": "D", "num": 1}, {"text": "以下不属于特种加工的是（）", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 等离子弧加工", "B. 精密雕铣", "C. 激光加工", "D. 电火花加工"], "answer": "B", "num": 2}, {"text": "电火花线切割加工称为", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. EDMB", "B. ECM", "C. EBM", "D. WEDM"], "answer": "D", "num": 3}, {"text": "线切割加工的工件材料，应具有什么物理性能", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 导电性", "B. 绝缘性", "C. 高密度", "D. 低熔点"], "answer": "A", "num": 4}, {"text": "线切割加工的材料范围是", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 黑色金属", "B. 非淬火材料", "C. 硬度必须小于HRC30", "D. 各种导电金属"], "answer": "D", "num": 5}, {"text": "以下不能使用电火花线切割加工的材料为", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 石墨", "B. 大理石", "C. 铝", "D. 硬质合金"], "answer": "B", "num": 6}, {"text": "电火花成型加工中常用的电极材料有", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 石墨", "B. 紫铜", "C. 银钨合金", "D. 以上都是"], "answer": "D", "num": 7}, {"text": "电火花加工、电子束加工、等离子弧加工是利用（ ）能量加工材料的。", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 电、热能", "B. 电、机械能", "C. 电、化学能", "D. 电、声能"], "answer": "A", "num": 8}, {"text": "电火花加工主要用于高效加工（ ）", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 难切削材料", "B. 碳素钢", "C. 精密细小及复杂形状的金属件", "D. A+C"], "answer": "D", "num": 9}, {"text": "以下哪一项不属于特种加工设备范畴（ ）", "type": "single", "work_type": "WEDM", "section": "报告", "options": ["A. 电火花线切割、电火花成型机床", "B. 多工位深小孔钻床", "C. 激光加工机床", "D. 超声波加工机床"], "answer": "B", "num": 10}, {"text": "计算机辅助设计技术是利用计算机及其图形设备帮助设计人员进行设计工作。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "CAD设计过程不应该包括装配设计 。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "错", "num": 2}, {"text": "CAD设计中，草图特征中的旋转操作允许旋转一个或多个轮廓。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "CAD的发展过程按对几何模型表示模式的复杂程度，主要经历了线框建模、曲面建模、实体建模、参数化特征建模；CAM的发展过程主要经历了穿孔纸带、APT语言自动编程、图形交互自动编程、CAD/CAM集成数控编程的发展过程。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "在CAD设计系统中，零件和装配默认存在三个工作面、三个工作轴、一个工作点组成的原始坐标系，这个原始坐标系是固定的。", "type": "judge", "work_type": "CAD", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "CAD指的是", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 计算机辅助设计", "B. 计算机辅助制造", "C. 计算机辅助工程", "D. 计算机辅助开发"], "answer": "A", "num": 1}, {"text": "CAM指的是", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 计算机辅助设计", "B. 计算机辅助制造", "C. 计算机辅助工程", "D. 计算机辅助管理"], "answer": "B", "num": 2}, {"text": "CAD系统中的坐标体系包括世界坐标系和", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 绝对坐标系", "B. 平面坐标系", "C. 相对坐标系", "D. 用户坐标系"], "answer": "D", "num": 3}, {"text": "CAM系统功能中不包括", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 力学性能仿真", "B. 刀具路径生成", "C. 刀具路径仿真", "D. 数控代码生成"], "answer": "A", "num": 4}, {"text": "下述CAD/CAM技术中，属于CAD范畴的是（ ）。", "type": "single", "work_type": "CAD", "section": "预习", "options": ["A. 数控加工", "B. 几何造型", "C. CAPP", "D. 仿真加工"], "answer": "B", "num": 5}, {"text": "计算机辅助设计技术是利用计算机及其图形设备帮助设计人员进行设计工作。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "CAD设计过程不应该包括装配设计 。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "错", "num": 2}, {"text": "CAD设计中，草图特征中的旋转操作允许旋转一个或多个轮廓。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "CAD的发展过程按对几何模型表示模式的复杂程度，主要经 历了线框建模、曲面建模、实体建模、参数化特征建模；CAM的发展过程主要经历了穿孔纸带、APT语言自动编程、图形交互自动编程、CAD/CAM集成数控编程的发展过程。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "在CAD设计系统中，零件和装配默认存在三个工作面、三个工作轴、一个工作点组成的原始坐标系，这个原始坐标系是固定的。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "CAD设计中的组合实体的基本方式包括并、交、差运算。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "CAD设计中，采用阵列的方式不仅具有复制图形的功能，还实现了批量控制图形的位置和方向。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "CAD设计中，草图中的拉伸指令方向只有正向和反向两种。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "在CAD/CAM支撑软件中，特征是设计者对设计对象的功能、形状、结构、制造、装配、检验、管理与使用等信息及其关系的具有确切工程含义的高层次抽象描述；拉伸造型、旋转造型、扫描造型、放样造型以及镜向、圆周阵列、线性阵列、参数化驱动阵列等是基于特征造型的几何建模方法。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "几何建模是以几何信息和拓扑信息反映结构体的形状、位置、表现形式等数据的方法。", "type": "judge", "work_type": "CAD", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "CAD指的是", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 计算机辅助设计", "B. 计算机辅助制造", "C. 计算机辅助工程", "D. 计算机辅助开发"], "answer": "A", "num": 1}, {"text": "CAM指的是", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 计算机辅助设计", "B. 计算机辅助制造", "C. 计算机辅助工程", "D. 计算机辅助管理"], "answer": "B", "num": 2}, {"text": "CAD系统中的坐标体系包括世界坐标系和", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 绝对坐标系", "B. 平面坐标系", "C. 相对坐标系", "D. 用户坐标系"], "answer": "D", "num": 3}, {"text": "CAM系统功能中不包括", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 力学性能仿真", "B. 刀具路径生成", "C. 刀具路径仿真", "D. 数控代码生成"], "answer": "A", "num": 4}, {"text": "下述CAD/CAM技术中，属于CAD范畴的是（ ）。", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 数控加工", "B. 几何造型", "C. CAPP", "D. 仿真加工"], "answer": "B", "num": 5}, {"text": "CAD中的草图的编辑指令不包括", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 拖动", "B. 延伸", "C. 修剪", "D. 放样"], "answer": "D", "num": 6}, {"text": "CAM中需要设定的工艺信息不包括", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 加工模式", "B. 加工区域", "C. 机床精度", "D. 使用刀具"], "answer": "C", "num": 7}, {"text": "用CAD/CAM软件生成的程序属于下述哪种编程方法。( )", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. APT语言编程", "B. 图形交互自动编程", "C. 手工编程", "D. VB语言编程"], "answer": "B", "num": 8}, {"text": "在CAD/CAM整个过程中，需要人工介入最多的是哪个环节。（ ）", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. 计算机辅助编程", "B. 零件设计", "C. 数控加工", "D. 模拟加工"], "answer": "B", "num": 9}, {"text": "以下哪一项不是CAD/CAM软件系统（ ）。", "type": "single", "work_type": "CAD", "section": "报告", "options": ["A. Solidworks，AutoCAD", "B. Pro/E、UG", "C. iOS、Windows", "D. CATIA、i-Deal"], "answer": "C", "num": 10}, {"text": "VR的3D立体视觉效果利用的是两眼视差的原理。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "虚拟现实（Virtual Reality）技术是一种以计算机技术为核心的人机接口，通过对视觉、听觉、触觉、嗅觉和味觉等多种感觉进行实时模拟和实时交互，建立一个沉浸式的虚拟世界。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "AR（Augumented Reality）即增强现实，是将虚拟信息内容与真实世界叠加的应用。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "虚拟现实（Virtual Reality）的视觉感知设备——头盔显示器，采用两个LCD或者CRT显示器向双眼显示图像，双眼得到的图像没有差别。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "错", "num": 4}, {"text": "VR头盔（虚拟现实头戴式显示设备）中“透镜”的作用是聚焦光线，让视觉感受到视野成像在无限远之外。", "type": "judge", "work_type": "VR", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "虚拟现实（Virtual Reality）技术的特性包括", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. 沉浸性", "B. 交互性", "C. 想象性", "D. 以上都是"], "answer": "D", "num": 1}, {"text": "虚拟现实 (VR)系统的重要组成部分——感知设备，能将虚拟世界各类感知模型转变为人能接受的信号，包括", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. 视觉感知设备", "B. 听觉感知设备", "C. 触觉感知设备", "D. 以上都是"], "answer": "D", "num": 2}, {"text": "将虚拟环境占据满用户的整个视野，屏蔽真实的世界，使用户完全沉浸在虚拟的世界里，指的是下面哪项技术？", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. VR（Virtual Reality）", "B. AR（Augmented Reality）", "C. MR（Mixed Reality）"], "answer": "A", "num": 3}, {"text": "立体显示技术采用了双眼视差的原理，目前已存在的立体显示技术包括：", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. 分色技术（如红蓝滤色）", "B. 分光技术（如偏振式滤光）", "C. 分时技术（如主动快门式）", "D. 以上都是"], "answer": "D", "num": 4}, {"text": "VR头盔的主要组成部分包括：", "type": "single", "work_type": "VR", "section": "预习", "options": ["A. 显示器", "B. 光学透镜", "C. 位置传感器", "D. 以上都是"], "answer": "D", "num": 5}, {"text": "VR的3D立体视觉效果利用的是两眼视差的原理。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "虚拟现实（Virtual Reality）技术是一种以计算机技术为核心的人机接口，通过对视觉、听觉、触觉、嗅觉和味觉等多种感觉进行实时模拟和实时交互，建立一个沉浸式的虚拟世界。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "AR（Augumented Reality）即增强现实，是将虚拟信息内容与真实世界叠加的应用。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "虚拟现实（Virtual Reality）的视觉感知设备——头盔显示器，采用两个LCD或者CRT显示器向双眼显示图像，双眼得到的图像没有差别。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "错", "num": 4}, {"text": "VR头盔（虚拟现实头戴式显示设备）中“透镜”的作用是聚焦光线，让视觉感受到视野成像在无限远之外。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "在使用Unity软件建立虚拟现实（VR）场景之前，需要先准备相关资源素材，如模型、音频、视频、材质、图片等。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "本次虚拟现实（VR）实训课程中，我们使用的Unity脚本语言为C#", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "虚拟现实（VR）技术不仅可以应用在娱乐、艺术方面，同样也被应用于电气、机械、建筑等工程领域，以及在教育培训等行业也有较成熟的应用。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "在Unity中建立虚拟（VR）场景时，我们在头盔中看到的虚拟世界的景象，是由场景中的摄像机（Camera）“拍摄”并“播放”在头盔的屏幕上。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "在Unity中建立虚拟（VR）场景时，可以通过编写脚本语言来实现场景中各种对象的运行。", "type": "judge", "work_type": "VR", "section": "报告", "options": [], "answer": "对", "num": 10}, {"text": "虚拟现实（Virtual Reality）技术的特性包括", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 沉浸性", "B. 交互性", "C. 想象性", "D. 以上都是"], "answer": "D", "num": 1}, {"text": "虚拟现实 (VR)系统的重要组成部分——感知设备，能将虚拟世界各类感知模型转变为人能接受的信号，包括", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 视觉感知设备", "B. 听觉感知设备", "C. 触觉感知设备", "D. 以上都是"], "answer": "D", "num": 2}, {"text": "将虚拟环境占据满用户的整个视野，屏蔽真实的世界，使用户完全沉浸在虚拟的世界里，指的是下面哪项技术？", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. VR（Virtual Reality）", "B. AR（Augmented Reality）", "C. MR（Mixed Reality）"], "answer": "A", "num": 3}, {"text": "立体显示技术采用了双眼视差的原理，目前已存在的立体显示技术包括：", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 分色技术（如红蓝滤色）", "B. 分光技术（如偏振式滤光）", "C. 分时技术（如主动快门式）", "D. 以上都是"], "answer": "D", "num": 4}, {"text": "VR头盔的主要组成部分包括：", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 显示器", "B. 光学透镜", "C. 位置传感器", "D. 以上都是"], "answer": "D", "num": 5}, {"text": "VR场景中出现的三维模型可以由什么方式建立？", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 全景拍摄", "B. CG建模", "C. 三维扫描", "D. 以上都是"], "answer": "D", "num": 6}, {"text": "虚拟现实技术在工业领域的应用有哪些？", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 工厂规划、数据可视化", "B. 虚拟装配、虚拟培训", "C. 训练体验、协同工作", "D. 以上都是"], "answer": "D", "num": 7}, {"text": "在VR实践课程中，当我们控制对象旋转和移动时，是改写了对象的( )组件中的Position和Rotation属性的值。", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. Transform组件", "B. Collider组件", "C. RigidBody组件", "D. Text组件"], "answer": "A", "num": 8}, {"text": "在实践课程中，我们建立的VR虚拟世界，是依托以下哪种设备生成后，与VR头显进行数据交互的？", "type": "single", "work_type": "VR", "section": "报告", "options": ["A. 个人电脑（PC）端", "B. 分布式网络计算机", "C. 超级计算机", "D. 图形工作站"], "answer": "A", "num": 9}, {"text": "直流有刷电机的工作原理是：直流电源的电能通过电刷和换向器进入电枢绕组，产生电枢电流，电枢电流产生的磁场与主磁场相互作用产生电磁转矩,使电机旋转带动负载。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "移动机器人运动学建模时标准轮需满足纯滚动约束和无侧滑约束。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "Arduino开发环境使用C/C++编写程序。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "机器人的基本功能类型有操作机器人和移动机器人。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "对", "num": 4}, {"text": "轮式移动机器人适合松软、沟壑路面。", "type": "judge", "work_type": "机电", "section": "预习", "options": [], "answer": "错", "num": 5}, {"text": "下列产品中不属于嵌入式系统的是( )。", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 有线电视机顶盒", "B. 服务器", "C. 电饭煲", "D. 路由器"], "answer": "B", "num": 1}, {"text": "1MB 等于( )。", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 1024B", "B. 1024KB", "C. 8bit", "D. 1024GB"], "answer": "B", "num": 2}, {"text": "平面平行运动刚体的自由度是（）。", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 2", "B. 3", "C. 4", "D. 6"], "answer": "B", "num": 3}, {"text": "常规情况下，保持移动机器人静态稳定至少需要（）个轮子", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 2", "B. 3", "C. 4", "D. 6"], "answer": "B", "num": 4}, {"text": "两轮差速小车如何实现绕过两轮中心竖直轴自转？", "type": "single", "work_type": "机电", "section": "预习", "options": ["A. 两轮以相同速度正转", "B. 两轮以相同速度反转", "C. 两轮以相同速度反向转动", "D. 两轮以不同速度反向转动"], "answer": "C", "num": 5}, {"text": "直流有刷电机的工作原理是：直流电源的电能通过电刷和换向器进入电枢绕组，产生电枢电流，电枢电流产生的磁场与主磁场相互作用产生电磁转矩,使电机旋转带动负载。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "移动机器人运动学建模时标准轮需满足纯滚动约束和无侧滑约束。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "Arduino开发环境使用C/C++编写程序。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "机器人的基本功能类型有操作机器人和移动机器人。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 4}, {"text": "轮式移动机器人适合松软、沟壑路面。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "错", "num": 5}, {"text": "在Arduino的开发环境(Arduino IDE)点击“串口监视器”可以察看串口收发的数据。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "Arduino程序基本结构由main() 和loop() 两个函数组成。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "错", "num": 7}, {"text": "在Arduino程序中，编写C程序代码的时候必须使用英文全角输入法，尤其是标点符号", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "错", "num": 8}, {"text": "Arduino IDE状态栏的作用是输出编译或报错信息。", "type": "judge", "work_type": "机电", "section": "报告", "options": [], "answer": "对", "num": 9}, {"text": "下列产品中不属于嵌入式系统的是( )。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 有线电视机顶盒", "B. 服务器", "C. 电饭煲", "D. 路由器"], "answer": "B", "num": 1}, {"text": "1MB 等于( )。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 1024B", "B. 1024KB", "C. 8bit", "D. 1024GB"], "answer": "B", "num": 2}, {"text": "平面平行运动刚体的自由度是（）。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 2", "B. 3", "C. 4", "D. 6"], "answer": "B", "num": 3}, {"text": "常规情况下，保持移动机器人静态稳定至少需要（）个轮子", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 2", "B. 3", "C. 4", "D. 6"], "answer": "B", "num": 4}, {"text": "两轮差速小车如何实现绕过两轮中心竖直轴自转？", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 两轮以相同速率同向正转", "B. 两轮以相同速率同向反转", "C. 两轮以相同速率反向转动", "D. 两轮以不同速率反向转动"], "answer": "C", "num": 5}, {"text": "Arduino的开发环境(Arduino IDE)可以打开后缀名为( )的程序文件。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. .ino", "B. .pdf", "C. .rar", "D. .jpg"], "answer": "A", "num": 6}, {"text": "PWM脉冲宽度调制技术，其具有两个很重要的参数：频率和( )。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 周期", "B. 脉冲宽度", "C. 调制率", "D. 占空比"], "answer": "D", "num": 7}, {"text": "在Arduino中，设定某个特定引脚是输入接口，使用的命令符是（）。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. HIGH", "B. LOW", "C. OUTPUT", "D. INPUT"], "answer": "D", "num": 8}, {"text": "开环控制方式是按（）进行控制的。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 偏差", "B. 扰动", "C. 给定量", "D. 输出量"], "answer": "C", "num": 9}, {"text": "Arduino函数“delay(1500)”表示延迟时间是（）。", "type": "single", "work_type": "机电", "section": "报告", "options": ["A. 1500毫秒", "B. 1500微妙", "C. 1500秒", "D. 1.5毫秒"], "answer": "A", "num": 10}, {"text": "FDM 熔融沉积成型（Fused Deposition Modeling）是将热塑性材料通过加热器融化，挤压喷出并堆积一个层面，同样的方法造出第二个层面并与前一层融化在一起，层层堆积可以获得三维实体。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "对", "num": 1}, {"text": "快速成型、增材制造、三维打印表示同一概念。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "对", "num": 2}, {"text": "三维打印工艺不受刀具、模具及工装卡具的限制，且不受零件复杂程度的限制，因此可以降低了新产品的开发成本和周期。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "对", "num": 3}, {"text": "由于三维打印采用了离散/堆积分层制造工艺和非接触加工方式，能够很好地将CAD、CAM结合起来。可实现快速制造，将完全替代传统制造方法。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "错", "num": 4}, {"text": "三维打印的CAM过程是将三维模型分层切片，并根据每一层形状生成喷头 移动路径的G代码。", "type": "judge", "work_type": "3D", "section": "预习", "options": [], "answer": "对", "num": 5}, {"text": "三维打印技术运用于零部件制造的特点不包括", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 短周期", "B. 高柔性", "C. 低成本", "D. 高精度"], "answer": "D", "num": 1}, {"text": "下列对三维打印技术的解说不正确的一项是", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 三维打印技术的工作原理是：在平面上以一定形式固化材料，逐层打印，以堆积成三维物体。", "B. 三维打印过程总体上分为三个步骤，包括：数据前处理，分层叠加成型，后处理。", "C. 三维打印技术的开发从20世纪80年代开始，目前已可以替代大部分传统制造方式。", "D. 三维打印技术的优势在于可以制作出几乎任意形状、传统加工工艺无法完成的产品。"], "answer": "C", "num": 2}, {"text": "三维打印的成型原理为（ ）。", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 切削成型", "B. 受迫成型", "C. 增材制造", "D. 注塑成型"], "answer": "C", "num": 3}, {"text": "以下哪项符合快速成型制造的特点。", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 适合于大批量零件生产", "B. 可使用任何材料成型", "C. 加工精度高", "D. 可成型复杂曲面"], "answer": "D", "num": 4}, {"text": "以下哪种方式不属于三维打印技术", "type": "single", "work_type": "3D", "section": "预习", "options": ["A. 电子束熔融成型EBM", "B. 电火花成型EDM", "C. 选择性激光熔融SLM", "D. 立体光固化成型SLA"], "answer": "B", "num": 5}, {"text": "FDM 熔融沉积成型（Fused Deposition Modeling）是将热塑性材料通过加热器融化，挤压喷出并堆积一个层面，同样的方法造出第二个层面并与前一层融化在一起，层层堆积可以获得三维实体。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 1}, {"text": "快速成型、增材制造、三维打印表示同一概念。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 2}, {"text": "三维打印工艺不受刀具、模具及工装卡具的限制，且不受零件复杂程度的限制，因此可以降低了新产品的开发成本和周期。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 3}, {"text": "由于三维打印采用了离散/堆积分层制造工艺和非接触加工方式，能够很好地将CAD、CAM结合起来。可实现快速制造，将完全替代传统制造方法。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "错", "num": 4}, {"text": "三维打印的CAM过程是将三维模型分层切片，并根据每一层形状生成喷头移动路径的G代码。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 5}, {"text": "三维打印机的加工范围是有限的，当被加工零件超出加工范围时，可以对零件进行分割打印。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 6}, {"text": "由于不易控制Z方向（垂直面）上的翘曲变形等原因，打印工件的X-Y方向（水平面）的尺寸精度比Z方向更易保证。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 7}, {"text": "逆向工程是一个通过实物建立模型的过程，其重点在于采集物体表面数据和后期处理两部分，即利用设备对物体作全方位的扫描或测绘，得到物体表面的原始三维信息，之后再使用软件整理数据、三维造型并输出结果。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "对", "num": 8}, {"text": "快速成型制造相对于数控机床加工而言，精度更高、速度更快，适用于大批量的零件生产，并可大大降低生产成本。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "错", "num": 9}, {"text": "FDM类型的三维打印机可使用金属粉末、液态光敏树脂、塑料、尼龙等多种原材料。", "type": "judge", "work_type": "3D", "section": "报告", "options": [], "answer": "错", "num": 10}, {"text": "三维打印技术运用于零部件制造的特点不包括", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 短周期", "B. 高柔性", "C. 低成本", "D. 高精度"], "answer": "D", "num": 1}, {"text": "下列对三维打印技术的解说不正确的一项是", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 三维打印技术的工作原理是：在平面上以一定形式固化材料，逐层打印，以堆积成三维物体。", "B. 三维打印过程总体上分为三个步骤，包括：数据前处理，分层叠加成型，后处理。", "C. 三维打印技术的开发从20世纪80年代开始，目前已可以替代大部分传统制造方式。", "D. 三维打印技术的优势在于可以制作出几乎任意形状、传统加工工艺无法完成的产品。"], "answer": "C", "num": 2}, {"text": "三维打印的成型原理为（ ）。", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 切削成型", "B. 受迫成型", "C. 增材制造", "D. 注塑成型"], "answer": "C", "num": 3}, {"text": "以下哪项符合快速成型制造的特点。", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 适合于大批量零件生产", "B. 可使用任何材料成型", "C. 加工精度高", "D. 可成型复杂曲面"], "answer": "D", "num": 4}, {"text": "以下哪种方式不属于三维打印技术", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 电子束熔融成型EBM", "B. 电火花成型EDM", "C. 选择性激光熔融SLM", "D. 立体光固化成型SLA"], "answer": "B", "num": 5}, {"text": "熔融沉积三维打印使用的成形材料可以是", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. PLA塑料丝", "B. 薄片纸", "C. 光敏树脂液", "D. 陶瓷粉末"], "answer": "A", "num": 6}, {"text": "以下3D打印工艺中表面精度最高的是", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 熔融沉积工艺", "B. 光固化立体成型工艺", "C. 粉末烧结工艺", "D. 层片叠加工艺"], "answer": "B", "num": 7}, {"text": "课程实训中所使用的FDM打印过程设置的层厚一般在", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 0.001mm左右", "B. 0.01mm左右", "C. 0.1mm左右", "D. 1mm左右"], "answer": "C", "num": 8}, {"text": "课程实训中所使用的FDM打印机喷头出口直径大约在", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 0.4μm左右", "B. 0.004mm左右", "C. 0.04mm左右", "D. 0.4mm左右"], "answer": "D", "num": 9}, {"text": "课程学习中所用到的三维打印机系统从控制角度看属于", "type": "single", "work_type": "3D", "section": "报告", "options": ["A. 2轴联动系统", "B. 3轴联动系统", "C. 4轴联动系统", "D. 5轴联动系统"], "answer": "C", "num": 10}];
@@ -1427,9 +2456,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initEvents();
   updateWrongBookDisplay();
   initSidebarHover();
-  
-  var btt=document.getElementById("btt");if(btt){window.addEventListener("scroll",function(){if(window.pageYOffset>200||document.documentElement.scrollTop>200){btt.classList.add("sh")}else{btt.classList.remove("sh")}
-  setTimeout(addTiltEffect, 600);});btt.onclick=function(){window.scrollTo({top:0,behavior:"smooth"})};}  // Set initial slider positions after layout settles
+  initMain3DTilt();
+  var btt=document.getElementById("btt");if(btt){window.addEventListener("scroll",function(){if(window.pageYOffset>200||document.documentElement.scrollTop>200){btt.classList.add("sh")}else{btt.classList.remove("sh")}});btt.onclick=function(){window.scrollTo({top:0,behavior:"smooth"})};}  // Set initial slider positions after layout settles
   setTimeout(() => {
     updateNavSlider();
     updateSubtabSlider();
@@ -1462,9 +2490,12 @@ function initKnowledgeContent() {
   });
   buildKnowledgeTree();
   setTimeout(function() {
-    document.querySelectorAll('#knowledgeContent .chapter-wrapper').forEach(function(w) {
-      w.classList.add('ch-enter');
+    var wrappers = document.querySelectorAll('#knowledgeContent .chapter-wrapper');
+    wrappers.forEach(function(w, i) {
+      w.classList.add('ch-enter', 'scroll-3d-stage');
+      w.classList.add('scroll-3d-card');
     });
+    initScrollAnimation();
   }, 50);
 }
 
@@ -1549,8 +2580,8 @@ function scrollToSection(id) {
     if (wrapper) filterChapter(wrapper.dataset.chapterId);
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     el.style.transition = 'background 0.6s, box-shadow 0.6s';
-    el.style.background = 'rgba(78, 205, 196, 0.15)';
-    el.style.boxShadow = 'inset 0 0 30px rgba(78, 205, 196, 0.1), 0 0 20px rgba(78, 205, 196, 0.05)';
+    el.style.background = 'rgba(61, 212, 200, 0.15)';
+    el.style.boxShadow = 'inset 0 0 30px rgba(61, 212, 200, 0.1), 0 0 20px rgba(61, 212, 200, 0.05)';
     setTimeout(function() {
       el.style.background = '';
       el.style.boxShadow = '';
@@ -1660,24 +2691,90 @@ function filterQbank(wt) {
 }
 
 function renderQbank() {
-  var container = document.getElementById('qbankContent');
-  container.innerHTML = '';
-  var items = getFilteredQbank(state.currentQbankFilter);
-  var statsEl = document.getElementById('qbankStats');
-  var totalJudge = items.filter(function(q) { return q.type === 'judge'; }).length;
-  var totalSingle = items.filter(function(q) { return q.type === 'single'; }).length;
-  statsEl.innerHTML = '<span style="animation:countBounce 0.5s both;">\U0001F4CB \u5171 ' + items.length + ' \u9898</span>' +
-    '<span>（\u5224\u65AD ' + totalJudge + ' \u00B7 \u5355\u9009 ' + totalSingle + '）</span>';
-  items.forEach(function(q, idx) {
-    var qEl = document.createElement('div');
-    qEl.className = 'q-card';
-    qEl.style.animation = 'qbankEnter 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards';
-    qEl.style.opacity = '0';
-    qEl.style.animationDelay = (idx * 0.03) + 's';
-    qEl.innerHTML = renderQbankItem(q);
-    container.appendChild(qEl);
+  // Reset all-answers toggle state
+  allAnswersShown = false;
+  const toggleBtn = document.getElementById('btnToggleAnswers');
+  if (toggleBtn) {
+    toggleBtn.textContent = '展开所有答案';
+    toggleBtn.classList.remove('active');
+  }
+
+  const container = document.getElementById('qbankContent');
+  const filter = state.currentQbankFilter;
+
+  let filtered = filter === 'all' ? ALL_QUESTIONS : ALL_QUESTIONS.filter(q => q.work_type === filter);
+
+  // Update stats
+  const judgeCount = filtered.filter(q => q.type === 'judge').length;
+  const singleCount = filtered.filter(q => q.type === 'single').length;
+  document.getElementById('qbankStats').textContent = `共 ${filtered.length} 题（判断 ${judgeCount} 题，单选 ${singleCount} 题）`;
+
+  // Group by work type, then by type
+  const groups = {};
+  filtered.forEach(q => {
+    const key = q.work_type + '|' + q.type;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(q);
   });
-}function toggleAllAnswers() {
+
+  let html = '';
+  for (const [key, qs] of Object.entries(groups)) {
+    const [wt, type] = key.split('|');
+    const typeLabel = type === 'judge' ? '判断题' : '单选题';
+    html += `<div class="q-group">
+      <div class="q-group-header">${wt} - ${typeLabel}（${qs.length}题）</div>`;
+
+    qs.forEach((q, idx) => {
+      html += `<div class="q-card">
+        <div class="q-meta">
+          <span class="q-type-badge ${type}">${typeLabel}</span>
+          工种: ${q.work_type}
+        </div>
+        <div class="q-text">${idx+1}. ${q.text}</div>`;
+
+      if (q.type === 'single' && q.options && q.options.length > 0) {
+        html += `<div class="q-options">`;
+        q.options.forEach(opt => {
+          html += `<div>${opt}</div>`;
+        });
+        html += `</div>`;
+      }
+
+      html += `<button class="btn-answer" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="q-answer">正确答案：${q.answer}</div>
+      </div>`;
+    });
+
+    html += '</div>';
+  }
+
+  if (!html) html = '<p style="color:var(--text-muted);text-align:center;padding:40px;">该筛选条件下无题目。</p>';
+  container.innerHTML = html;
+
+  // Fade-in animation same as knowledge chapter
+  container.classList.remove('qfade');
+  void container.offsetWidth;
+  container.classList.add('qfade');
+
+  // Add 3D tilt effect
+  addCardTiltEffect();
+}
+
+function toggleAnswer(btn) {
+  var answer = btn.nextElementSibling;
+  if (answer.classList.contains('show')) {
+    answer.classList.remove('show');
+    answer.style.maxHeight = '';
+    btn.textContent = '显示答案';
+  } else {
+    answer.classList.add('show');
+    btn.textContent = '隐藏答案';
+  }
+}
+
+let allAnswersShown = false;
+
+function toggleAllAnswers() {
   var btn = document.getElementById('btnToggleAnswers');
   var answers = document.querySelectorAll('#qbankContent .q-answer');
   var answerBtns = document.querySelectorAll('#qbankContent .btn-answer');
@@ -1711,7 +2808,7 @@ function updatePracticeSidebar(subtabName) {
 
   if (subtabName === 'practice-mode') {
     html += `
-      <h3 style="color:var(--accent-green);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📝 刷题设置</span></h3>
+      <h3 style="color:var(--accent);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📝 刷题设置</span></h3>
 
       <label><span class="sidebar-text">工种</span></label>
       <div class="custom-select-wrap" id="practiceWorkTypeWrap">
@@ -1754,7 +2851,7 @@ function updatePracticeSidebar(subtabName) {
 
       <button class="btn-start" onclick="startPractice()"><span class="sidebar-text">▶ 开始刷题</span></button>`;} else if (subtabName === 'exam-mode') {
     html += `
-      <h3 style="color:var(--accent-blue);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📄 考试设置</span></h3>
+      <h3 style="color:var(--accent);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📄 考试设置</span></h3>
 
       <label><span class="sidebar-text">考试工种</span></label>
       <div class="custom-select-wrap" id="examWorkTypeWrap">
@@ -1796,13 +2893,13 @@ function updatePracticeSidebar(subtabName) {
       <label><span class="sidebar-text">倒计时（分钟，0=不计时）</span></label>
       <input type="number" id="examTimer" value="30" min="0" max="180">
 
-      <button class="btn-start" onclick="startExam()" style="background:var(--accent-blue);"><span class="sidebar-text">📄 开始考试</span></button>`;
+      <button class="btn-start" onclick="startExam()" style="background:linear-gradient(180deg,var(--accent),#3a6edb) !important;border-color:rgba(91,141,239,0.3) !important;box-shadow:0 2px 12px rgba(91,141,239,0.2),inset 0 1px 0 rgba(255,255,255,0.15) !important;"><span class="sidebar-text">📄 开始考试</span></button>`;
   } else if (subtabName === 'wrong-book') {
     const wq = state.wrongQuestions;
     html += `
-      <h3 style="color:var(--accent-orange);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📕 错题本</span></h3>
+      <h3 style="color:var(--accent);font-size:15px;margin-bottom:12px;"><span class="sidebar-text">📕 错题本</span></h3>
       <p style="color:var(--text-muted);font-size:12px;margin-bottom:12px;"><span class="sidebar-text">共 ${wq.length} 道错题</span></p>
-      <button class="btn-start" onclick="clearWrongBook()" style="background:var(--bg-secondary);color:var(--accent-red);border:1px solid var(--accent-red);">
+      <button class="btn-start" onclick="clearWrongBook()" style="background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.2)) !important;color:var(--red) !important;border:1px solid rgba(232,85,80,0.3) !important;box-shadow:inset 0 1px 0 rgba(255,255,255,0.03) !important;">
         <span class="sidebar-text">🗑 清空错题本</span>
       </button>`;
   }
@@ -1871,75 +2968,119 @@ function startPractice() {
   renderPracticeQuestion();
   switchSubTab('practice-mode');
   closeSidebar();
-}function renderPracticeQuestion() {
+}
+
+// Stagger carousel navigation
+function staggerGoTo(idx) {
+  if (idx < 0 || idx >= state.practiceQuestions.length || idx === state.practiceIndex) return;
+  state.practiceIndex = idx;
+  renderPracticeQuestion();
+}
+function staggerPrev() { staggerGoTo(state.practiceIndex - 1); }
+function staggerNext() { staggerGoTo(state.practiceIndex + 1); }
+function staggerSelect(answer) {
+  const idx = state.practiceIndex;
+  if (state.practiceLocked || state.practiceAnswers[idx] !== null) return;
+  state.practiceAnswers[idx] = answer;
+  const q = state.practiceQuestions[idx];
+  if (answer !== q.answer) addToWrongBook(q);
+  renderPracticeQuestion();
+}
+
+function renderPracticeQuestion() {
   const area = document.getElementById('practiceArea');
-  const q = state.practiceQuestions[state.practiceIndex];
   const idx = state.practiceIndex;
   const total = state.practiceQuestions.length;
-  const userAns = state.practiceAnswers[idx];
-  const isLocked = state.practiceLocked || userAns !== null;
 
   if (state.practiceDone) {
     renderPracticeResult();
     return;
   }
 
-  let html = `<div class="question-display">
-    <div class="q-number">第 ${idx+1}/${total} 题 | ${q.work_type} | ${q.type === 'judge' ? '判断题' : '单选题'}</div>
-    <div class="q-text">${q.text}</div>`;
+  function buildCardHtml(q, i, userAns, isLocked) {
+    const qidx = state.practiceQuestions.indexOf(q);
+    const answered = userAns !== null;
+    const cls = answered && userAns === q.answer ? 'correct' : (answered ? 'wrong' : '');
+    const typeLabel = q.type === 'judge' ? '判断题' : '单选题';
 
-  if (q.type === 'single' && q.options && q.options.length > 0) {
-    q.options.forEach(opt => {
-      const letter = opt.charAt(0);
-      const selected = userAns === letter ? ' selected' : '';
-      const locked = isLocked ? ' locked' : '';
-      let extra = '';
-      if (isLocked && userAns !== null) {
-        if (letter === q.answer) extra += ' correct';
-        if (userAns === letter && letter !== q.answer) extra += ' wrong';
+    let html = `<div class="card-badge">第 ${qidx+1} 题 · ${typeLabel}</div>`;
+    html += `<div class="card-text">${q.text}</div>`;
+
+    if (q.type === 'single' && q.options && q.options.length > 0) {
+      html += `<div class="card-options">`;
+      q.options.forEach(opt => {
+        const letter = opt.charAt(0);
+        const sel = userAns === letter ? ' sel' : '';
+        const lck = isLocked ? ' locked' : '';
+        let extra = '';
+        if (answered) {
+          if (letter === q.answer) extra += ' correct';
+          if (userAns === letter && letter !== q.answer) extra += ' wrong';
+        }
+        html += `<button class="card-opt${sel}${lck}${extra}" onclick="staggerSelect('${letter}')" ${isLocked ? 'disabled' : ''}>${opt}</button>`;
+      });
+      html += `</div>`;
+    } else {
+      html += `<div class="card-options">`;
+      const tSel = userAns === '对' ? ' sel' : ''; const fSel = userAns === '错' ? ' sel' : '';
+      const lck = isLocked ? ' locked' : '';
+      let eT = '', eF = '';
+      if (answered) {
+        if (q.answer === '对') eT += ' correct'; else eF += ' correct';
+        if (userAns === '对' && q.answer !== '对') eT += ' wrong';
+        if (userAns === '错' && q.answer !== '错') eF += ' wrong';
       }
-      html += `<button class="q-option${selected}${locked}${extra}" onclick="practiceSelect('${letter}')" ${isLocked ? 'disabled' : ''}>
-        ${opt}
-      </button>`;
-    });
-  } else {
-    // Judge type
-    const selectedTrue = userAns === '对' ? ' selected' : '';
-    const selectedFalse = userAns === '错' ? ' selected' : '';
-    const locked = isLocked ? ' locked' : '';
-    let extraT = '', extraF = '';
-    if (isLocked && userAns !== null) {
-      if (q.answer === '对') extraT += ' correct';
-      else extraF += ' correct';
-      if (userAns === '对' && q.answer !== '对') extraT += ' wrong';
-      if (userAns === '错' && q.answer !== '错') extraF += ' wrong';
+      html += `<button class="card-opt${tSel}${lck}${eT}" onclick="staggerSelect('对')" ${isLocked ? 'disabled' : ''}>对</button>`;
+      html += `<button class="card-opt${fSel}${lck}${eF}" onclick="staggerSelect('错')" ${isLocked ? 'disabled' : ''}>错</button>`;
+      html += `</div>`;
     }
-    html += `<button class="q-option${selectedTrue}${locked}${extraT}" onclick="practiceSelect('对')" ${isLocked ? 'disabled' : ''}>对</button>
-    <button class="q-option${selectedFalse}${locked}${extraF}" onclick="practiceSelect('错')" ${isLocked ? 'disabled' : ''}>错</button>`;
+
+    if (isLocked && userAns !== null) {
+      const correct = userAns === q.answer;
+      html += `<div class="card-feedback">${correct ? '✅ 正确！' : '❌ 错误，正确答案：'+q.answer}</div>`;
+    }
+
+    return html;
   }
 
-  // Feedback
-  if (isLocked && userAns !== null) {
-    const isCorrect = userAns === q.answer;
-    const cls = isCorrect ? 'correct' : 'wrong';
-    html += `<div class="q-feedback ${cls}">
-      ${isCorrect ? '✅ 回答正确！' : '❌ 回答错误。'} 正确答案：${q.answer}
+  const SQRT_5000 = Math.sqrt(5000).toFixed(2);
+  const cardW = Math.min(380, area.offsetWidth - 40);
+  const sideW = Math.min(300, cardW - 60);
+  const staggerH = 520;
+
+  let html = `<div class="stagger-wrap" style="height:${staggerH}px">`;
+  html += `<div class="stagger-progress">${idx+1} / ${total}</div>`;
+
+  state.practiceQuestions.forEach(function(q, i) {
+    const userAns = state.practiceAnswers[i];
+    const isLocked = state.practiceLocked || userAns !== null;
+    const dist = i - idx;
+
+    // Only show cards within visible range (-3 to +3)
+    if (dist < -3 || dist > 3) return;
+
+    let posClass = dist === 0 ? 'center' : 'side';
+    if (Math.abs(dist) > 2) posClass += ' dim';
+
+    // Position calculation
+    const offsetX = dist * (cardW / 1.6);
+    const offsetY = dist === 0 ? -65 : (dist % 2 ? 15 : -15);
+    const rot = dist === 0 ? 0 : (dist % 2 ? 2.5 : -2.5);
+    const w = dist === 0 ? cardW + 'px' : sideW + 'px';
+    const h = dist === 0 ? '400px' : '320px';
+
+    html += `<div class="stagger-card ${posClass}" onclick="staggerGoTo(${i})" data-qidx="${i}"
+      style="width:${w};height:${h};transform:translate(-50%,${offsetY}%) translateX(${offsetX}px) rotate(${rot}deg)">
+      <span class="diagonal-line"></span>
+      ${buildCardHtml(q, i, userAns, isLocked)}
     </div>`;
-  }
+  });
 
-  html += `</div>
-
-  <div class="question-nav">
-    <button onclick="practiceGoTo(${idx-1})" ${idx === 0 ? 'disabled' : ''}>◀ 上一题</button>
-    <button onclick="practiceGoTo(${idx+1})" ${idx >= total-1 ? 'disabled' : ''}>下一题 ▶</button>
-    <button class="primary" onclick="finishPractice()" style="margin-left:auto;">完成并查看结果</button>
-  </div>`;
-
-  if (isLocked) {
-    html += `<div style="text-align:center;color:var(--text-muted);font-size:12px;margin-top:8px;">
-      本题已作答，答案已锁定。使用上一题/下一题浏览。
-    </div>`;
-  }
+  html += `<div class="stagger-nav">
+    <button class="stagger-nav-btn" onclick="staggerPrev()" ${idx <= 0 ? 'disabled' : ''}>◀</button>
+    <button class="stagger-nav-btn" onclick="staggerNext()" ${idx >= total-1 ? 'disabled' : ''}>▶</button>
+    <button class="stagger-nav-btn" onclick="finishPractice()" style="width:auto;padding:0 18px;border-radius:99px;font-size:13px;">✓ 完成</button>
+  </div></div>`;
 
   area.innerHTML = html;
 }
@@ -1998,9 +3139,9 @@ function renderPracticeResult() {
     <div class="big-number">${rate}%</div>
     <div style="font-size:14px;color:var(--text-muted);margin-top:4px;">正确率</div>
     <div class="stats-detail">
-      <div class="stat-item"><span class="num" style="color:var(--accent-green);">${correct}</span><span class="label">正确</span></div>
-      <div class="stat-item"><span class="num" style="color:var(--accent-red);">${total - correct}</span><span class="label">错误</span></div>
-      <div class="stat-item"><span class="num" style="color:var(--accent-blue);">${total}</span><span class="label">总题</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--accent);">${correct}</span><span class="label">正确</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--red);">${total - correct}</span><span class="label">错误</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--accent);">${total}</span><span class="label">总题</span></div>
     </div>
   </div>
 
@@ -2011,12 +3152,12 @@ function renderPracticeResult() {
 
   // Show wrong answers
   if (wrongList.length > 0) {
-    html += '<h3 style="color:var(--accent-red);margin:20px 0 10px;">错题回顾</h3>';
+    html += '<h3 style="color:var(--red);margin:20px 0 10px;">错题回顾</h3>';
     wrongList.forEach((item, i) => {
       html += `<div class="q-card">
         <div class="q-text">${item.q.text}</div>
-        <div style="font-size:12px;color:var(--accent-red);">你的答案：${item.userAnswer}</div>
-        <div style="font-size:12px;color:var(--accent-green);">正确答案：${item.q.answer}</div>
+        <div style="font-size:12px;color:var(--red);">你的答案：${item.userAnswer}</div>
+        <div style="font-size:12px;color:var(--accent);">正确答案：${item.q.answer}</div>
       </div>`;
     });
   }
@@ -2171,13 +3312,13 @@ function renderExam() {
     const isCorrect = state.examSubmitted ? (state.examAnswers[i] === q.answer) : false;
     let borderColor, bgColor, textColor;
     if (state.examSubmitted) {
-      if (isCorrect) { borderColor = 'var(--accent-green)'; bgColor = 'rgba(78,205,196,0.15)'; textColor = 'var(--accent-green)'; }
-      else if (answered) { borderColor = 'var(--accent-red)'; bgColor = 'rgba(232,85,80,0.15)'; textColor = 'var(--accent-red)'; }
+      if (isCorrect) { borderColor = 'var(--accent)'; bgColor = 'rgba(61,212,200,0.15)'; textColor = 'var(--accent)'; }
+      else if (answered) { borderColor = 'var(--red)'; bgColor = 'rgba(232,85,80,0.15)'; textColor = 'var(--red)'; }
       else { borderColor = 'var(--border-color)'; bgColor = 'var(--bg-secondary)'; textColor = 'var(--text-muted)'; }
     } else {
-      borderColor = answered ? 'var(--accent-green)' : 'var(--border-color)';
-      bgColor = answered ? 'rgba(78,205,196,0.1)' : 'var(--bg-secondary)';
-      textColor = answered ? 'var(--accent-green)' : 'var(--text-muted)';
+      borderColor = answered ? 'var(--accent)' : 'var(--border-color)';
+      bgColor = answered ? 'rgba(61,212,200,0.1)' : 'var(--bg-secondary)';
+      textColor = answered ? 'var(--accent)' : 'var(--text-muted)';
     }
     html += '<button onclick="examGoTo(' + i + ')" style="padding:6px 10px;font-size:12px;border:1px solid ' + borderColor + ';background:' + bgColor + ';color:' + textColor + ';border-radius:4px;cursor:pointer;">' + (i+1) + '</button>';
   });
@@ -2270,9 +3411,9 @@ function submitExam() {
     <div class="big-number">${score}</div>
     <div style="font-size:14px;color:var(--text-muted);margin-top:4px;">总分（满分100）</div>
     <div class="stats-detail">
-      <div class="stat-item"><span class="num" style="color:var(--accent-green);">${correct}</span><span class="label">正确</span></div>
-      <div class="stat-item"><span class="num" style="color:var(--accent-red);">${total - correct}</span><span class="label">错误</span></div>
-      <div class="stat-item"><span class="num" style="color:var(--accent-blue);">${total}</span><span class="label">总题</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--accent);">${correct}</span><span class="label">正确</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--red);">${total - correct}</span><span class="label">错误</span></div>
+      <div class="stat-item"><span class="num" style="color:var(--accent);">${total}</span><span class="label">总题</span></div>
     </div>
     <div class="question-nav" style="justify-content:center;margin-top:12px;">
       <button onclick="resetExam()">🔄 重新考试</button>
@@ -2334,9 +3475,9 @@ function updateWrongBookDisplay() {
   }
 
   let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-    <h3 style="color:var(--accent-orange);">错题本（${wq.length}题）</h3>
+    <h3 style="color:var(--accent);">错题本（${wq.length}题）</h3>
     <div style="display:flex;gap:8px;">
-      <button onclick="clearWrongBook()" style="padding:6px 14px;background:none;border:1px solid var(--accent-red);color:var(--accent-red);border-radius:var(--radius);cursor:pointer;font-size:12px;font-family:inherit;">清空错题本</button>
+      <button onclick="clearWrongBook()" style="padding:6px 14px;background:none;border:1px solid var(--red);color:var(--red);border-radius:var(--radius);cursor:pointer;font-size:12px;font-family:inherit;">清空错题本</button>
     </div>
   </div>
   <div class="wrong-book">`;
@@ -2405,6 +3546,7 @@ function switchModule(moduleName) {
   // Reset chapter filter when switching to knowledge
   if (moduleName === 'knowledge') {
     document.querySelectorAll('.tree-item-header').forEach(function(h) { h.classList.remove('active-chapter'); });
+    setTimeout(initScrollAnimation, 300);
   }
 }
 
@@ -2457,13 +3599,6 @@ function initEvents() {
     });
   });
 
-  // Sidebar mode tabs
-  document.querySelectorAll('.sidebar-mode-tab').forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      switchSidebar(this.dataset.sidebar);
-    });
-  });
-
   // Mobile menu
   document.getElementById('menuToggle').addEventListener('click', function() {
     document.getElementById('sidebar').classList.toggle('open');
@@ -2511,7 +3646,32 @@ function syncPreset(input) {
 }
 
 
-/* 3D tilt removed */
+function initMain3DTilt() {
+  // Removed — mouse-driven 3D tilt caused "hanging" effect
+}
+
+function addCardTiltEffect() {
+  // Removed — mouse-driven 3D tilt caused "hanging" effect
+}
+
+
+
+function toggleCustomSelect(el) {
+  const wrap = el.closest('.custom-select-wrap');
+  const isOpen = wrap.classList.contains('open');
+  // Close all other custom selects
+  document.querySelectorAll('.custom-select-wrap.open').forEach(w => w.classList.remove('open'));
+  if (!isOpen) {
+    wrap.classList.add('open');
+    // Animate panel items with stagger
+    const items = wrap.querySelectorAll('.custom-select-option');
+    items.forEach((item, i) => {
+      item.style.animation = 'none';
+      item.offsetHeight; // trigger reflow
+      item.style.animation = `fadeInUp 0.3s ease forwards ${i * 0.04}s`;
+    });
+  }
+}
 
 function selectCustomOption(el) {
   const wrap = el.closest('.custom-select-wrap');
@@ -2579,7 +3739,7 @@ function initSidebarHover(){
   if(hi)return;hi=true;
   document.addEventListener('mouseover',function(e){
     var item=e.target.closest('.tree-item-header,.tree-leaf,.work-type-item,.practice-subtab,.nav-btn');
-    if(item){item.style.transition='transform 0.2s,box-shadow 0.2s';item.style.transform='translateY(-1px)';item.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';}
+    if(item){item.style.transition='transform 0.2s,box-shadow 0.2s';item.style.transform='translateY(-2px)';item.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';}
   });
   document.addEventListener('mouseout',function(e){
     var item=e.target.closest('.tree-item-header,.tree-leaf,.work-type-item,.practice-subtab,.nav-btn');
@@ -2588,85 +3748,146 @@ function initSidebarHover(){
 }
 
 
+// ============================================================
+// Scroll Progress Bar + Card Reveal
+// ============================================================
 
-
-
-
-function transitionCard(container, newHtml, direction, cb) {
-  var oldCard = container.querySelector('.q-card, .question-display');
-  if (!oldCard) { container.innerHTML = newHtml; if (cb) cb(); return; }
-  var outClass = direction === 'right' ? 'slide-out-left' : 'slide-out-right';
-  oldCard.style.animation = 'none'; if (oldCard.offsetWidth) {};
-  oldCard.style.animation = outClass + ' 0.35s cubic-bezier(0.55,0,0.8,0) forwards';
-  
-  function handler() {
-    oldCard.removeEventListener('animationend', handler);
-    container.innerHTML = newHtml;
-    container.style.animation = 'none'; if (container.offsetWidth) {};
-    var newCard = container.querySelector('.q-card, .question-display');
-    if (newCard) {
-      var inClass = direction === 'right' ? 'slide-in-right' : 'slide-in-left';
-      newCard.style.opacity = '0'; if (newCard.offsetWidth) {};
-      newCard.classList.add(inClass);
+/* Scroll progress bar — thin line at top of page */
+(function addProgressBar() {
+  var bar = document.createElement('div');
+  bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),rgba(61,212,200,0.3));z-index:9999;width:0%;transition:width 0.1s linear;pointer-events:none';
+  document.body.appendChild(bar);
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = Math.min(100, (window.pageYOffset / Math.max(h,1)) * 100) + '%';
+        ticking = false;
+      });
+      ticking = true;
     }
-    var options = container.querySelectorAll('.q-option');
-    var optDir = direction === 'right' ? 'option-enter' : 'option-enter-left';
-    options.forEach(function(opt, idx) {
-      opt.style.opacity = '0'; if (opt.offsetWidth) {};
-      opt.style.animation = 'none'; if (opt.offsetWidth) {};
-      opt.classList.add(optDir);
-      opt.style.animationDelay = (0.045 * (idx + 1)) + 's';
+  }, { passive: true });
+})();
+
+function initScrollAnimation() {
+  /* Card reveal: translateY + opacity */
+  var fadeObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        fadeObs.unobserve(entry.target);
+      }
     });
-    var dots = container.querySelectorAll('.answer-dot');
-    dots.forEach(function(dot, i) {
-      dot.style.animation = 'none'; if (dot.offsetWidth) {};
-      dot.style.animation = 'gridBounce 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards';
-      dot.style.opacity = '0';
-      dot.style.animationDelay = (i * 0.025) + 's';
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.scroll-3d-card').forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+    fadeObs.observe(el);
+  });
+
+  /* Chapter titles: subtle highlight pulse on scroll into view */
+  var titleObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.transition = 'opacity 0.6s ease';
+        entry.target.style.opacity = '1';
+        titleObs.unobserve(entry.target);
+      }
     });
-    // Trigger particle burst
-    var rect = container.getBoundingClientRect();
-    burstParticles(rect.left + rect.width/2, rect.top + rect.height/2, 8);
-    if (cb) cb();
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.chapter-title').forEach(function(el) {
+    el.style.opacity = '0.7';
+    titleObs.observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(initScrollAnimation, 200);
+});
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.nav-btn')) {
+    setTimeout(initScrollAnimation, 500);
   }
-  oldCard.addEventListener('animationend', handler);
-}
+});
 
-function addTiltEffect() {
-  document.querySelectorAll('.q-card').forEach(function(card) {
-    card.addEventListener('mousemove', function(e) {
-      var rect = this.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width - 0.5;
-      var y = (e.clientY - rect.top) / rect.height - 0.5;
-      this.style.transform = 'perspective(800px) rotateX(' + (-y * 6) + 'deg) rotateY(' + (x * 6) + 'deg) translateY(' + (-y * 3) + 'px)';
-      this.style.transition = 'transform 0.1s ease-out';
-    });
-    card.addEventListener('mouseleave', function() {
-      this.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
-      this.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-    });
-  });
-}
 
-function switchSidebar(side) {
-  document.querySelectorAll('.sidebar-mode-tab').forEach(function(b) {
-    b.classList.toggle('active', b.dataset.sidebar === side);
-  });
-  document.querySelectorAll('.sidebar-panel').forEach(function(p) {
-    if (p.id === 'sidebar-' + side) {
-      p.style.display = '';
-      p.style.animation = 'none'; if (p.offsetWidth) {};
-      p.style.animation = 'sectionSlide 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards';
-    } else {
-      p.style.display = 'none';
-    }
-  });
-  if (side === 'knowledge') updateKnowledgeSidebar ? updateKnowledgeSidebar() : null;
-  else if (side === 'qbank') updateQbankSidebar ? updateQbankSidebar() : null;
-  else if (side === 'practice') updatePracticeSidebar();
-}
+
+
 
 </script>
+<!-- Particle wave background container (Three.js) -->
 <button class="btt" id="btt">↑</button>
+
+<div id="particle-bg" style="position:fixed;inset:0;z-index:-3;pointer-events:none;"></div>
+
+<!-- Three.js particle wave — async load so it doesn't block the page -->
+<script>
+(function() {
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  s.onload = function() {
+    var container = document.getElementById('particle-bg');
+    if (!container || typeof THREE === 'undefined') return;
+
+    var SEP = 150, AX = 40, AY = 60;
+    var scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x050812, 2000, 10000);
+    var cam = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+    cam.position.set(0, 355, 1220);
+    var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x050812, 0);
+    container.appendChild(renderer.domElement);
+
+    var pos = new Float32Array(AX * AY * 3);
+    var idx = 0;
+    for (var x = 0; x < AX; x++) {
+      for (var y = 0; y < AY; y++) {
+        pos[idx] = x * SEP - (AX * SEP) / 2;
+        pos[idx + 1] = 0;
+        pos[idx + 2] = y * SEP - (AY * SEP) / 2;
+        idx += 3;
+      }
+    }
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    var mat = new THREE.PointsMaterial({ size: 6, color: 0x4ecdc4, transparent: true, opacity: 0.25, sizeAttenuation: true });
+    var pts = new THREE.Points(geo, mat);
+    scene.add(pts);
+
+    var count = 0;
+    function anim() {
+      requestAnimationFrame(anim);
+      var p = geo.attributes.position.array;
+      var i2 = 0;
+      for (var x2 = 0; x2 < AX; x2++) {
+        for (var y2 = 0; y2 < AY; y2++) {
+          p[i2 + 1] = Math.sin((x2 + count) * 0.3) * 50 + Math.sin((y2 + count) * 0.5) * 50;
+          i2 += 3;
+        }
+      }
+      geo.attributes.position.needsUpdate = true;
+      cam.position.x = Math.sin(count * 0.02) * 80;
+      renderer.render(scene, cam);
+      count += 0.05;
+    }
+    anim();
+
+    window.addEventListener('resize', function() {
+      cam.aspect = window.innerWidth / window.innerHeight;
+      cam.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  };
+  s.onerror = function() { /* CDN unreachable — skip particles */ };
+  document.head.appendChild(s);
+})();
+</script>
+
 </body>
 </html>
