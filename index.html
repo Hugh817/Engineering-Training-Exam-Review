@@ -2531,7 +2531,7 @@ function initSidebarHover(){
   if(hi)return;hi=true;
   document.addEventListener('mouseover',function(e){
     var item=e.target.closest('.tree-item-header,.tree-leaf,.work-type-item,.practice-subtab,.nav-btn');
-    if(item){item.style.transition='transform 0.2s,box-shadow 0.2s';item.style.transform='translateY(-2px)';item.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';}
+    if(item){item.style.transition='transform 0.2s,box-shadow 0.2s';item.style.transform='translateY(-1px)';item.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';}
   });
   document.addEventListener('mouseout',function(e){
     var item=e.target.closest('.tree-item-header,.tree-leaf,.work-type-item,.practice-subtab,.nav-btn');
